@@ -1,4 +1,4 @@
-package mybootapp.model;
+package com.example.chocosolver;
 
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
