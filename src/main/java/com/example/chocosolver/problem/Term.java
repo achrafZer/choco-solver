@@ -2,6 +2,7 @@ package com.example.chocosolver.problem;
 
 import java.util.ArrayList;
 
+@Data
 public class Term {
     //exemple: A+B ==> variables: {A, B} || operator: PLUS
     private ArrayList<Variable> variables;
@@ -21,31 +22,5 @@ public class Term {
         this.value = value;
     }
 
-    public ArrayList<Variable> getVariables() {
-        return variables;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public Operator getOperator() {
-        return operator;
-    }
-
-    public void setVariables(ArrayList<Variable> variables) {
-        this.variables = variables;
-    }
-
-    public void setANumber(boolean ANumber) {
-        isANumber = ANumber;
-    }
-
-    public void setOperator(Operator operator) {
-        this.operator = operator;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
+  
 }
