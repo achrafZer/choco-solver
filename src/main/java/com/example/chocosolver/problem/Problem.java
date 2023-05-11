@@ -5,6 +5,8 @@ import org.chocosolver.solver.variables.IntVar;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+@Data
 public class Problem {
 
     //le but de cette classe est que le seul Model créé soit dans la méthode solve
@@ -19,34 +21,17 @@ public class Problem {
 
     public void addVariable(String name, int lowerBound, int upperBound) {
         //TODO crée la variable à partir de sa valeur
+        Variable v = new Variable(name, new Pair<>(lowerBound, upperBound));
+    	this.variables.add(v);
     }
 
     public void addVariable(Variable variable) {
-        //TODO
+        this.variables.add(variable);
     }
 
     public void addConstraint(Constraint constraint) {
-        //FIXME
+    	this.constraints.add(constraint);
     }
 
-    public HashMap<String, Integer> solve() {
-        //TODO crée un model, le remplit puis l'utilise pour résoudre
-        return null;
-    }
 
-    public ArrayList<Constraint> getConstraints() {
-        return constraints;
-    }
-
-    public ArrayList<Variable> getVariables() {
-        return variables;
-    }
-
-    public void setConstraints(ArrayList<Constraint> constraints) {
-        this.constraints = constraints;
-    }
-
-    public void setVariables(ArrayList<Variable> variables) {
-        this.variables = variables;
-    }
 }
