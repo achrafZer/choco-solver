@@ -1,9 +1,8 @@
 package com.example.chocosolver.problem;
-import org.chocosolver.solver.Model;
-import org.chocosolver.solver.variables.IntVar;
-
+import lombok.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
+import org.jgrapht.alg.util.Pair;
 
 
 @Data

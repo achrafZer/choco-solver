@@ -1,5 +1,6 @@
 package com.example.chocosolver.problem;
 
+import lombok.Data;
 import org.jgrapht.alg.util.Pair;
 
 import java.util.List;
