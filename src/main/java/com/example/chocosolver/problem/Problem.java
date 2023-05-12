@@ -19,7 +19,6 @@ public class Problem {
     }
 
     public void addVariable(String name, int lowerBound, int upperBound) {
-        //TODO crée la variable à partir de sa valeur
         Variable v = new Variable(name, new Pair<>(lowerBound, upperBound));
     	this.variables.add(v);
     }
