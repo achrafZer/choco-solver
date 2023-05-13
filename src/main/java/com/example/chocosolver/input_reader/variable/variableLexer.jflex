@@ -23,11 +23,11 @@ WS = [ \t\n\r]+
     System.out.println("Mot-clé : " + yytext());
 }
 
-"[" + {NUMBER} + "," + {NUMBER} + "]" {
+"[" {NUMBER} "," {NUMBER} "]" {
     System.out.println("Intervalle : " + yytext());
 }
 
-"{" + {NUMBER} + ("," + {NUMBER})* + "}" {
+"{" {NUMBER} ("," {NUMBER})* "}" {
     System.out.println("Ensemble : " + yytext());
 }
 
