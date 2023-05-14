@@ -2,7 +2,6 @@ package com.example.chocosolver.problem;
 import lombok.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.jgrapht.alg.util.Pair;
 
 
 @Data

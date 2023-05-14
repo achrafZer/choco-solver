@@ -1,7 +1,6 @@
 package com.example.chocosolver.problem;
 
 import lombok.Data;
-import org.jgrapht.alg.util.Pair;
 
 import java.util.List;
 
@@ -13,8 +12,6 @@ public class Variable {
     private Pair<Integer, Integer> valueInterval;
     private List<Integer> valueSet;
     private Integer constantValue;
-
-
 
     public Variable(String name, Pair<Integer, Integer> valueInterval) {
     	this.name=name;
