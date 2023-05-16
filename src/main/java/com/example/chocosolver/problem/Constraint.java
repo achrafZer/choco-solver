@@ -6,9 +6,9 @@ import lombok.Data;
 public class Constraint {
 
     //exemple: A+B < 10 ==> term1: A+B || term2: 10 || relation: INFERIOR
-    private Term term1;
-    private Term term2;
-    private Relation relation;
+    private final Term term1;
+    private final Relation relation;
+    private final Term term2;
 
     public Constraint(Term term1, Relation relation, Term term2) {
     	 this.term1 = term1;

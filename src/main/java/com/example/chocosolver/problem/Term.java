@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 @Data
 public class Term {
+
     //exemple: A+B ==> variables: {A, B} || operator: PLUS
     private ArrayList<Variable> variables;
     private Operator operator;

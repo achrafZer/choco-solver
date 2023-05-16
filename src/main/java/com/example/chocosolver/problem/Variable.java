@@ -9,11 +9,11 @@ public class Variable {
 
     private String name;
     private boolean isANumber;
-    private Pair<Integer, Integer> valueInterval;
+    private Pair valueInterval;
     private List<Integer> valueSet;
     private Integer constantValue;
 
-    public Variable(String name, Pair<Integer, Integer> valueInterval) {
+    public Variable(String name, Pair valueInterval) {
     	this.name=name;
     	this.isANumber = false;
         this.valueInterval = valueInterval;

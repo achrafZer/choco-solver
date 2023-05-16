@@ -8,7 +8,7 @@
 ID = [A-Z][0-9]*
 OPERATOR = [+\-*/]
 COMPARATOR = [><=]
-WS = [ \t\n\r]+
+WS = [\t\n\r]+
 
 %%
 

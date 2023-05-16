@@ -18,7 +18,7 @@ public class Problem {
     }
 
     public void addVariable(String name, int lowerBound, int upperBound) {
-        Variable v = new Variable(name, new Pair<>(lowerBound, upperBound));
+        Variable v = new Variable(name, new Pair(lowerBound, upperBound));
     	this.variables.add(v);
     }
 
@@ -30,5 +30,8 @@ public class Problem {
     	this.constraints.add(constraint);
     }
 
+    public void solve() {
+
+    }
 
 }
