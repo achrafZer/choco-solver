@@ -8,5 +8,6 @@ import lombok.Data;
 public class Pair {
     private int first;
     private int second;
+
 }
 
