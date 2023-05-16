@@ -5,5 +5,6 @@ public enum Relation {
     SUPERIORorEQUAL,
     INFERIOR,
     INFERIORorEQUAL,
-    EQUALS
+    EQUALS,
+    DIFFERENT
 }

@@ -1,8 +1,10 @@
 package com.example.chocosolver.problem;
 
 public enum Operator {
-    PLUS,
-    MOINS,
+	SUM,
+	DIFFERENCE,
+	PRODUCT,
+	QUOTIENT,   
     MAX,
     MIN,
     AVG
