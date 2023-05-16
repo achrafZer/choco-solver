@@ -15,7 +15,7 @@ public class Problem {
 
     public Problem() {
         this.variables = new HashMap<>();
-        this.constraints = new ArrayList<Constraint>();
+        this.constraints = new List<Constraint>();
     }
 
     public void addVariable(String name, int lowerBound, int upperBound) {
