@@ -10,7 +10,7 @@ public class Problem {
 
     //le but de cette classe est que le seul Model créé soit dans la méthode solve
 
-	private HashMap<String, Variable> variables;
+    private HashMap<String, Variable> variables;
     private List<Constraint> constraints;
 
     public Problem() {
@@ -20,7 +20,7 @@ public class Problem {
 
     public void addVariable(String name, int lowerBound, int upperBound) {
         Variable v = new Variable(name, new Pair(lowerBound, upperBound));
-    	this.variables.put(v.getName(),v);
+        this.variables.put(v.getName(),v);
     }
 
     public void addVariable(Variable variable) {
@@ -28,7 +28,7 @@ public class Problem {
     }
 
     public void addConstraint(Constraint constraint) {
-    	this.constraints.add(constraint);
+        this.constraints.add(constraint);
     }
 
 

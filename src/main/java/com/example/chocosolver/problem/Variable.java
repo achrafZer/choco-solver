@@ -10,7 +10,7 @@ public class Variable {
     private String name;
     private Pair valueInterval;
     private List<Integer> valueSet;
-   
+
     public Variable(String name, Pair valueInterval) {
     	this.name=name;
         this.valueInterval = valueInterval;
@@ -20,7 +20,7 @@ public class Variable {
     	this.name=name;
     	this.valueSet=valueSet;
     }
-  
+
 
 }
 
