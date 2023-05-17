@@ -1,9 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Hello World</title>
+  <title>Choco Solver</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<h2>Hello World!</h2>
+  <h1>Welcome to the Choco Solver!</h1>
+  <form>
+    <label for="problem">Write your problem:</label>
+    <textarea id="problem" name="problem" rows="4" cols="50"></textarea><br><br>
+    <button type="submit">Solve</button>
+  </form>
+  <div>
+    <hr>
+    <p>Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a></p>
+  </div>
 </body>
 </html>
