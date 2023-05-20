@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class TestLexer {
-    public static String script = "A + B < 10 ";
+    public static String script = " A > B < C ;";
 
 
     public static void main(String args[]) throws IOException {
@@ -15,3 +15,6 @@ public class TestLexer {
         return;
     }
 }
+
+
+
