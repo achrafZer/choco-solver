@@ -11,6 +11,5 @@ public class ChocoSolverApplication implements WebMvcConfigurer {
         SpringApplication.run(ChocoSolverApplication.class, args);
     }
 
-   
     
 }
