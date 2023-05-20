@@ -14,7 +14,6 @@ public class VariableTest {
     public void testCreateVariableWithValueInterval() {
         Pair valueInterval = new Pair(0, 10);
         Variable variable = new Variable("A", valueInterval);
-
         assertEquals("A", variable.getName());
         assertEquals(valueInterval, variable.getValueInterval());
         assertNull(variable.getValueSet());
@@ -24,7 +23,6 @@ public class VariableTest {
     public void testCreateVariableWithValueSet() {
         List<Integer> valueSet = Arrays.asList(1, 2, 3);
         Variable variable = new Variable("B", valueSet);
-
         assertEquals("B", variable.getName());
         assertNull(variable.getValueInterval());
         assertEquals(valueSet, variable.getValueSet());
