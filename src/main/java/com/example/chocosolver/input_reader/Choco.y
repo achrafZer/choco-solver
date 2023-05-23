@@ -20,12 +20,12 @@
 	private Problem problem;
 	public static Problem parse(String script) throws IOException {
   		InputStream stream = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
-        	ChocoLexer lexer = new ChocoLexer(stream);
+        ChocoLexer lexer = new ChocoLexer(stream);
 		Choco parser = new Choco(lexer);
-        	parser.problem = new Problem();
-    		if(parser.parse())
-      			return parser.problem;
-    		return null;
+        parser.problem = new Problem();
+        if(parser.parse())
+            return parser.problem;
+        return null;
   	}
 }
 
@@ -33,32 +33,34 @@
 	public static List<Integer> set = new ArrayList<>();
 }
 
-%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS
+%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS EXC
 
 %%
 prog:
-  | variable
-  | constraint
+	prog prog |
+	variable |
+	constraint
 ;
 
 variable:
-    ID DANS interval EOI {
-	Variable variable = new Variable(Yylex.id, (Pair) $3);
-        problem.addVariable(variable);
-    }|
+	ID DANS interval EOI {
+		Variable variable = new Variable(Yylex.id, (Pair) $3);
+		problem.addVariable(variable);
+    } |
     ID DANS set EOI {
         Variable variable = new Variable(Yylex.id, set);
         problem.addVariable(variable);
-	}
+        set = new ArrayList<>();
+    }
 ;
 
 constraint:
     term relation term EOI {
         Constraint constraint = new Constraint();
         constraint.setTerm1((Term) $1);
-	constraint.setTerm2((Term) $3);
-	constraint.setRelation((Relation) $2);
-	problem.addConstraint(constraint);
+		constraint.setTerm2((Term) $3);
+		constraint.setRelation((Relation) $2);
+		problem.addConstraint(constraint);
     }
 ;
 
@@ -71,14 +73,34 @@ interval:
 relation:
     INF {
     	$$ = Relation.INFERIOR;
-    }|
+    } |
     SUP {
     	$$ = Relation.SUPERIOR;
-    }|
+    } |
     EQUALS {
     	$$ = Relation.EQUALS;
+    } |
+    inf_or_equals {
+        $$ = Relation.INFERIORorEQUAL;
+    } |
+    sup_or_equals {
+        $$ = Relation.SUPERIORorEQUAL;
+    } |
+    EXC EQUALS {
+        $$ = Relation.DIFFERENT;
     }
 ;
+
+inf_or_equals:
+ 	INF EQUALS
+;
+
+sup_or_equals:
+	SUP EQUALS
+;
+
+
+
 
 set:
     OPENSET NUMBER sous_ensemble CLOSESET {
@@ -89,7 +111,7 @@ set:
 sous_ensemble:
     SEPARATOR NUMBER {
     	set.add((Integer) $2);
-    }|
+    } |
     SEPARATOR NUMBER sous_ensemble {
         set.add((Integer) $2);
     }
@@ -98,10 +120,10 @@ sous_ensemble:
 term:
     NUMBER {
     	$$ = new Term((Integer) $1);
-    }|
+    } |
     ID {
-	$$ = problem.addVariable(Yylex.id);
-    }|
+		$$ = problem.addVariable(Yylex.id);
+    } |
     term operateur term {
     	$$ = new Term((Term) $1, (Operator) $2, (Term) $3);
     }
@@ -110,19 +132,17 @@ term:
 operateur:
     PLUS {
     	$$ = Operator.ADD;
-    }|
+    } |
     MOINS {
-	$$ = Operator.SUBTRACT;
-    }|
+		$$ = Operator.SUBTRACT;
+    } |
     MUL {
     	$$ = Operator.MULTIPLY;
-    }|
+    } |
     DIV {
-	$$ = Operator.DIVIDE;
+		$$ = Operator.DIVIDE;
     }
 ;
-
-
 
 %%
 

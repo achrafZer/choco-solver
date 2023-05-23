@@ -23,16 +23,16 @@ public class ChocoSolverTest {
 		Term term1=new Term(L,Operator.ADD);
 		Term term2=new Term(10);
 		Constraint C=new Constraint(term1,term2,Relation.EQUALS);
-		
+
 		Problem p=new Problem();
 		p.addVariable(A);
 		p.addVariable(B);
 		p.addConstraint(C);
-		
+
 		ChocoSolver cs=new ChocoSolver(p);
 		cs.solve();
-		
-		
+
+
 	}
-	
+
 }

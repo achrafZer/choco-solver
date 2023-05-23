@@ -55,10 +55,14 @@ public class ChocoSolver {
 	}
 
 	private ArExpression ResolveTerm(Term term) {
+
 		if (term.getVariable() != null) {
 			Variable variable = term.getVariable();
+
 			var v = intVars.get(variable.getName());
+
 			return v;
+
 		} else if (term.getValue() != null) {
 			int constantTerm1 = term.getValue();
 			return model.intVar(constantTerm1);
@@ -82,16 +86,9 @@ public class ChocoSolver {
 				return t1.min(t2);
 			}
 		}
-//		else {
-//			var tf=0;
-//			List<var> list=new List<var>();
-//			for(Term t:term.getTerms())	
-//			{
-//				
-//			}
-//		}
-//		// Handle other cases or throw an exception if needed
-		throw new IllegalStateException("Unknown term");
+
+		throw new IllegalStateException("term inconnu");
+
 	}
 
 	private void addConstraints() {

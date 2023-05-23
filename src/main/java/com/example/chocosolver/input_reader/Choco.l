@@ -5,8 +5,8 @@ package com.example.chocosolver.input_reader;
 
 %class Yylex
 %{
-  public static int yylval;  // Déclaration de yylval
-  public static String id;
+	public static int yylval;  // Déclaration de yylval
+	public static String id;
 %}
 
 
@@ -22,25 +22,20 @@ UNKNOWN_TOKEN = .
 %%
 
 <YYINITIAL> {
-    {WS}    {}
-    {ID}    {
-      id = yytext();
-      System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
-      return ChocoLexer.ID;
+	{WS}    {}
+	{ID}    {
+		id = yytext();
+		System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		return ChocoLexer.ID;
     }
-
     "dans" {System.out.println("Mot-clé : " + yytext()); return ChocoLexer.DANS;}
-
-
     ";" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EOI;}
-
-
     {NUMBER} {
         yylval = Integer.valueOf(yytext());
         System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
         return ChocoLexer.NUMBER;
     }
-    "[" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENINTERVAL;}
+	"[" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENINTERVAL;}
     "]" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSEINTERVAL;}
     "," {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SEPARATOR;}
      "{" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENSET;}
@@ -52,6 +47,7 @@ UNKNOWN_TOKEN = .
     "-" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MOINS;}
     "*" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;}
     "/" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;}
+    "!" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EXC;}
 
 
     {UNKNOWN_TOKEN} {return ChocoLexer.UNKNOWN_TOKEN;}

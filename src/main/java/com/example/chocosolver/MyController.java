@@ -27,13 +27,13 @@ public class MyController {
     public String index() {
         return "home";
     }
-    
+
     @PostMapping("/solve")
     public ModelAndView solveProblem(@RequestParam("problem") String problemText) {
     	// nous créons le problème
-    	Problem p= new Problem(); 
-    	
-    	
+    	Problem p= new Problem();
+
+
     	Variable A=new  Variable("A",new Pair(0,10));
 		Variable B=new  Variable("B",new Pair(0,10));
 		ArrayList L=new ArrayList();
@@ -44,13 +44,13 @@ public class MyController {
 		Term term1=new Term(L,Operator.ADD);
 		Term term2=new Term(10);
 		Constraint C=new Constraint(term1,term2,Relation.EQUALS);
-		
-		
+
+
 		p.addVariable(A);
 		p.addVariable(B);
 		p.addConstraint(C);
-		
-		
+
+
     	///nous analysons le string ProblemText et on retire les variable et constraint
     	// nous ajoutons les variable et constraints
     	// on utlise solve pour avoir le resultat
@@ -61,7 +61,7 @@ public class MyController {
         return modelAndView;
     }
 
-    
+
     private Solution solve(Problem problem) {
     	ChocoSolver cs=new ChocoSolver(problem);
     	Solution s=cs.solve();
