@@ -8,6 +8,8 @@ import com.example.chocosolver.problem.Relation;
 import com.example.chocosolver.problem.Term;
 import com.example.chocosolver.problem.Variable;
 
+import lombok.var;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,28 +55,43 @@ public class ChocoSolver {
 	}
 
 	private ArExpression ResolveTerm(Term term) {
-		
-		
 		if (term.getVariable() != null) {
 			Variable variable = term.getVariable();
-			
-			var v=intVars.get(variable.getName());
-		
+			var v = intVars.get(variable.getName());
 			return v;
-			
 		} else if (term.getValue() != null) {
 			int constantTerm1 = term.getValue();
 			return model.intVar(constantTerm1);
+		} else if (term.getTerms().size() == 2) {
+			var t1 = ResolveTerm(term.getTerms().get(0));
+			var t2 = ResolveTerm(term.getTerms().get(1));
+			switch (term.getOperator()) {
+			case ADD:
+				return t1.add(t2);
+			case SUBTRACT:
+				return t1.sub(t2);
+			case MULTIPLY:
+				return t1.mul(t2);
+			case DIVIDE:
+				return t1.div(t2);
+			case MAX:
+				return t1.max(t2);
+			case MIN:
+				return t1.min(t2);
+			case AVG:
+				return t1.min(t2);
+			}
 		}
-		else if(term.getListvariable().size()==2){
-			var t1=ResolveTerm(term.getListvariable().get(0));
-			var t2=ResolveTerm(term.getListvariable().get(1));
-			return t1.add(t2);
-		}
-		else {
-			throw new IllegalStateException("term inconnu");
-		}
-		
+//		else {
+//			var tf=0;
+//			List<var> list=new List<var>();
+//			for(Term t:term.getTerms())	
+//			{
+//				
+//			}
+//		}
+//		// Handle other cases or throw an exception if needed
+		throw new IllegalStateException("Unknown term");
 	}
 
 	private void addConstraints() {
@@ -86,7 +103,27 @@ public class ChocoSolver {
 			ArExpression term2 = ResolveTerm(constraint.getTerm2());
 			Relation relation = constraint.getRelation();
 
-			model.arithm(term1.intVar(),relation.toString(),term2.intVar()).post();
+			switch (relation) {
+			case SUPERIOR:
+				model.arithm(term1.intVar(), ">", term2.intVar()).post();
+				break;
+			case SUPERIORorEQUAL:
+				model.arithm(term1.intVar(), ">=", term2.intVar()).post();
+				break;
+			case INFERIOR:
+				model.arithm(term1.intVar(), "<", term2.intVar()).post();
+				break;
+			case INFERIORorEQUAL:
+				model.arithm(term1.intVar(), "<=", term2.intVar()).post();
+				break;
+			case EQUALS:
+				model.arithm(term1.intVar(), "=", term2.intVar()).post();
+				break;
+			case DIFFERENT:
+				model.arithm(term1.intVar(), "!=", term2.intVar()).post();
+				break;
+
+			}
 
 		}
 
@@ -108,24 +145,3 @@ public class ChocoSolver {
 	}
 
 }
-//private List<IntVar> ResolveTerm(Term term) {
-//	List<IntVar> resolvedTerm;
-//	resolvedTerm = new ArrayList<>();
-//	if (term.getVariable() != null) {
-//		Variable variable = term.getVariable();
-//		resolvedTerm.add(intVars.get(variable.getName()));
-//	} else if (term.getValue() != null) {
-//		int constantTerm1 = term.getValue();
-//		resolvedTerm.add(model.intVar(constantTerm1));
-//	} else {
-//		for (Term t : term.getListvariable()) {
-//			if (t.getVariable() != null) {
-//				Variable variable = t.getVariable();
-//				resolvedTerm.add(intVars.get(variable.getName()));
-//			} else if (t.getValue() != null) {
-//				int constantTerm1 = t.getValue();
-//			}
-//		}
-//	}
-//	return resolvedTerm;
-//}

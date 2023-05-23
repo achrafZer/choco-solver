@@ -41,7 +41,7 @@ public class MyController {
 		Term termB=new Term(B);
 		L.add(termB);
 		L.add(termA);
-		Term term1=new Term(L,Operator.SUM);
+		Term term1=new Term(L,Operator.ADD);
 		Term term2=new Term(10);
 		Constraint C=new Constraint(term1,term2,Relation.EQUALS);
 		
