@@ -8,6 +8,7 @@ import java.util.List;
  * Represents a variable used in a problem.
  */
 @Data
+
 public class Variable {
 
     /**

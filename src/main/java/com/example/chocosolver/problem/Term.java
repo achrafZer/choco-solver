@@ -105,4 +105,7 @@ public class Term {
             return "Term(Variables : " + this.terms + ", " + "Operator : " + this.operator + ")";
         }
     }
+    
+   
+    
 }
