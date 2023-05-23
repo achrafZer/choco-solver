@@ -62,9 +62,16 @@ public class TestLexer {
 
         assertEquals(relation, Relation.SUPERIOR);
 
+    }
 
-
-
+    @Test
+    public void testProblem() throws IOException {
+        String script = "A dans {1, 2, 3}; B dans [2, 4]; A <= 1;";
+        var p = Choco.parse(script);
+        assertNotNull(p);
+        assertEquals(p.getVariables().size(), 2);
+        assertTrue(p.getVariables().get("A").getValueSet().contains(3));
+        System.out.println(p);
     }
 }
 

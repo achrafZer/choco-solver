@@ -18,7 +18,7 @@ public class Constraint {
      * The first term in the constraint.
      */
     private Term term1;
-
+    
     /**
      * The second term in the constraint.
      */

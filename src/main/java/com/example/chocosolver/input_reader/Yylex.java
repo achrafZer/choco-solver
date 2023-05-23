@@ -282,8 +282,8 @@ public class Yylex {
   private boolean zzEOFDone;
 
   /* user code: */
-  public static int yylval;  // Déclaration de yylval
-  public static String id;
+	public static int yylval;  // Déclaration de yylval
+	public static String id;
 
 
   /**
@@ -765,8 +765,8 @@ public class Yylex {
           case 32: break;
           case 14:
             { id = yytext();
-      System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
-      return ChocoLexer.ID;
+		System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		return ChocoLexer.ID;
             }
           // fall through
           case 33: break;

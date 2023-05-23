@@ -326,40 +326,41 @@ public class Choco
       {
           case 5:
   if (yyn == 5)
-    /* "Choco.y":45  */
-                         {
-	Variable variable = new Variable(Yylex.id, (Pair) yystack.valueAt (1));
-        problem.addVariable(variable);
+    /* "Choco.y":46  */
+                             {
+		Variable variable = new Variable(Yylex.id, (Pair) yystack.valueAt (1));
+		problem.addVariable(variable);
     };
   break;
     
 
   case 6:
   if (yyn == 6)
-    /* "Choco.y":49  */
+    /* "Choco.y":50  */
                     {
         Variable variable = new Variable(Yylex.id, set);
         problem.addVariable(variable);
-	};
+        set = new ArrayList<>();
+    };
   break;
     
 
   case 7:
   if (yyn == 7)
-    /* "Choco.y":56  */
+    /* "Choco.y":58  */
                            {
         Constraint constraint = new Constraint();
         constraint.setTerm1((Term) yystack.valueAt (3));
-	constraint.setTerm2((Term) yystack.valueAt (1));
-	constraint.setRelation((Relation) yystack.valueAt (2));
-	problem.addConstraint(constraint);
+		constraint.setTerm2((Term) yystack.valueAt (1));
+		constraint.setRelation((Relation) yystack.valueAt (2));
+		problem.addConstraint(constraint);
     };
   break;
     
 
   case 8:
   if (yyn == 8)
-    /* "Choco.y":66  */
+    /* "Choco.y":68  */
                                                        {
         yyval = new Pair((Integer) yystack.valueAt (3), (Integer) yystack.valueAt (1));
     };
@@ -368,7 +369,7 @@ public class Choco
 
   case 9:
   if (yyn == 9)
-    /* "Choco.y":72  */
+    /* "Choco.y":74  */
         {
     	yyval = Relation.INFERIOR;
     };
@@ -377,7 +378,7 @@ public class Choco
 
   case 10:
   if (yyn == 10)
-    /* "Choco.y":75  */
+    /* "Choco.y":77  */
         {
     	yyval = Relation.SUPERIOR;
     };
@@ -386,7 +387,7 @@ public class Choco
 
   case 11:
   if (yyn == 11)
-    /* "Choco.y":78  */
+    /* "Choco.y":80  */
            {
     	yyval = Relation.EQUALS;
     };
@@ -395,18 +396,9 @@ public class Choco
 
   case 12:
   if (yyn == 12)
-    /* "Choco.y":84  */
-                                          {
-        set.add((Integer) yystack.valueAt (2));
-    };
-  break;
-    
-
-  case 13:
-  if (yyn == 13)
-    /* "Choco.y":90  */
-                     {
-    	set.add((Integer) yystack.valueAt (0));
+    /* "Choco.y":83  */
+                  {
+        yyval = Relation.INFERIORorEQUAL;
     };
   break;
     
@@ -414,8 +406,8 @@ public class Choco
   case 14:
   if (yyn == 14)
     /* "Choco.y":93  */
-                                   {
-        set.add((Integer) yystack.valueAt (1));
+                                          {
+        set.add((Integer) yystack.valueAt (2));
     };
   break;
     
@@ -423,8 +415,8 @@ public class Choco
   case 15:
   if (yyn == 15)
     /* "Choco.y":99  */
-           {
-    	yyval = new Term((Integer) yystack.valueAt (0));
+                     {
+    	set.add((Integer) yystack.valueAt (0));
     };
   break;
     
@@ -432,17 +424,17 @@ public class Choco
   case 16:
   if (yyn == 16)
     /* "Choco.y":102  */
-       {
-	yyval = problem.addVariable(Yylex.id);
+                                   {
+        set.add((Integer) yystack.valueAt (1));
     };
   break;
     
 
   case 17:
   if (yyn == 17)
-    /* "Choco.y":105  */
-                        {
-    	yyval = new Term((Term) yystack.valueAt (2), (Operator) yystack.valueAt (1), (Term) yystack.valueAt (0));
+    /* "Choco.y":108  */
+           {
+    	yyval = new Term((Integer) yystack.valueAt (0));
     };
   break;
     
@@ -450,8 +442,8 @@ public class Choco
   case 18:
   if (yyn == 18)
     /* "Choco.y":111  */
-         {
-    	yyval = Operator.ADD;
+       {
+		yyval = problem.addVariable(Yylex.id);
     };
   break;
     
@@ -459,32 +451,50 @@ public class Choco
   case 19:
   if (yyn == 19)
     /* "Choco.y":114  */
-          {
-	yyval = Operator.SUBTRACT;
+                        {
+    	yyval = new Term((Term) yystack.valueAt (2), (Operator) yystack.valueAt (1), (Term) yystack.valueAt (0));
     };
   break;
     
 
   case 20:
   if (yyn == 20)
-    /* "Choco.y":117  */
-        {
-    	yyval = Operator.MULTIPLY;
+    /* "Choco.y":120  */
+         {
+    	yyval = Operator.ADD;
     };
   break;
     
 
   case 21:
   if (yyn == 21)
-    /* "Choco.y":120  */
+    /* "Choco.y":123  */
+          {
+		yyval = Operator.SUBTRACT;
+    };
+  break;
+    
+
+  case 22:
+  if (yyn == 22)
+    /* "Choco.y":126  */
         {
-	yyval = Operator.DIVIDE;
+    	yyval = Operator.MULTIPLY;
+    };
+  break;
+    
+
+  case 23:
+  if (yyn == 23)
+    /* "Choco.y":129  */
+        {
+		yyval = Operator.DIVIDE;
     };
   break;
     
 
 
-/* "Choco.java":488  */
+/* "Choco.java":498  */
 
         default: break;
       }
@@ -856,7 +866,7 @@ public class Choco
     return yyvalue == yytable_ninf_;
   }
 
-  private static final byte yypact_ninf_ = -14;
+  private static final byte yypact_ninf_ = -13;
   private static final byte yytable_ninf_ = -1;
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -866,10 +876,11 @@ public class Choco
   {
     return new byte[]
     {
-     -10,   -13,   -14,    25,   -14,   -14,     6,     8,   -14,   -14,
-     -14,   -14,   -14,   -14,   -14,   -14,    -9,    -9,     9,    11,
-      16,    18,   -14,    10,    -4,    14,    15,   -14,   -14,   -14,
-      17,    19,    20,    24,    15,   -14,   -14,   -14
+      -9,   -12,   -13,     0,   -13,   -13,    15,    13,   -13,    -9,
+      10,   -13,   -13,   -13,   -13,   -13,   -13,    -8,   -13,    -8,
+      12,    14,    19,    21,   -13,   -13,     5,    -3,    17,    18,
+     -13,   -13,   -13,    20,    22,    23,    27,    18,   -13,   -13,
+     -13
     };
   }
 
@@ -881,10 +892,11 @@ public class Choco
   {
     return new byte[]
     {
-       2,    16,    15,     0,     3,     4,     0,     0,     1,     9,
-      10,    11,    18,    19,    20,    21,     0,     0,     0,     0,
-       0,     0,    16,     0,    17,     0,     0,     5,     6,     7,
-       0,     0,     0,     0,    13,    12,     8,    14
+       0,    18,    17,     0,     3,     4,     0,     0,     1,     2,
+       9,    10,    11,    20,    21,    22,    23,     0,    12,     0,
+       0,     0,     0,     0,    13,    18,     0,    19,     0,     0,
+       5,     6,     7,     0,     0,     0,     0,    15,    14,     8,
+      16
     };
   }
 
@@ -894,7 +906,8 @@ public class Choco
   {
     return new byte[]
     {
-     -14,   -14,   -14,   -14,   -14,   -14,   -14,    -2,     7,   -14
+     -13,    35,   -13,   -13,   -13,   -13,   -13,   -13,    -1,     9,
+     -13
     };
   }
 
@@ -904,7 +917,8 @@ public class Choco
   {
     return new byte[]
     {
-      -1,     3,     4,     5,    20,    16,    21,    32,     6,    17
+      -1,     9,     4,     5,    22,    17,    18,    23,    35,     6,
+      19
     };
   }
 
@@ -916,10 +930,11 @@ public class Choco
   {
     return new byte[]
     {
-       1,    22,    12,    13,    14,    15,     7,     2,     2,     9,
-      10,    11,    12,    13,    14,    15,    12,    13,    14,    15,
-      18,    29,    19,    23,    24,     8,    25,    27,    26,    28,
-      30,    31,    37,     0,    33,    35,    34,    36
+       8,     1,    25,    13,    14,    15,    16,     7,     2,     2,
+       1,    13,    14,    15,    16,    24,    32,     2,    10,    11,
+      12,    13,    14,    15,    16,    20,    26,    21,    27,    28,
+      30,    29,    31,    33,    34,     3,    40,    36,    38,    37,
+      39
     };
   }
 
@@ -928,10 +943,11 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-      10,    10,     6,     7,     8,     9,    19,    17,    17,     3,
-       4,     5,     6,     7,     8,     9,     6,     7,     8,     9,
-      12,    11,    14,    16,    17,     0,    17,    11,    17,    11,
-      16,    16,    34,    -1,    17,    15,    17,    13
+       0,    10,    10,     6,     7,     8,     9,    19,    17,    17,
+      10,     6,     7,     8,     9,     5,    11,    17,     3,     4,
+       5,     6,     7,     8,     9,    12,    17,    14,    19,    17,
+      11,    17,    11,    16,    16,     0,    37,    17,    15,    17,
+      13
     };
   }
 
@@ -942,10 +958,11 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,    10,    17,    21,    22,    23,    28,    19,     0,     3,
-       4,     5,     6,     7,     8,     9,    25,    29,    12,    14,
-      24,    26,    10,    28,    28,    17,    17,    11,    11,    11,
-      16,    16,    27,    17,    17,    15,    13,    27
+       0,    10,    17,    21,    22,    23,    29,    19,     0,    21,
+       3,     4,     5,     6,     7,     8,     9,    25,    26,    30,
+      12,    14,    24,    27,     5,    10,    29,    29,    17,    17,
+      11,    11,    11,    16,    16,    28,    17,    17,    15,    13,
+      28
     };
   }
 
@@ -956,8 +973,8 @@ private static final byte yycheck_[] = yycheck_init();
     return new byte[]
     {
        0,    20,    21,    21,    21,    22,    22,    23,    24,    25,
-      25,    25,    26,    27,    27,    28,    28,    28,    29,    29,
-      29,    29
+      25,    25,    25,    26,    27,    28,    28,    29,    29,    29,
+      30,    30,    30,    30
     };
   }
 
@@ -967,9 +984,9 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     2,     0,     1,     1,     4,     4,     4,     5,     1,
-       1,     1,     4,     2,     3,     1,     1,     3,     1,     1,
-       1,     1
+       0,     2,     2,     1,     1,     4,     4,     4,     5,     1,
+       1,     1,     1,     2,     4,     2,     3,     1,     1,     3,
+       1,     1,     1,     1
     };
   }
 
@@ -984,8 +1001,8 @@ private static final byte yycheck_[] = yycheck_init();
   "$end", "error", "$undefined", "INF", "SUP", "EQUALS", "PLUS", "MOINS",
   "MUL", "DIV", "ID", "EOI", "OPENINTERVAL", "CLOSEINTERVAL", "OPENSET",
   "CLOSESET", "SEPARATOR", "NUMBER", "UNKNOWN_TOKEN", "DANS", "$accept",
-  "prog", "variable", "constraint", "interval", "relation", "set",
-  "sous_ensemble", "term", "operateur", null
+  "prog", "variable", "constraint", "interval", "relation",
+  "inf_or_equals", "set", "sous_ensemble", "term", "operateur", null
     };
   }
 
@@ -1044,8 +1061,8 @@ private static final byte yycheck_[] = yycheck_init();
 
   private static final byte yy_error_token_ = 1;
 
-  private static final int yylast_ = 37;
-  private static final int yynnts_ = 10;
+  private static final int yylast_ = 40;
+  private static final int yynnts_ = 11;
   private static final int yyempty_ = -2;
   private static final int yyfinal_ = 8;
   private static final int yyntokens_ = 20;
@@ -1057,22 +1074,22 @@ private static final byte yycheck_[] = yycheck_init();
 	private Problem problem;
 	public static Problem parse(String script) throws IOException {
   		InputStream stream = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
-        	ChocoLexer lexer = new ChocoLexer(stream);
+        ChocoLexer lexer = new ChocoLexer(stream);
 		Choco parser = new Choco(lexer);
-        	parser.problem = new Problem();
-    		if(parser.parse())
-      			return parser.problem;
-    		return null;
+        parser.problem = new Problem();
+        if(parser.parse())
+            return parser.problem;
+        return null;
   	}
 /* "Choco.y":32  */
 
 	public static List<Integer> set = new ArrayList<>();
 
-/* "Choco.java":1072  */
+/* "Choco.java":1089  */
 
 }
 
-/* "Choco.y":127  */
+/* "Choco.y":134  */
 
 
 class ChocoLexer implements Choco.Lexer {
