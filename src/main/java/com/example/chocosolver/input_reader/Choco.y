@@ -4,94 +4,152 @@
 %define parse.error verbose
 
 %code imports{
-  import java.io.InputStream;
-  import java.io.InputStreamReader;
-  import java.io.Reader;
-  import java.io.IOException;
+	package com.example.chocosolver.input_reader;
+	import java.io.InputStream;
+  	import java.io.InputStreamReader;
+  	import java.io.Reader;
+  	import java.io.IOException;
+  	import java.util.ArrayList;
+  	import java.util.List;
+  	import com.example.chocosolver.problem.*;
+  	import java.io.ByteArrayInputStream;
+	import java.nio.charset.StandardCharsets;
 }
 
 %code {
-  public static void main(String args[]) throws IOException {
-    ChocoLexer lexer = new ChocoLexer(System.in);
-    Choco parser = new Choco(lexer);
-    if(parser.parse())
-      System.out.println("Parsing Result = SUCCESS");
-    return;
-  }
+	private Problem problem;
+	public static Problem parse(String script) throws IOException {
+  		InputStream stream = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
+        	ChocoLexer lexer = new ChocoLexer(stream);
+		Choco parser = new Choco(lexer);
+        	parser.problem = new Problem();
+    		if(parser.parse())
+      			return parser.problem;
+    		return null;
+  	}
 }
 
-%token INF SUP EGAL PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS
+%code {
+	public static List<Integer> set = new ArrayList<>();
+}
+
+%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS
 
 %%
 prog:
-  variable
-  | contrainte
+  | variable
+  | constraint
 ;
 
-variable   
-    : ID DANS interval EOI
-    | ID DANS ensemble EOI
+variable:
+    ID DANS interval EOI {
+	Variable variable = new Variable(Yylex.id, (Pair) $3);
+        problem.addVariable(variable);
+    }|
+    ID DANS set EOI {
+        Variable variable = new Variable(Yylex.id, set);
+        problem.addVariable(variable);
+	}
 ;
 
-interval
-    : OPENINTERVAL NUMBER SEPARATOR NUMBER CLOSEINTERVAL
+constraint:
+    term relation term EOI {
+        Constraint constraint = new Constraint();
+        constraint.setTerm1((Term) $1);
+	constraint.setTerm2((Term) $3);
+	constraint.setRelation((Relation) $2);
+	problem.addConstraint(constraint);
+    }
 ;
 
-ensemble
-    : OPENSET NUMBER sous_ensemble CLOSESET
+interval:
+    OPENINTERVAL NUMBER SEPARATOR NUMBER CLOSEINTERVAL {
+        $$ = new Pair((Integer) $2, (Integer) $4);
+    }
 ;
 
-contrainte
-    : term comparateur term EOI
+relation:
+    INF {
+    	$$ = Relation.INFERIOR;
+    }|
+    SUP {
+    	$$ = Relation.SUPERIOR;
+    }|
+    EQUALS {
+    	$$ = Relation.EQUALS;
+    }
 ;
 
-term
-    : NUMBER
-    | ID
-    | ID operateur term
+set:
+    OPENSET NUMBER sous_ensemble CLOSESET {
+        set.add((Integer) $2);
+    }
 ;
 
-operateur
-    : PLUS
-    | MOINS
-    | MUL
-    | DIV
+sous_ensemble:
+    SEPARATOR NUMBER {
+    	set.add((Integer) $2);
+    }|
+    SEPARATOR NUMBER sous_ensemble {
+        set.add((Integer) $2);
+    }
 ;
 
-sous_ensemble
-    : SEPARATOR NUMBER
-    | SEPARATOR NUMBER sous_ensemble
+term:
+    NUMBER {
+    	$$ = new Term((Integer) $1);
+    }|
+    ID {
+	$$ = problem.addVariable(Yylex.id);
+    }|
+    term operateur term {
+    	$$ = new Term((Term) $1, (Operator) $2, (Term) $3);
+    }
 ;
 
-comparateur
-    : INF
-    | SUP
-    | EGAL
+operateur:
+    PLUS {
+    	$$ = Operator.ADD;
+    }|
+    MOINS {
+	$$ = Operator.SUBTRACT;
+    }|
+    MUL {
+    	$$ = Operator.MULTIPLY;
+    }|
+    DIV {
+	$$ = Operator.DIVIDE;
+    }
 ;
+
+
 
 %%
 
 class ChocoLexer implements Choco.Lexer {
-  InputStreamReader it;
-  Yylex yylex;
+    InputStreamReader it;
+    Yylex yylex;
+    Object lastTokenValue;
 
-  public ChocoLexer(InputStream is){
-    it = new InputStreamReader(is);
-    yylex = new Yylex(it);
-  }
+    public ChocoLexer(InputStream is){
+        it = new InputStreamReader(is);
+        yylex = new Yylex(it);
+    }
 
-  @Override
-  public void yyerror (String s){
-    System.err.println(s);
-  }
+    @Override
+    public void yyerror (String s){
+        System.err.println(s);
+    }
 
-  @Override
-  public Object getLVal() {
-    return null;
-  }
+    @Override
+    public Object getLVal() {
+        return lastTokenValue;
+    }
 
-  @Override
-  public int yylex () throws IOException{
-    return yylex.yylex();
-  }
+    @Override
+    public int yylex () throws IOException{
+        int tokenType = yylex.yylex();
+        lastTokenValue = Yylex.yylval;
+        return tokenType;
+    }
 }

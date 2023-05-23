@@ -12,14 +12,27 @@ public class Variable {
     private Pair valueInterval;
     private List<Integer> valueSet;
 
+    public Variable(String name) {
+        this.name = name;
+    }
+
     public Variable(String name, Pair valueInterval) {
-    	this.name=name;
+        this.name = name;
         this.valueInterval = valueInterval;
     }
 
     public Variable(String name, List<Integer> valueSet) {
-    	this.name=name;
-    	this.valueSet=valueSet;
+        this.name = name;
+        this.valueSet = valueSet;
+    }
+
+    @Override
+    public String toString() {
+        if (this.valueInterval != null) {
+            return "Variable(" + name + " in " + this.valueInterval + ")";
+        } else {
+            return "Variable(" + name + " in " + this.valueSet;
+        }
     }
 
 

@@ -14,10 +14,9 @@ public class TermTest {
     public void testCreateTermWithValue() {
         int value = 4;
         Term term = new Term(value);
-
         assertEquals(value, term.getValue());
         assertNull(term.getVariable());
-        assertNull(term.getListvariable());
+        assertNull(term.getTerms());
         assertNull(term.getOperator());
     }
 
@@ -25,10 +24,9 @@ public class TermTest {
     public void testCreateTermWithVariable() {
         Variable variable = new Variable("A", new Pair(0, 10));
         Term term = new Term(variable);
-
         assertNull(term.getValue());
         assertEquals(variable, term.getVariable());
-        assertNull(term.getListvariable());
+        assertNull(term.getTerms());
         assertNull(term.getOperator());
     }
    
@@ -36,35 +34,38 @@ public class TermTest {
     public void testCreateTermWithListAndOperatorDifference() {
         Term term1 = new Term(new Variable("A", Collections.singletonList(1)));
         Term term2 = new Term(new Variable("B", Collections.singletonList(2)));
-        Operator operator = Operator.SUM;
+        Operator operator = Operator.ADD;
         Term term = new Term(Arrays.asList(term1, term2), operator);
         assertNull(term.getValue());
         assertNull(term.getVariable());
-        assertEquals(Arrays.asList(term1, term2), term.getListvariable());
+        assertEquals(Arrays.asList(term1, term2), term.getTerms());
         assertEquals(operator, term.getOperator());
     }
+
     @Test
     public void testCreateTermWithListAndOperatorProduct() {
         Term term1 = new Term(new Variable("A", Collections.singletonList(1)));
         Term term2 = new Term(new Variable("B", Collections.singletonList(2)));
-        Operator operator = Operator.PRODUCT;
+        Operator operator = Operator.MULTIPLY;
         Term term = new Term(Arrays.asList(term1, term2), operator);
         assertNull(term.getValue());
         assertNull(term.getVariable());
-        assertEquals(Arrays.asList(term1, term2), term.getListvariable());
+        assertEquals(Arrays.asList(term1, term2), term.getTerms());
         assertEquals(operator, term.getOperator());
     }
+
     @Test
     public void testCreateTermWithListAndOperatorQuotient() {
         Term term1 = new Term(new Variable("A", Collections.singletonList(1)));
         Term term2 = new Term(new Variable("B", Collections.singletonList(2)));
-        Operator operator = Operator.QUOTIENT;
+        Operator operator = Operator.DIVIDE;
         Term term = new Term(Arrays.asList(term1, term2), operator);
         assertNull(term.getValue());
         assertNull(term.getVariable());
-        assertEquals(Arrays.asList(term1, term2), term.getListvariable());
+        assertEquals(Arrays.asList(term1, term2), term.getTerms());
         assertEquals(operator, term.getOperator());
     }
+
     @Test
     public void testCreateTermWithListAndOperatorMax() {
         Term term1 = new Term(new Variable("A", Collections.singletonList(1)));
@@ -73,9 +74,10 @@ public class TermTest {
         Term term = new Term(Arrays.asList(term1, term2), operator);
         assertNull(term.getValue());
         assertNull(term.getVariable());
-        assertEquals(Arrays.asList(term1, term2), term.getListvariable());
+        assertEquals(Arrays.asList(term1, term2), term.getTerms());
         assertEquals(operator, term.getOperator());
     }
+
     @Test
     public void testCreateTermWithListAndOperatorMin() {
         Term term1 = new Term(new Variable("A", Collections.singletonList(1)));
@@ -84,9 +86,10 @@ public class TermTest {
         Term term = new Term(Arrays.asList(term1, term2), operator);
         assertNull(term.getValue());
         assertNull(term.getVariable());
-        assertEquals(Arrays.asList(term1, term2), term.getListvariable());
+        assertEquals(Arrays.asList(term1, term2), term.getTerms());
         assertEquals(operator, term.getOperator());
     }
+
     @Test
     public void testCreateTermWithListAndOperatorAvg() {
         Term term1 = new Term(new Variable("A", Collections.singletonList(1)));
@@ -95,7 +98,7 @@ public class TermTest {
         Term term = new Term(Arrays.asList(term1, term2), operator);
         assertNull(term.getValue());
         assertNull(term.getVariable());
-        assertEquals(Arrays.asList(term1, term2), term.getListvariable());
+        assertEquals(Arrays.asList(term1, term2), term.getTerms());
         assertEquals(operator, term.getOperator());
     }
 }

@@ -18,6 +18,10 @@
 		<p>Problem solution:</p>
 		<p>	
 			<%= request.getAttribute("solution") %>
+
+		<p>
+			Problem solution:
+			<%= request.getAttribute("message") %>
 		</p>
 
 	</div>

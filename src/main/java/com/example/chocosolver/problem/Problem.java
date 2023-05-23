@@ -8,8 +8,6 @@ import java.util.List;
 @Data
 public class Problem {
 
-    //le but de cette classe est que le seul Model créé soit dans la méthode solve
-
     private HashMap<String, Variable> variables;
     private List<Constraint> constraints;
 
@@ -19,16 +17,33 @@ public class Problem {
     }
 
     public void addVariable(String name, int lowerBound, int upperBound) {
-        Variable v = new Variable(name, new Pair(lowerBound, upperBound));
-        this.variables.put(v.getName(),v);
+        Variable v = variables.get(name);
+        if (v == null) {
+            v = new Variable(name, new Pair(lowerBound, upperBound));
+        } else {
+            variables.get(name).setValueInterval(new Pair(lowerBound, upperBound));
+        }
+        variables.put(v.getName(),v);
+    }
+
+    public Term addVariable(String name) {
+        Variable v = variables.get(name);
+        if (v == null) {
+            v = new Variable(name);
+        }
+        variables.put(v.getName(),v);
+        return new Term(v);
     }
 
     public void addVariable(Variable variable) {
-        this.variables.put(variable.getName(),variable);
+        variables.put(variable.getName(),variable);
     }
 
     public void addConstraint(Constraint constraint) {
         this.constraints.add(constraint);
     }
-      
-} 
+
+    public HashMap<String, Variable> getVariables() {
+        return variables;
+    }
+}

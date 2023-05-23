@@ -57,4 +57,6 @@ public class ProblemTest {
         assertEquals(1, problem.getConstraints().size());
         assertTrue(problem.getConstraints().contains(constraint));
     }
+
+
 }
