@@ -66,9 +66,9 @@ public class ChocoSolver {
 			int constantTerm1 = term.getValue();
 			return model.intVar(constantTerm1);
 		}
-		else if(term.getListvariable().size()==2){
-			var t1=ResolveTerm(term.getListvariable().get(0));
-			var t2=ResolveTerm(term.getListvariable().get(1));
+		else if(term.getTerms().size()==2){
+			var t1=ResolveTerm(term.getTerms().get(0));
+			var t2=ResolveTerm(term.getTerms().get(1));
 			return t1.add(t2);
 		}
 		else {
