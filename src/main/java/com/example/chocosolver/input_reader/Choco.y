@@ -33,7 +33,7 @@
 	public static List<Integer> set = new ArrayList<>();
 }
 
-%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS
+%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS EXC
 
 %%
 prog:
@@ -85,6 +85,9 @@ relation:
     } |
     sup_or_equals {
         $$ = Relation.SUPERIORorEQUAL;
+    } |
+    EXC EQUALS {
+        $$ = Relation.DIFFERENT;
     }
 ;
 
@@ -95,6 +98,7 @@ inf_or_equals:
 sup_or_equals:
 	SUP EQUALS
 ;
+
 
 
 

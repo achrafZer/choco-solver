@@ -47,6 +47,7 @@ UNKNOWN_TOKEN = .
     "-" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MOINS;}
     "*" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;}
     "/" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;}
+    "!" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EXC;}
 
 
     {UNKNOWN_TOKEN} {return ChocoLexer.UNKNOWN_TOKEN;}

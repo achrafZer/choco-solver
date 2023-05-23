@@ -60,12 +60,12 @@ public class Yylex {
   private static final int [] ZZ_CMAP_BLOCKS = zzUnpackcmap_blocks();
 
   private static final String ZZ_CMAP_BLOCKS_PACKED_0 =
-    "\11\0\2\1\2\2\1\1\22\0\1\1\11\0\1\3"+
-    "\1\4\1\5\1\6\1\0\1\7\12\10\1\0\1\11"+
-    "\1\12\1\13\1\14\2\0\32\15\1\16\1\0\1\17"+
-    "\3\0\1\20\2\0\1\21\11\0\1\22\4\0\1\23"+
-    "\7\0\1\24\1\0\1\25\7\0\1\2\u01a2\0\2\2"+
-    "\326\0\u0100\2";
+    "\11\0\2\1\2\2\1\1\22\0\1\1\1\3\10\0"+
+    "\1\4\1\5\1\6\1\7\1\0\1\10\12\11\1\0"+
+    "\1\12\1\13\1\14\1\15\2\0\32\16\1\17\1\0"+
+    "\1\20\3\0\1\21\2\0\1\22\11\0\1\23\4\0"+
+    "\1\24\7\0\1\25\1\0\1\26\7\0\1\2\u01a2\0"+
+    "\2\2\326\0\u0100\2";
 
   private static int [] zzUnpackcmap_blocks() {
     int [] result = new int[1024];
@@ -94,10 +94,10 @@ public class Yylex {
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
     "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
-    "\1\20\1\1\1\21\1\22\2\0\1\23";
+    "\1\20\1\21\1\1\1\22\1\23\2\0\1\24";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[23];
+    int [] result = new int[24];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -122,12 +122,12 @@ public class Yylex {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\26\0\54\0\26\0\26\0\26\0\26\0\26"+
-    "\0\26\0\102\0\26\0\26\0\26\0\26\0\130\0\26"+
-    "\0\26\0\156\0\26\0\26\0\204\0\232\0\26";
+    "\0\0\0\27\0\56\0\27\0\27\0\27\0\27\0\27"+
+    "\0\27\0\27\0\105\0\27\0\27\0\27\0\27\0\134"+
+    "\0\27\0\27\0\163\0\27\0\27\0\212\0\241\0\27";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[23];
+    int [] result = new int[24];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -152,12 +152,12 @@ public class Yylex {
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11"+
     "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
-    "\1\2\1\22\2\2\1\23\1\24\27\0\1\3\34\0"+
-    "\1\12\32\0\1\17\30\0\1\25\27\0\1\26\26\0"+
-    "\1\27\2\0";
+    "\1\22\1\2\1\23\2\2\1\24\1\25\30\0\1\3"+
+    "\36\0\1\13\33\0\1\20\31\0\1\26\30\0\1\27"+
+    "\27\0\1\30\2\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[176];
+    int [] result = new int[184];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -200,11 +200,11 @@ public class Yylex {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\1\1\6\11\1\1\4\11\1\1\2\11"+
+    "\1\0\1\11\1\1\7\11\1\1\4\11\1\1\2\11"+
     "\1\1\2\11\2\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[23];
+    int [] result = new int[24];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -700,101 +700,106 @@ public class Yylex {
             { return ChocoLexer.UNKNOWN_TOKEN;
             }
           // fall through
-          case 20: break;
+          case 21: break;
           case 2:
             { 
             }
           // fall through
-          case 21: break;
+          case 22: break;
           case 3:
             { System.out.print(yytext());
             }
           // fall through
-          case 22: break;
-          case 4:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;
-            }
-          // fall through
           case 23: break;
-          case 5:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.PLUS;
+          case 4:
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EXC;
             }
           // fall through
           case 24: break;
-          case 6:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SEPARATOR;
+          case 5:
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;
             }
           // fall through
           case 25: break;
-          case 7:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MOINS;
+          case 6:
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.PLUS;
             }
           // fall through
           case 26: break;
-          case 8:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;
+          case 7:
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SEPARATOR;
             }
           // fall through
           case 27: break;
+          case 8:
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MOINS;
+            }
+          // fall through
+          case 28: break;
           case 9:
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;
+            }
+          // fall through
+          case 29: break;
+          case 10:
             { yylval = Integer.valueOf(yytext());
         System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
         return ChocoLexer.NUMBER;
             }
           // fall through
-          case 28: break;
-          case 10:
+          case 30: break;
+          case 11:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EOI;
             }
           // fall through
-          case 29: break;
-          case 11:
+          case 31: break;
+          case 12:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.INF;
             }
           // fall through
-          case 30: break;
-          case 12:
+          case 32: break;
+          case 13:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EQUALS;
             }
           // fall through
-          case 31: break;
-          case 13:
+          case 33: break;
+          case 14:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SUP;
             }
           // fall through
-          case 32: break;
-          case 14:
+          case 34: break;
+          case 15:
             { id = yytext();
 		System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
 		return ChocoLexer.ID;
             }
           // fall through
-          case 33: break;
-          case 15:
+          case 35: break;
+          case 16:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENINTERVAL;
             }
           // fall through
-          case 34: break;
-          case 16:
+          case 36: break;
+          case 17:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSEINTERVAL;
             }
           // fall through
-          case 35: break;
-          case 17:
+          case 37: break;
+          case 18:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENSET;
             }
           // fall through
-          case 36: break;
-          case 18:
+          case 38: break;
+          case 19:
             { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSESET;
             }
           // fall through
-          case 37: break;
-          case 19:
+          case 39: break;
+          case 20:
             { System.out.println("Mot-clé : " + yytext()); return ChocoLexer.DANS;
             }
           // fall through
-          case 38: break;
+          case 40: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
