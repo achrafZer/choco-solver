@@ -49,7 +49,7 @@ variable:
     ID DANS set EOI {
         Variable variable = new Variable(Yylex.id, set);
         problem.addVariable(variable);
-	}
+    }
 ;
 
 constraint:
