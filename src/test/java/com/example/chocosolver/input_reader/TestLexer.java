@@ -66,7 +66,7 @@ public class TestLexer {
 
     @Test
     public void testProblem() throws IOException {
-        String script = "A dans {1, 2, 3}; B dans [2, 4]; A <= 1;";
+        String script = "A dans {1, 2, 3}; B dans [2, 4]; A >= 1;";
         var p = Choco.parse(script);
         assertNotNull(p);
         assertEquals(p.getVariables().size(), 2);

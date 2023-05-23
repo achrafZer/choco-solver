@@ -83,14 +83,20 @@ relation:
     inf_or_equals {
         $$ = Relation.INFERIORorEQUAL;
     } |
-    inf_or_equals {
-        $$ = Relation.INFERIORorEQUAL;
+    sup_or_equals {
+        $$ = Relation.SUPERIORorEQUAL;
     }
 ;
 
 inf_or_equals:
-	INF EQUALS
+ 	INF EQUALS
 ;
+
+sup_or_equals:
+	SUP EQUALS
+;
+
+
 
 set:
     OPENSET NUMBER sous_ensemble CLOSESET {
