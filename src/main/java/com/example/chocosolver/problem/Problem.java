@@ -30,6 +30,5 @@ public class Problem {
     public void addConstraint(Constraint constraint) {
         this.constraints.add(constraint);
     }
-
-
-}
+      
+} 

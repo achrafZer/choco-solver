@@ -35,4 +35,7 @@ public class Term {
     	this.Listvariable=variables;
     	this.operator=operator;
     }
+    
+   
+    
 }
