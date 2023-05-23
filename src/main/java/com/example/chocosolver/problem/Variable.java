@@ -11,6 +11,10 @@ public class Variable {
     private Pair valueInterval;
     private List<Integer> valueSet;
 
+    public Variable(String name) {
+        this.name = name;
+    }
+
     public Variable(String name, Pair valueInterval) {
         this.name = name;
         this.valueInterval = valueInterval;
@@ -24,9 +28,9 @@ public class Variable {
     @Override
     public String toString() {
         if (this.valueInterval != null) {
-            return "Variable(" + name + " in" + this.valueInterval + ")";
+            return "Variable(" + name + " in " + this.valueInterval + ")";
         } else {
-            return "Variable(" + name + " in" + this.valueSet;
+            return "Variable(" + name + " in " + this.valueSet;
         }
     }
 

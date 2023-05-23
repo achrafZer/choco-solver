@@ -1,10 +1,10 @@
 package com.example.chocosolver.problem;
 
 public enum Operator {
-	SUM,
-	DIFFERENCE,
-	PRODUCT,
-	QUOTIENT,   
+	ADD,
+	SUBTRACT,
+	MULTIPLY,
+	DIVIDE,
     MAX,
     MIN,
     AVG

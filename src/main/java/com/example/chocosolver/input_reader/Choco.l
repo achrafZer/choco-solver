@@ -47,7 +47,7 @@ UNKNOWN_TOKEN = .
     "}" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSESET;}
       "<" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.INF;}
     ">" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SUP;}
-    "=" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EGAL;}
+    "=" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EQUALS;}
    "+" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.PLUS;}
     "-" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MOINS;}
     "*" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;}

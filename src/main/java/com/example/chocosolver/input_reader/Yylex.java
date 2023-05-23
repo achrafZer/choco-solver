@@ -754,7 +754,7 @@ public class Yylex {
           // fall through
           case 30: break;
           case 12:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EGAL;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EQUALS;
             }
           // fall through
           case 31: break;

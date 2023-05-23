@@ -20,7 +20,8 @@
 	private Problem problem;
 	public static Problem parse(String script) throws IOException {
   		InputStream stream = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
-        	ChocoLexer lexer = new ChocoLexer(stream);    Choco parser = new Choco(lexer);
+        	ChocoLexer lexer = new ChocoLexer(stream);
+		Choco parser = new Choco(lexer);
         	parser.problem = new Problem();
     		if(parser.parse())
       			return parser.problem;
@@ -29,102 +30,96 @@
 }
 
 %code {
-	public static List<Integer> ensemble = new ArrayList<>();
-  	public static Pair interval;
-  	public static Term term1;
-	public static Term term2;
-	public static Relation relation;
-
+	public static List<Integer> set = new ArrayList<>();
 }
 
-%token INF SUP EGAL PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS
+%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS
 
 %%
 prog:
-    prog
-  |  variable
-  | contrainte
+  | variable
+  | constraint
 ;
 
 variable:
     ID DANS interval EOI {
-	Variable variable = new Variable(Yylex.id, interval);
+	Variable variable = new Variable(Yylex.id, (Pair) $3);
         problem.addVariable(variable);
     }|
-    ID DANS ensemble EOI {
-        Variable variable = new Variable(Yylex.id, ensemble);
+    ID DANS set EOI {
+        Variable variable = new Variable(Yylex.id, set);
         problem.addVariable(variable);
 	}
 ;
 
-contrainte:
-    term comparateur term EOI {
+constraint:
+    term relation term EOI {
         Constraint constraint = new Constraint();
-        constraint.setTerm1(term1);
-	constraint.setTerm2(term2);
-	constraint.setRelation(relation);
+        constraint.setTerm1((Term) $1);
+	constraint.setTerm2((Term) $3);
+	constraint.setRelation((Relation) $2);
 	problem.addConstraint(constraint);
     }
 ;
 
 interval:
     OPENINTERVAL NUMBER SEPARATOR NUMBER CLOSEINTERVAL {
-        interval = new Pair((Integer) $2, (Integer) $4);
+        $$ = new Pair((Integer) $2, (Integer) $4);
     }
 ;
 
-comparateur:
+relation:
     INF {
-    	relation = Relation.INFERIOR;
+    	$$ = Relation.INFERIOR;
     }|
     SUP {
-    	relation = Relation.SUPERIOR;
+    	$$ = Relation.SUPERIOR;
     }|
-    EGAL {
-    	relation = Relation.EQUALS;
+    EQUALS {
+    	$$ = Relation.EQUALS;
     }
 ;
 
-ensemble:
+set:
     OPENSET NUMBER sous_ensemble CLOSESET {
-        ensemble.add((Integer) $2);
+        set.add((Integer) $2);
     }
 ;
 
 sous_ensemble:
     SEPARATOR NUMBER {
-    	ensemble.add((Integer) $2);
+    	set.add((Integer) $2);
     }|
     SEPARATOR NUMBER sous_ensemble {
-        ensemble.add((Integer) $2);
+        set.add((Integer) $2);
     }
 ;
 
 term:
     NUMBER {
-	if (term1 == null) {
-		term1 = new Term((Integer) $1);
-	} else {
-    		term2 = new Term((Integer) $1);
-	}
+    	$$ = new Term((Integer) $1);
     }|
     ID {
-	if (term1 == null) {
-		term1 = new Term(Problem.variables.get(Yylex.id));
-	} else {
-		term2 = new Term(Problem.variables.get(Yylex.id));
-	}
+	$$ = problem.addVariable(Yylex.id);
     }|
-    ID operateur term {
-    }|
-    term operateur ID
+    term operateur term {
+    	$$ = new Term((Term) $1, (Operator) $2, (Term) $3);
+    }
 ;
 
 operateur:
-    PLUS|
-    MOINS|
-    MUL|
-    DIV
+    PLUS {
+    	$$ = Operator.ADD;
+    }|
+    MOINS {
+	$$ = Operator.SUBTRACT;
+    }|
+    MUL {
+    	$$ = Operator.MULTIPLY;
+    }|
+    DIV {
+	$$ = Operator.DIVIDE;
+    }
 ;
 
 

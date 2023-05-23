@@ -17,19 +17,13 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestLexer {
-    public static String script = " A dans {1, 2};";
-
-    @Test
-    public void testVariable() throws IOException {
-        testVariableSet();
-        testVariableInterval();
-    }
 
     @Test
     public void testVariableSet() throws IOException {
         String script = "A dans {1, 2};";
         var p = Choco.parse(script);
         assertNotNull(p);
+        //TODO
         System.out.println(p);
     }
 
@@ -38,6 +32,7 @@ public class TestLexer {
         String script = "A dans [1, 2];";
         var p = Choco.parse(script);
         assertNotNull(p);
+        //TODO
         System.out.println(p);
     }
 
@@ -45,10 +40,18 @@ public class TestLexer {
     public void testConstraintInf1() throws IOException {
         String script = "0 < 1;";
         var p = Choco.parse(script);
-        assertNotNull(p);
-        assertNotNull(p.getConstraints());
-        assertNull(p.getConstraints().get(0).getTerm1().getVariable());
+        assertEquals(p.getConstraints().get(0).getTerm1().getValue(), 0);
         assertEquals(p.getConstraints().get(0).getTerm2().getValue(), 1);
+
+        System.out.println(p);
+    }
+
+    @Test
+    public void testConstraintSup() throws IOException {
+        String script = "A + 2 > 1;";
+        var p = Choco.parse(script);
+
+        System.out.println(p);
 
         System.out.println(p);
     }
