@@ -425,7 +425,7 @@ public class Choco
 
   case 17:
   if (yyn == 17)
-    /* "Choco.y":106  */
+    /* "Choco.y":103  */
                                           {
         set.add((Integer) yystack.valueAt (2));
     };
@@ -434,7 +434,7 @@ public class Choco
 
   case 18:
   if (yyn == 18)
-    /* "Choco.y":112  */
+    /* "Choco.y":109  */
                      {
     	set.add((Integer) yystack.valueAt (0));
     };
@@ -443,7 +443,7 @@ public class Choco
 
   case 19:
   if (yyn == 19)
-    /* "Choco.y":115  */
+    /* "Choco.y":112  */
                                    {
         set.add((Integer) yystack.valueAt (1));
     };
@@ -452,7 +452,7 @@ public class Choco
 
   case 20:
   if (yyn == 20)
-    /* "Choco.y":121  */
+    /* "Choco.y":118  */
            {
     	yyval = new Term((Integer) yystack.valueAt (0));
     };
@@ -461,7 +461,7 @@ public class Choco
 
   case 21:
   if (yyn == 21)
-    /* "Choco.y":124  */
+    /* "Choco.y":121  */
        {
 		yyval = problem.addVariable(Yylex.id);
     };
@@ -470,7 +470,7 @@ public class Choco
 
   case 22:
   if (yyn == 22)
-    /* "Choco.y":127  */
+    /* "Choco.y":124  */
                         {
     	yyval = new Term((Term) yystack.valueAt (2), (Operator) yystack.valueAt (1), (Term) yystack.valueAt (0));
     };
@@ -479,7 +479,7 @@ public class Choco
 
   case 23:
   if (yyn == 23)
-    /* "Choco.y":133  */
+    /* "Choco.y":130  */
          {
     	yyval = Operator.ADD;
     };
@@ -488,7 +488,7 @@ public class Choco
 
   case 24:
   if (yyn == 24)
-    /* "Choco.y":136  */
+    /* "Choco.y":133  */
           {
 		yyval = Operator.SUBTRACT;
     };
@@ -497,7 +497,7 @@ public class Choco
 
   case 25:
   if (yyn == 25)
-    /* "Choco.y":139  */
+    /* "Choco.y":136  */
         {
     	yyval = Operator.MULTIPLY;
     };
@@ -506,7 +506,7 @@ public class Choco
 
   case 26:
   if (yyn == 26)
-    /* "Choco.y":142  */
+    /* "Choco.y":139  */
         {
 		yyval = Operator.DIVIDE;
     };
@@ -1098,9 +1098,9 @@ private static final byte yycheck_[] = yycheck_init();
         ChocoLexer lexer = new ChocoLexer(stream);
 		Choco parser = new Choco(lexer);
         parser.problem = new Problem();
-        if(parser.parse())
-            return parser.problem;
-        return null;
+        lexer.setProblem(parser.problem);
+        parser.parse();
+        return parser.problem;
   	}
 /* "Choco.y":32  */
 
@@ -1110,22 +1110,29 @@ private static final byte yycheck_[] = yycheck_init();
 
 }
 
-/* "Choco.y":147  */
+/* "Choco.y":144  */
 
 
 class ChocoLexer implements Choco.Lexer {
     InputStreamReader it;
     Yylex yylex;
     Object lastTokenValue;
+    Problem problem;
 
     public ChocoLexer(InputStream is){
         it = new InputStreamReader(is);
         yylex = new Yylex(it);
     }
 
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+
     @Override
     public void yyerror (String s){
         System.err.println(s);
+        problem.setError(true);
+        problem.setErrorMessage(s);
     }
 
     @Override

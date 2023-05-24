@@ -38,7 +38,6 @@ public class MyController {
         return modelAndView;
     }
 
-
     private Solution solve(Problem problem) {
     	ChocoSolver cs=new ChocoSolver(problem);
     	Solution s = cs.solve();

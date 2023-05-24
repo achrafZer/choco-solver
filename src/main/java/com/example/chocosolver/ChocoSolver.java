@@ -53,7 +53,6 @@ public class ChocoSolver {
 	}
 
 	private ArExpression ResolveTerm(Term term) {
-
 		if (term.getVariable() != null) {
 			Variable variable = term.getVariable();
 
@@ -117,11 +116,8 @@ public class ChocoSolver {
 			case DIFFERENT:
 				model.arithm(term1.intVar(), "!=", term2.intVar()).post();
 				break;
-
 			}
-
 		}
-
 	}
 
 	public Solution solve() {

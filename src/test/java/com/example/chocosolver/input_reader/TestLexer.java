@@ -73,6 +73,17 @@ public class TestLexer {
         assertTrue(p.getVariables().get("A").getValueSet().contains(3));
         System.out.println(p);
     }
+
+    @Test
+    public void testError() throws IOException {
+        String script = "A dans {1, 2, 3}";
+        var p = Choco.parse(script);
+
+        assertTrue(p.isError());
+        assertEquals(p.getErrorMessage(), "syntax error, unexpected end of input, expecting EOI");
+        assertNull(p.getVariables());
+        assertNull(p.getConstraints());
+    }
 }
 
 
