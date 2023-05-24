@@ -1,5 +1,8 @@
 package com.example.chocosolver.problem;
+import com.example.chocosolver.input_reader.Choco;
 import lombok.Data;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +29,13 @@ public class Problem {
     public Problem() {
         this.variables = new HashMap<>();
         this.constraints = new ArrayList<Constraint>();
+    }
+
+    public Problem(String script) throws IOException {
+        Problem problem = Choco.parse(script);
+        assert problem != null;
+        this.variables = problem.getVariables();
+        this.constraints = problem.getConstraints();
     }
 
     /**

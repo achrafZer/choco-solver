@@ -1,7 +1,6 @@
 package com.example.chocosolver;
 
-
-
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.chocosolver.solver.Solution;
@@ -29,31 +28,9 @@ public class MyController {
     }
 
     @PostMapping("/solve")
-    public ModelAndView solveProblem(@RequestParam("problem") String problemText) {
-    	// nous créons le problème
-    	Problem p= new Problem();
+    public ModelAndView solveProblem(@RequestParam("problem") String problemText) throws IOException {
+		Problem p= new Problem(problemText);
 
-
-    	Variable A=new  Variable("A",new Pair(0,10));
-		Variable B=new  Variable("B",new Pair(0,10));
-		ArrayList L=new ArrayList();
-		Term termA=new Term(A);
-		Term termB=new Term(B);
-		L.add(termB);
-		L.add(termA);
-		Term term1=new Term(L,Operator.ADD);
-		Term term2=new Term(10);
-		Constraint C=new Constraint(term1,term2,Relation.EQUALS);
-
-
-		p.addVariable(A);
-		p.addVariable(B);
-		p.addConstraint(C);
-
-
-    	///nous analysons le string ProblemText et on retire les variable et constraint
-    	// nous ajoutons les variable et constraints
-    	// on utlise solve pour avoir le resultat
         Solution solution = solve(p);
         ModelAndView modelAndView = new ModelAndView("response");
         modelAndView.addObject("solution", solution);
@@ -64,7 +41,7 @@ public class MyController {
 
     private Solution solve(Problem problem) {
     	ChocoSolver cs=new ChocoSolver(problem);
-    	Solution s=cs.solve();
+    	Solution s = cs.solve();
     	return s;
     }
 }

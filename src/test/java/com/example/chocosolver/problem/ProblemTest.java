@@ -3,6 +3,8 @@ package com.example.chocosolver.problem;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -57,6 +59,4 @@ public class ProblemTest {
         assertEquals(1, problem.getConstraints().size());
         assertTrue(problem.getConstraints().contains(constraint));
     }
-
-
 }
