@@ -34,6 +34,10 @@ public class ChocoSolver {
 		this.intVars = new HashMap<>();
 	}
 
+    public IntVar getIntVar(String varName) {
+        return intVars.get(varName);
+    }
+
 	private void createVariables() {
 		IntVar var = null;
 		HashMap<String, Variable> variables = problem.getVariables();
@@ -85,6 +89,35 @@ public class ChocoSolver {
 			case AVG:
 				return t1.min(t2);
 			}
+		} else {
+			ArExpression result = null;
+			for (int i = 0; i < term.getTerms().size(); i++) {
+				ArExpression currentTerm = ResolveTerm(term.getTerms().get(i));
+				if (result == null) {
+					result = currentTerm;
+				} else {
+					
+					
+					switch (term.getOperator()) {
+					case ADD:
+						result = result.add(currentTerm);
+					case SUBTRACT:
+						result = result.sub(currentTerm);
+
+					case MULTIPLY:
+						result = result.mul(currentTerm);
+					case DIVIDE:
+						result = result.div(currentTerm);
+					case MAX:
+						result = result.max(currentTerm);
+					case MIN:
+						result = result.min(currentTerm);
+					case AVG:
+						result = result.add(currentTerm);
+					}
+				}
+			}
+			return result;
 		}
 
 		throw new IllegalStateException("term inconnu");
@@ -113,7 +146,7 @@ public class ChocoSolver {
 			case INFERIORorEQUAL:
 				model.arithm(term1.intVar(), "<=", term2.intVar()).post();
 				break;
-			case EQUALS:
+			case EQUALS: 
 				model.arithm(term1.intVar(), "=", term2.intVar()).post();
 				break;
 			case DIFFERENT:

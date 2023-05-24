@@ -1,38 +1,169 @@
 package com.example.chocosolver.problem;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import com.example.chocosolver.ChocoSolver;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.chocosolver.solver.Solution;
+import org.chocosolver.solver.variables.IntVar;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.Test;
-
-import com.example.chocosolver.ChocoSolver;
-
 public class ChocoSolverTest {
+	private Variable A;
+	private Variable B;
+	private Variable D;
+	private Problem problem;
+	private ChocoSolver cs;
 
-	@Test
-	public void test()
-	{
-		Variable A=new  Variable("A",new Pair(0,10));
-		Variable B=new  Variable("B",new Pair(0,10));
-		ArrayList L=new ArrayList();
-		Term termA=new Term(A);
-		Term termB=new Term(B);
-		L.add(termA);
-		L.add(termB);
-		Term term1=new Term(L,Operator.ADD);
-		Term term2=new Term(10);
-		Constraint C=new Constraint(term1,term2,Relation.EQUALS);
-
-		Problem p=new Problem();
-		p.addVariable(A);
-		p.addVariable(B);
-		p.addConstraint(C);
-
-		ChocoSolver cs=new ChocoSolver(p);
-		cs.solve();
-
-
+	@BeforeEach
+	public void init() {
+		A = new Variable("A", new Pair(0, 100));
+		B = new Variable("B", new Pair(0, 100));
+		D = new Variable("D", new Pair(0, 100));
+		problem = new Problem();
 	}
 
+	@Test
+	public void testSolver() {
+		// A + B = 10
+		ArrayList<Term> termList = new ArrayList<>();
+		termList.add(new Term(A));
+		termList.add(new Term(B));
+		Term term1 = new Term(termList, Operator.ADD);
+		Term term2 = new Term(10);
+		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
+
+		problem.addVariable(A);
+		problem.addVariable(B);
+		problem.addConstraint(C);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve();
+		assertNotNull(solution);
+
+		IntVar varA = cs.getIntVar(A.getName());
+		IntVar varB = cs.getIntVar(B.getName());
+		int aValue = solution.getIntVal(varA);
+		int bValue = solution.getIntVal(varB);
+
+		assertEquals(10, aValue + bValue);
+	}
+	
+
+	@Test
+	public void testSolver2() {
+		// A = B
+		Term term1 = new Term(A);
+		Term term2 = new Term(B);
+		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
+
+		problem.addVariable(A);
+		problem.addVariable(B);
+		problem.addConstraint(C);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve();
+		assertNotNull(solution);
+
+		IntVar varA = cs.getIntVar(A.getName());
+		IntVar varB = cs.getIntVar(B.getName());
+		int aValue = solution.getIntVal(varA);
+		int bValue = solution.getIntVal(varB);
+
+		assertEquals(aValue, bValue);
+	}
+
+	@Test
+	public void testSolver3() {
+		// A = D+B
+		ArrayList<Term> termList = new ArrayList<>();
+		termList.add(new Term(D));
+		termList.add(new Term(B));
+		Term term2 = new Term(termList, Operator.ADD);
+		Term term1 = new Term(A);
+		Term term3 = new Term(2);
+		Constraint C = new Constraint(term1, term2, Relation.INFERIOR);
+		Constraint E = new Constraint(term1,term3,Relation.SUPERIORorEQUAL);
+
+		problem.addVariable(A);
+		problem.addVariable(B);
+		problem.addVariable(D);
+		problem.addConstraint(C);
+		problem.addConstraint(E);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve();
+		assertNotNull(solution);
+
+		IntVar varA = cs.getIntVar(A.getName());
+		IntVar varB = cs.getIntVar(B.getName());
+		IntVar varD = cs.getIntVar(D.getName());
+
+		int aValue = solution.getIntVal(varA);
+		int bValue = solution.getIntVal(varB);
+		int dValue = solution.getIntVal(varD);
+		assertTrue(aValue < (dValue+bValue));
+		assertTrue(aValue >= 2);
+	}
+	@Test
+	public void testSolver4() {
+		// A +B+C= 50
+		ArrayList<Term> termList = new ArrayList<>();
+		termList.add(new Term(D));
+		termList.add(new Term(B));
+		termList.add(new Term(A));
+		Term term1 = new Term(termList, Operator.MULTIPLY);
+		Term term2 = new Term(50);
+		
+		Constraint C = new Constraint(term1, term2, Relation.INFERIOR);
+
+		problem.addVariable(A);
+		problem.addVariable(B);
+		problem.addVariable(D);
+		problem.addConstraint(C);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve();
+		assertNotNull(solution);
+
+		IntVar varA = cs.getIntVar(A.getName());
+		IntVar varB = cs.getIntVar(B.getName());
+		IntVar varD = cs.getIntVar(D.getName());
+
+		int aValue = solution.getIntVal(varA);
+		int bValue = solution.getIntVal(varB);
+		int dValue = solution.getIntVal(varD);
+		assertTrue((aValue * dValue * bValue) < 50 );
+	}
+	
+	@Test
+	public void testSolver5() {
+		// A + B = 10
+		ArrayList<Term> termList = new ArrayList<>();
+		termList.add(new Term(A));
+		termList.add(new Term(B));
+		Term term1 = new Term(termList, Operator.SUBTRACT);
+		Term term2 = new Term(10);
+		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
+
+		problem.addVariable(A);
+		problem.addVariable(B);
+		problem.addConstraint(C);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve();
+		assertNotNull(solution);
+
+		IntVar varA = cs.getIntVar(A.getName());
+		IntVar varB = cs.getIntVar(B.getName());
+		int aValue = solution.getIntVal(varA);
+		int bValue = solution.getIntVal(varB);
+
+		assertEquals(10, aValue - bValue);
+	}
 }
