@@ -8,8 +8,6 @@ import com.example.chocosolver.problem.Relation;
 import com.example.chocosolver.problem.Term;
 import com.example.chocosolver.problem.Variable;
 
-import lombok.var;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
