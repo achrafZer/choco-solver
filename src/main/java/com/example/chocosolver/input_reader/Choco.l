@@ -13,7 +13,7 @@ package com.example.chocosolver.input_reader;
 %line
 %column
 
-ID = [A-Z]+
+ID = [A-Za-z]
 WS = [ \t\n\r]+
 NUMBER = ([0-9])+
 UNKNOWN_TOKEN = .
