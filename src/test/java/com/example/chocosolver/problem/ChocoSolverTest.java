@@ -19,6 +19,9 @@ public class ChocoSolverTest {
 	private Variable D;
 	private Problem problem;
 	private ChocoSolver cs;
+	private Variable AVide;
+	private Variable BVide;
+
 
 	@BeforeEach
 	public void init() {
@@ -169,15 +172,18 @@ public class ChocoSolverTest {
 	@Test
 	public void testSolver6() {
 		// A = B +1
+		Variable AVide=new Variable("AVide");
+		Variable BVide=new Variable("BVide");
+		
 		ArrayList<Term> termList = new ArrayList<>();
 		termList.add(new Term(1));
-		termList.add(new Term(B));
+		termList.add(new Term(BVide));
 		Term term2 = new Term(termList, Operator.ADD);
-		Term term1 = new Term(A);
+		Term term1 = new Term(AVide);
 		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
 
-		problem.addVariable(A);
-		problem.addVariable(B);
+		problem.addVariable(AVide);
+		problem.addVariable(BVide);
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
@@ -185,11 +191,30 @@ public class ChocoSolverTest {
 		System.out.print(solution);
 		assertNotNull(solution);
 
-//		IntVar varA = cs.getIntVar(A.getName());
-//		IntVar varB = cs.getIntVar(B.getName());
-//		int aValue = solution.getIntVal(varA);
-//		int bValue = solution.getIntVal(varB);
-//
-//		assertEquals(10, aValue - bValue);
+	}
+	@Test
+	public void testSolver7() {
+		// A = 1,B=a;
+		AVide=new Variable("AVide");
+		BVide=new Variable("BVide");
+		
+		Term term1 = new Term(1);
+		Term term2 = new Term(AVide);
+		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
+		
+		Term term3 = new Term(BVide);
+		Term term4 = new Term(AVide);
+		Constraint E = new Constraint(term3, term4, Relation.EQUALS);
+
+		problem.addVariable(AVide);
+		problem.addVariable(BVide);
+		problem.addConstraint(E);
+		problem.addConstraint(C);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve().get(0);
+		System.out.print(solution);
+		assertNotNull(solution);
+
 	}
 }

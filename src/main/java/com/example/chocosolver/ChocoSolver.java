@@ -52,6 +52,9 @@ public class ChocoSolver {
 				}
 				var = model.intVar(variable.getName(), values);
 			}
+			else {
+				var =model.intVar(variable.getName(),-9999999,9999999);
+			}
 			intVars.put(variable.getName(), var);
 		}
 	}

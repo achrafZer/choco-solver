@@ -84,6 +84,7 @@ public class TestLexer {
         System.out.println(p);
     }
 
+   
     @Test
     public void testError() throws IOException {
         String script = "A dans {1, 2, 3}";
