@@ -1,4 +1,5 @@
 package com.example.chocosolver.problem;
+import com.example.chocosolver.ChocoSolver;
 import com.example.chocosolver.input_reader.Choco;
 import lombok.Data;
 
@@ -6,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import org.chocosolver.solver.Solution;
 
 /**
  * Represents a problem to be solved using a solver like choco
@@ -104,11 +107,20 @@ public class Problem {
         return variables;
     }
 
+	public List<Solution> solve() {
+
+		ChocoSolver cs = new ChocoSolver(this);
+		List<Solution> s = cs.solve();
+		return s;
+
+	}
+
     public void setErrorMessage(String errorMessage){
         this.error  = true;
         this.constraints = null;
         this.variables = null;
         this.errorMessage = errorMessage;
     }
+
 
 }
