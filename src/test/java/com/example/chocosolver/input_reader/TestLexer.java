@@ -75,6 +75,16 @@ public class TestLexer {
     }
 
     @Test
+    public void testProblem1() throws IOException {
+        String script = "A < B + 1;";
+        var p = Choco.parse(script);
+        assertNotNull(p);
+        assertEquals(p.getVariables().size(), 2);
+        assertEquals(p.getConstraints().size(), 1);
+        System.out.println(p);
+    }
+
+    @Test
     public void testError() throws IOException {
         String script = "A dans {1, 2, 3}";
         var p = Choco.parse(script);

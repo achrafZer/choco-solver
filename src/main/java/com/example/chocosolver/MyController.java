@@ -32,6 +32,7 @@ public class MyController {
 		Problem p= new Problem(problemText);
 
         Solution solution = solve(p);
+        System.out.println(solution.toString());
         ModelAndView modelAndView = new ModelAndView("response");
         modelAndView.addObject("solution", solution);
         modelAndView.addObject("problem", problemText);
