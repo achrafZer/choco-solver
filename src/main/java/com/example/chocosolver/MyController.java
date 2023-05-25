@@ -32,10 +32,14 @@ public class MyController {
     public ModelAndView solveProblem(@RequestParam("problem") String problemText) throws IOException {
 		Problem p= new Problem(problemText);
 
+
         List <Solution> solution = p.solve();
         ModelAndView modelAndView = new ModelAndView("response");
         modelAndView.addObject("solution", solution);
         modelAndView.addObject("problem", problemText);
         return modelAndView;
-    } 
+
+    }
+
+ 
 }

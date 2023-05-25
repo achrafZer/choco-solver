@@ -27,6 +27,13 @@ public class Problem {
     private List<Constraint> constraints;
 
     /**
+     * If a problem is described containing a problem, error = true
+     */
+    private boolean error;
+
+    private String errorMessage;
+
+    /**
      * Constructs a Problem object.
      */
     public Problem() {
@@ -107,4 +114,13 @@ public class Problem {
 		return s;
 
 	}
+
+    public void setErrorMessage(String errorMessage){
+        this.error  = true;
+        this.constraints = null;
+        this.variables = null;
+        this.errorMessage = errorMessage;
+    }
+
+
 }

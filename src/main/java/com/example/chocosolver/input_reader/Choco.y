@@ -23,9 +23,9 @@
         ChocoLexer lexer = new ChocoLexer(stream);
 		Choco parser = new Choco(lexer);
         parser.problem = new Problem();
-        if(parser.parse())
-            return parser.problem;
-        return null;
+        lexer.setProblem(parser.problem);
+        parser.parse();
+        return parser.problem;
   	}
 }
 
@@ -99,9 +99,6 @@ sup_or_equals:
 	SUP EQUALS
 ;
 
-
-
-
 set:
     OPENSET NUMBER sous_ensemble CLOSESET {
         set.add((Integer) $2);
@@ -150,15 +147,22 @@ class ChocoLexer implements Choco.Lexer {
     InputStreamReader it;
     Yylex yylex;
     Object lastTokenValue;
+    Problem problem;
 
     public ChocoLexer(InputStream is){
         it = new InputStreamReader(is);
         yylex = new Yylex(it);
     }
 
+    public void setProblem(Problem problem) {
+        this.problem = problem;
+    }
+
     @Override
     public void yyerror (String s){
         System.err.println(s);
+        problem.setError(true);
+        problem.setErrorMessage(s);
     }
 
     @Override
