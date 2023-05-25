@@ -43,7 +43,7 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve();
+		Solution solution = cs.solve().get(0);
 		assertNotNull(solution);
 
 		IntVar varA = cs.getIntVar(A.getName());
@@ -67,7 +67,7 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve();
+		Solution solution = cs.solve().get(0);
 		assertNotNull(solution);
 
 		IntVar varA = cs.getIntVar(A.getName());
@@ -97,7 +97,7 @@ public class ChocoSolverTest {
 		problem.addConstraint(E);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve();
+		Solution solution = cs.solve().get(0);
 		assertNotNull(solution);
 
 		IntVar varA = cs.getIntVar(A.getName());
@@ -128,7 +128,7 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve();
+		Solution solution = cs.solve().get(0);
 		assertNotNull(solution);
 
 		IntVar varA = cs.getIntVar(A.getName());
@@ -156,7 +156,7 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve();
+		Solution solution = cs.solve().get(0);
 		assertNotNull(solution);
 
 		IntVar varA = cs.getIntVar(A.getName());
@@ -165,5 +165,31 @@ public class ChocoSolverTest {
 		int bValue = solution.getIntVal(varB);
 
 		assertEquals(10, aValue - bValue);
+	}
+	@Test
+	public void testSolver6() {
+		// A = B +1
+		ArrayList<Term> termList = new ArrayList<>();
+		termList.add(new Term(1));
+		termList.add(new Term(B));
+		Term term2 = new Term(termList, Operator.ADD);
+		Term term1 = new Term(A);
+		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
+
+		problem.addVariable(A);
+		problem.addVariable(B);
+		problem.addConstraint(C);
+
+		cs = new ChocoSolver(problem);
+		Solution solution = cs.solve().get(0);
+		System.out.print(solution);
+		assertNotNull(solution);
+
+//		IntVar varA = cs.getIntVar(A.getName());
+//		IntVar varB = cs.getIntVar(B.getName());
+//		int aValue = solution.getIntVal(varA);
+//		int bValue = solution.getIntVal(varB);
+//
+//		assertEquals(10, aValue - bValue);
 	}
 }

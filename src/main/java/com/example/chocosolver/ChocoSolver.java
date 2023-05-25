@@ -60,9 +60,7 @@ public class ChocoSolver {
 
 		if (term.getVariable() != null) {
 			Variable variable = term.getVariable();
-
 			var v = intVars.get(variable.getName());
-
 			return v;
 
 		} else if (term.getValue() != null) {
@@ -157,7 +155,7 @@ public class ChocoSolver {
 
 	}
 
-	public Solution solve() {
+	public List<Solution> solve() {
 		// Créer les variables
 		createVariables();
 
@@ -165,10 +163,8 @@ public class ChocoSolver {
 		addConstraints();
 
 		// Résoudre le problème
-		Solution solution = model.getSolver().findSolution();
-		if (solution != null) {
-			System.out.println(solution.toString());
-		}
+		List<Solution> solution = model.getSolver().findAllSolutions();
+		
 		return solution;
 	}
 

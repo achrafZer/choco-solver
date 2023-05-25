@@ -2,6 +2,7 @@ package com.example.chocosolver;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.chocosolver.solver.Solution;
 import org.jboss.logging.Logger;
@@ -31,17 +32,10 @@ public class MyController {
     public ModelAndView solveProblem(@RequestParam("problem") String problemText) throws IOException {
 		Problem p= new Problem(problemText);
 
-        Solution solution = solve(p);
+        List <Solution> solution = p.solve();
         ModelAndView modelAndView = new ModelAndView("response");
         modelAndView.addObject("solution", solution);
         modelAndView.addObject("problem", problemText);
         return modelAndView;
-    }
-
-
-    private Solution solve(Problem problem) {
-    	ChocoSolver cs=new ChocoSolver(problem);
-    	Solution s = cs.solve();
-    	return s;
-    }
+    } 
 }
