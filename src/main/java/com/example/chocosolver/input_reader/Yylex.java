@@ -63,8 +63,8 @@ public class Yylex {
     "\11\0\2\1\2\2\1\1\22\0\1\1\1\3\10\0"+
     "\1\4\1\5\1\6\1\7\1\0\1\10\12\11\1\0"+
     "\1\12\1\13\1\14\1\15\2\0\32\16\1\17\1\0"+
-    "\1\20\3\0\1\21\2\0\1\22\11\0\1\23\4\0"+
-    "\1\24\7\0\1\25\1\0\1\26\7\0\1\2\u01a2\0"+
+    "\1\20\3\0\1\21\2\16\1\22\11\16\1\23\4\16"+
+    "\1\24\7\16\1\25\1\0\1\26\7\0\1\2\u01a2\0"+
     "\2\2\326\0\u0100\2";
 
   private static int [] zzUnpackcmap_blocks() {
@@ -94,7 +94,7 @@ public class Yylex {
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
     "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
-    "\1\20\1\21\1\1\1\22\1\23\2\0\1\24";
+    "\1\20\1\21\1\17\1\22\1\23\2\0\1\24";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[24];
@@ -123,8 +123,8 @@ public class Yylex {
 
   private static final String ZZ_ROWMAP_PACKED_0 =
     "\0\0\0\27\0\56\0\27\0\27\0\27\0\27\0\27"+
-    "\0\27\0\27\0\105\0\27\0\27\0\27\0\27\0\134"+
-    "\0\27\0\27\0\163\0\27\0\27\0\212\0\241\0\27";
+    "\0\27\0\27\0\105\0\27\0\27\0\27\0\27\0\27"+
+    "\0\27\0\27\0\134\0\27\0\27\0\163\0\212\0\27";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[24];
@@ -152,12 +152,12 @@ public class Yylex {
   private static final String ZZ_TRANS_PACKED_0 =
     "\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11"+
     "\1\12\1\13\1\14\1\15\1\16\1\17\1\20\1\21"+
-    "\1\22\1\2\1\23\2\2\1\24\1\25\30\0\1\3"+
-    "\36\0\1\13\33\0\1\20\31\0\1\26\30\0\1\27"+
-    "\27\0\1\30\2\0";
+    "\1\22\1\20\1\23\2\20\1\24\1\25\30\0\1\3"+
+    "\36\0\1\13\36\0\1\26\30\0\1\27\27\0\1\30"+
+    "\2\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[184];
+    int [] result = new int[161];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -200,8 +200,8 @@ public class Yylex {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\1\1\7\11\1\1\4\11\1\1\2\11"+
-    "\1\1\2\11\2\0\1\11";
+    "\1\0\1\11\1\1\7\11\1\1\7\11\1\1\2\11"+
+    "\2\0\1\11";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[24];

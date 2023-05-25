@@ -76,7 +76,7 @@ public class TestLexer {
 
     @Test
     public void testProblem1() throws IOException {
-        String script = "A < B + 1;";
+        String script = "a < B + 1;";
         var p = Choco.parse(script);
         assertNotNull(p);
         assertEquals(p.getVariables().size(), 2);
