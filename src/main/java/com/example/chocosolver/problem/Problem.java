@@ -43,9 +43,10 @@ public class Problem {
 
     public Problem(String script) throws IOException {
         Problem problem = Choco.parse(script);
-        assert problem != null;
+        this.errorMessage = problem.errorMessage;
         this.variables = problem.getVariables();
         this.constraints = problem.getConstraints();
+        this.error = problem.isError();
     }
 
     /**
@@ -107,10 +108,10 @@ public class Problem {
         return variables;
     }
 
-	public List<Solution> solve() {
+	public List<HashMap<String, Integer>> solve() {
 
 		ChocoSolver cs = new ChocoSolver(this);
-		List<Solution> s = cs.solve();
+		List<HashMap<String, Integer>> s = cs.solve();
 		return s;
 
 	}

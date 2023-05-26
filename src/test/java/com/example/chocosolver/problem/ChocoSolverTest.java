@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ChocoSolverTest {
 	private Variable A;
@@ -46,13 +47,12 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution = cs.solve().get(0);
 		assertNotNull(solution);
 
-		IntVar varA = cs.getIntVar(A.getName());
-		IntVar varB = cs.getIntVar(B.getName());
-		int aValue = solution.getIntVal(varA);
-		int bValue = solution.getIntVal(varB);
+		
+		int aValue = solution.get(A.getName());
+		int bValue = solution.get(B.getName());
 
 		assertEquals(10, aValue + bValue);
 	}
@@ -70,13 +70,12 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution = cs.solve().get(0);
 		assertNotNull(solution);
 
-		IntVar varA = cs.getIntVar(A.getName());
-		IntVar varB = cs.getIntVar(B.getName());
-		int aValue = solution.getIntVal(varA);
-		int bValue = solution.getIntVal(varB);
+
+		int aValue = solution.get(A.getName());
+		int bValue = solution.get(B.getName());
 
 		assertEquals(aValue, bValue);
 	}
@@ -100,16 +99,13 @@ public class ChocoSolverTest {
 		problem.addConstraint(E);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution = cs.solve().get(0);
 		assertNotNull(solution);
 
-		IntVar varA = cs.getIntVar(A.getName());
-		IntVar varB = cs.getIntVar(B.getName());
-		IntVar varD = cs.getIntVar(D.getName());
-
-		int aValue = solution.getIntVal(varA);
-		int bValue = solution.getIntVal(varB);
-		int dValue = solution.getIntVal(varD);
+	
+		int aValue = solution.get(A.getName());
+		int bValue = solution.get(B.getName());
+		int dValue = solution.get(D.getName());
 		assertTrue(aValue < (dValue+bValue));
 		assertTrue(aValue >= 2);
 	}
@@ -131,16 +127,13 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution = cs.solve().get(0);
 		assertNotNull(solution);
 
-		IntVar varA = cs.getIntVar(A.getName());
-		IntVar varB = cs.getIntVar(B.getName());
-		IntVar varD = cs.getIntVar(D.getName());
-
-		int aValue = solution.getIntVal(varA);
-		int bValue = solution.getIntVal(varB);
-		int dValue = solution.getIntVal(varD);
+	
+		int aValue = solution.get(A.getName());
+		int bValue = solution.get(B.getName());
+		int dValue = solution.get(D.getName());
 		assertTrue((aValue * dValue * bValue) < 50 );
 	}
 	
@@ -159,13 +152,12 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution = cs.solve().get(0);
 		assertNotNull(solution);
 
-		IntVar varA = cs.getIntVar(A.getName());
-		IntVar varB = cs.getIntVar(B.getName());
-		int aValue = solution.getIntVal(varA);
-		int bValue = solution.getIntVal(varB);
+		
+		int aValue = solution.get(A.getName());
+		int bValue = solution.get(B.getName());
 
 		assertEquals(10, aValue - bValue);
 	}
@@ -187,18 +179,18 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution= cs.solve().get(0);
 		System.out.print(solution);
 		assertNotNull(solution);
 
 	}
 	@Test
 	public void testSolver7() {
-		// A = 1,B=a;
+		// A = 150,B=a;
 		AVide=new Variable("AVide");
 		BVide=new Variable("BVide");
 		
-		Term term1 = new Term(1);
+		Term term1 = new Term(150);
 		Term term2 = new Term(AVide);
 		Constraint C = new Constraint(term1, term2, Relation.EQUALS);
 		
@@ -212,7 +204,7 @@ public class ChocoSolverTest {
 		problem.addConstraint(C);
 
 		cs = new ChocoSolver(problem);
-		Solution solution = cs.solve().get(0);
+		HashMap<String,Integer> solution= cs.solve().get(0);
 		System.out.print(solution);
 		assertNotNull(solution);
 

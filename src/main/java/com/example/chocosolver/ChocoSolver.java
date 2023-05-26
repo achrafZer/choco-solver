@@ -53,7 +53,7 @@ public class ChocoSolver {
 				var = model.intVar(variable.getName(), values);
 			}
 			else {
-				var =model.intVar(variable.getName(),-9999999,9999999);
+				var =model.intVar(variable.getName(),-999999,999999);
 			}
 			intVars.put(variable.getName(), var);
 		}
@@ -154,17 +154,38 @@ public class ChocoSolver {
 		}
 	}
 
-	public List<Solution> solve() {
-		// Créer les variables
-		createVariables();
+	public List<HashMap<String, Integer>> solve() {
+	    // Create the variables
+	    createVariables();
 
-		// Ajouter les contraintes
-		addConstraints();
+	    // Add the constraints
+	    addConstraints();
 
-		// Résoudre le problème
-		List<Solution> solution = model.getSolver().findAllSolutions();
-		
-		return solution;
+	    // Solve the problem
+	    ArrayList<Solution> solutions = new ArrayList<>();
+
+	    for (int i = 0; i < 100; i++) {
+	        Solution solution = model.getSolver().findSolution();
+	        if (solution != null) {
+	            solutions.add(solution);
+	        }
+	    }
+
+	    List<HashMap<String, Integer>> resultList = new ArrayList<>();
+
+	    for (Solution solution : solutions) {
+	        HashMap<String, Integer> variableMap = new HashMap<>();
+
+	        for (IntVar intVar : intVars.values()) {
+	            int intVarValue = solution.getIntVal(intVar);
+	            variableMap.put(intVar.getName(), intVarValue);
+	        }
+
+	        resultList.add(variableMap);
+	    }
+
+	    return resultList;
 	}
+
 
 }

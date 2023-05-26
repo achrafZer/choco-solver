@@ -1,45 +1,43 @@
 package com.example.chocosolver;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import org.chocosolver.solver.Solution;
-import org.jboss.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.example.chocosolver.problem.Constraint;
-import com.example.chocosolver.problem.Operator;
-import com.example.chocosolver.problem.Pair;
 import com.example.chocosolver.problem.Problem;
-import com.example.chocosolver.problem.Relation;
-import com.example.chocosolver.problem.Term;
-import com.example.chocosolver.problem.Variable;
 
 @Controller
 public class MyController {
 
-    @GetMapping("/")
-    public String index() {
-        return "home";
-    }
+	@GetMapping("/")
+	public String index() {
+		return "home";
+	}
 
-    @PostMapping("/solve")
-    public ModelAndView solveProblem(@RequestParam("problem") String problemText) throws IOException {
-		Problem p= new Problem(problemText);
-
-
-        List <Solution> solution = p.solve();
-        ModelAndView modelAndView = new ModelAndView("response");
-        modelAndView.addObject("solution", solution);
-        modelAndView.addObject("problem", problemText);
-        return modelAndView;
-
-    }
-
+	@PostMapping("/solve")
+	public ModelAndView solveProblem(@RequestParam("problem") String problemText) throws IOException {
+		Problem p = new Problem(problemText);
+		ModelAndView modelAndView = new ModelAndView();
+		if (p.isError()) {
+			System.out.print("elie1: " + p.getErrorMessage());
+			modelAndView.setViewName("home");
+			modelAndView.addObject("errormessage", p.getErrorMessage());
+			modelAndView.addObject("problemText", problemText);
+			modelAndView.addObject("error", p.isError());
+		} else {
+			System.out.print("elie2: " + p.getErrorMessage());
+			List<HashMap<String, Integer>> solution = p.solve();
+			modelAndView.setViewName("response");
+			modelAndView.addObject("solution", solution);
+			modelAndView.addObject("problem", problemText);
  
+		}
+		return modelAndView;
+	}
+
 }
