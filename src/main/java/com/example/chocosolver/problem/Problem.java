@@ -108,10 +108,10 @@ public class Problem {
         return variables;
     }
 
-	public List<Solution> solve() {
+	public List<HashMap<String, Integer>> solve() {
 
 		ChocoSolver cs = new ChocoSolver(this);
-		List<Solution> s = cs.solve();
+		List<HashMap<String, Integer>> s = cs.solve();
 		return s;
 
 	}

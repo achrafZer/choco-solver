@@ -15,6 +15,7 @@ import java.util.List;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solution;
 import org.chocosolver.solver.Solver;
+import org.chocosolver.solver.exception.InvalidSolutionException;
 import org.chocosolver.solver.expression.discrete.arithmetic.ArExpression;
 import org.chocosolver.solver.variables.IntVar;
 
@@ -32,9 +33,9 @@ public class ChocoSolver {
 		this.intVars = new HashMap<>();
 	}
 
-    public IntVar getIntVar(String varName) {
-        return intVars.get(varName);
-    }
+	public IntVar getIntVar(String varName) {
+		return intVars.get(varName);
+	}
 
 	private void createVariables() {
 		IntVar var = null;
@@ -51,9 +52,8 @@ public class ChocoSolver {
 					values[i] = valueSet.get(i);
 				}
 				var = model.intVar(variable.getName(), values);
-			}
-			else {
-				var =model.intVar(variable.getName(),-999999,999999);
+			} else {
+				var = model.intVar(variable.getName(), -999999, 999999);
 			}
 			intVars.put(variable.getName(), var);
 		}
@@ -94,8 +94,7 @@ public class ChocoSolver {
 				if (result == null) {
 					result = currentTerm;
 				} else {
-					
-					
+
 					switch (term.getOperator()) {
 					case ADD:
 						result = result.add(currentTerm);
@@ -144,7 +143,7 @@ public class ChocoSolver {
 			case INFERIORorEQUAL:
 				model.arithm(term1.intVar(), "<=", term2.intVar()).post();
 				break;
-			case EQUALS: 
+			case EQUALS:
 				model.arithm(term1.intVar(), "=", term2.intVar()).post();
 				break;
 			case DIFFERENT:
@@ -154,17 +153,41 @@ public class ChocoSolver {
 		}
 	}
 
-	public List<Solution> solve() {
-		// Créer les variables
-		createVariables();
+	public List<HashMap<String, Integer>> solve() {
+	    // Create the variables
+	    createVariables();
 
-		// Ajouter les contraintes
-		addConstraints();
+	    // Add the constraints
+	    addConstraints();
 
-		// Résoudre le problème
-		List<Solution> solution = model.getSolver().findAllSolutions();
-		
-		return solution;
+	    // Solve the problem
+	    ArrayList<Solution> solutions = new ArrayList<>();
+
+	    for (int i = 0; i < 100; i++) {
+	        try {
+	            Solution solution = model.getSolver().findSolution();
+	            if (solution != null) {
+	                solutions.add(solution);
+	            }
+	        } catch (InvalidSolutionException e) {
+	            continue;
+	        }
+	    }
+
+	    List<HashMap<String, Integer>> resultList = new ArrayList<>();
+
+	    for (Solution solution : solutions) {
+	        HashMap<String, Integer> variableMap = new HashMap<>();
+
+	        for (IntVar intVar : intVars.values()) {
+	            int intVarValue = solution.getIntVal(intVar);
+	            variableMap.put(intVar.getName(), intVarValue);
+	        }
+
+	        resultList.add(variableMap);
+	    }
+
+	    return resultList;
 	}
 
 }
