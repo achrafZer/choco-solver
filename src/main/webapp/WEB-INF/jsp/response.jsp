@@ -18,7 +18,15 @@
 	<div>
 		<p>Problem solution:</p>
 		<div class="table-container">
+			<%
+			List<HashMap<String, Integer>> solutions = (List<HashMap<String, Integer>>) request.getAttribute("solution");
+			%>
+			<% if (solutions.isEmpty()) { %>
+			<div class="problem-container">
+				<p>Desole, ce problème n'a pas de solution</p>
+			</div>
 
+			<% } else { %>
 			<table>
 				<thead>
 					<tr>
@@ -29,21 +37,19 @@
 				</thead>
 				<tbody>
 					<%
-					List<HashMap<String, Integer>> solutions = (List<HashMap<String, Integer>>) request.getAttribute("solution");
-					%>
-					<%
-					for (int i = 0; i < solutions.size(); i++) {
-					%>
+						for (int i = 0; i < solutions.size(); i++) {
+						%>
 					<tr>
-						<td class="center"><%=i + 1%></td>
-						<td class="center"><%=solutions.get(i).get("a")%></td>
-						<td class="center"><%=solutions.get(i).get("b")%></td>
+						<td class="center"><%= i + 1 %></td>
+						<td class="center"><%= solutions.get(i).get("a") %></td>
+						<td class="center"><%= solutions.get(i).get("b") %></td>
 					</tr>
 					<%
-					}
-					%>
+						}
+						%>
 				</tbody>
 			</table>
+			<% } %>
 		</div>
 	</div>
 

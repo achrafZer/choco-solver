@@ -24,13 +24,11 @@ public class MyController {
 		Problem p = new Problem(problemText);
 		ModelAndView modelAndView = new ModelAndView();
 		if (p.isError()) {
-			System.out.print("elie1: " + p.getErrorMessage());
 			modelAndView.setViewName("home");
 			modelAndView.addObject("errormessage", p.getErrorMessage());
 			modelAndView.addObject("problemText", problemText);
 			modelAndView.addObject("error", p.isError());
 		} else {
-			System.out.print("elie2: " + p.getErrorMessage());
 			List<HashMap<String, Integer>> solution = p.solve();
 			modelAndView.setViewName("response");
 			modelAndView.addObject("solution", solution);
