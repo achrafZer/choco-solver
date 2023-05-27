@@ -59,4 +59,10 @@ public class ProblemTest {
         assertEquals(1, problem.getConstraints().size());
         assertTrue(problem.getConstraints().contains(constraint));
     }
+
+    @Test
+    public void testError() throws IOException {
+        Problem problem = new Problem("a");
+        System.out.println(problem.isError());
+    }
 }

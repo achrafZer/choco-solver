@@ -43,9 +43,10 @@ public class Problem {
 
     public Problem(String script) throws IOException {
         Problem problem = Choco.parse(script);
-        assert problem != null;
+        this.errorMessage = problem.errorMessage;
         this.variables = problem.getVariables();
         this.constraints = problem.getConstraints();
+        this.error = problem.isError();
     }
 
     /**

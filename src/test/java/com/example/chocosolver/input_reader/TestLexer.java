@@ -89,11 +89,18 @@ public class TestLexer {
     public void testError() throws IOException {
         String script = "A dans {1, 2, 3}";
         var p = Choco.parse(script);
-
+        Problem problem = new Problem(script);
         assertTrue(p.isError());
         assertEquals(p.getErrorMessage(), "syntax error, unexpected end of input, expecting EOI");
         assertNull(p.getVariables());
         assertNull(p.getConstraints());
+    }
+
+    @Test
+    public void testScript() throws IOException {
+        String script = "B <= 2; B dans {3, 4, 5}; A = B;";
+        Problem problem = new Problem(script);
+        System.out.println(problem);
     }
 }
 
