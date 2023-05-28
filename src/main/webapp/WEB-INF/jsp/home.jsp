@@ -3,19 +3,22 @@
 <head>
 <title>Choco Solver</title>
 <link rel="stylesheet" href="/css/style.css">
-
 </head>
 <body>
 	<h1>Welcome to the Choco Solver!</h1>
 	<form action="/solve" method="post">
 		<label for="problem">Write your problem:</label>
-		<textarea id="problem" name="problem" rows="4" cols="50"></textarea>
+		<textarea id="problem" name="problem" rows="4" cols="50" ><%
+			String problemText = (String) request.getAttribute("problemText");
+			if (problemText != null) {
+				out.print(problemText);
+			}
+		%></textarea>
 		<div class="error-message">
 			<p id="errorText"></p>
 		</div>
 		<button id="solveButton" type="submit" disabled>Solve</button>
 	</form>
-
 
 	<div>
 		<hr>
@@ -23,6 +26,7 @@
 			Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>
 		</p>
 	</div>
+
 	<script>
 	const errorMessage = "<%=request.getAttribute("errormessage")%>";
 	const hasError = "<%=request.getAttribute("error")%>" === "true";
@@ -46,6 +50,5 @@
 		}
 	});
 	</script>
-
 </body>
 </html>

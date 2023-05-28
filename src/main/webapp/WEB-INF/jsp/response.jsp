@@ -1,5 +1,4 @@
 <%@ page import="java.util.List"%>
-<%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Map"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +18,7 @@
 		<p>Problem solution:</p>
 		<div class="table-container">
 			<%
-			List<HashMap<String, Integer>> solutions = (List<HashMap<String, Integer>>) request.getAttribute("solution");
+			List<Map<String, Integer>> solutions = (List<Map<String, Integer>>) request.getAttribute("solution");
 			%>
 			<% if (solutions.isEmpty()) { %>
 			<div class="problem-container">
@@ -31,18 +30,30 @@
 				<thead>
 					<tr>
 						<th class="center">S/V</th>
-						<th class="center">a</th>
-						<th class="center">b</th>
+						<%
+							Map<String, Integer> firstSolution = solutions.get(0);
+							for (String variable : firstSolution.keySet()) {
+						%>
+						<th class="center"><%= variable %></th>
+						<%
+							}
+						%>
 					</tr>
 				</thead>
 				<tbody>
 					<%
 						for (int i = 0; i < solutions.size(); i++) {
+							Map<String, Integer> solution = solutions.get(i);
 						%>
 					<tr>
 						<td class="center"><%= i + 1 %></td>
-						<td class="center"><%= solutions.get(i).get("a") %></td>
-						<td class="center"><%= solutions.get(i).get("b") %></td>
+						<%
+							for (Integer value : solution.values()) {
+						%>
+						<td class="center"><%= value %></td>
+						<%
+							}
+						%>
 					</tr>
 					<%
 						}

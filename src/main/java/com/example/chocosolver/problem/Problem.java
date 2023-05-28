@@ -112,6 +112,7 @@ public class Problem {
 
 		ChocoSolver cs = new ChocoSolver(this);
 		List<HashMap<String, Integer>> s = cs.solve();
+		System.out.println("here's the solution "+s);
 		return s;
 
 	}
