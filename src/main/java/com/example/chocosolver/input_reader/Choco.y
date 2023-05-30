@@ -62,9 +62,10 @@ constraint:
 		constraint.setRelation((Relation) $2);
 		problem.addConstraint(constraint);
     } |
-    ALLDIFF {
+    ALLDIFF EOI {
         Constraint constraint = new Constraint();
         constraint.setAllDiff(true);
+        problem.addConstraint(constraint);
     }
 ;
 

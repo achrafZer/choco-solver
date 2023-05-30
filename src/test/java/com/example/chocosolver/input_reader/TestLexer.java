@@ -102,6 +102,22 @@ public class TestLexer {
         Problem problem = new Problem(script);
         System.out.println(problem);
     }
+
+    @Test
+    public void testAllDiffConstraint() throws IOException {
+        String script = "B <= 2; B dans {3, 4, 5}; A = B; ALLDIFF ;";
+        Problem problem = new Problem(script);
+        assertEquals(problem.getConstraints().size(), 3);
+        assertNull(problem.getConstraints().get(2).getRelation());
+        assertNull(problem.getConstraints().get(2).getTerm1());
+        assertNull(problem.getConstraints().get(2).getTerm2());
+        assertTrue(problem.getConstraints().get(2).isAllDiff());
+        assertFalse(problem.getConstraints().get(1).isAllDiff());
+        assertFalse(problem.getConstraints().get(0).isAllDiff());
+
+
+        System.out.println(problem);
+    }
 }
 
 

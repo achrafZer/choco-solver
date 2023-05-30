@@ -365,16 +365,17 @@ public class Choco
   case 8:
   if (yyn == 8)
     /* "Choco.y":65  */
-            {
+                {
         Constraint constraint = new Constraint();
         constraint.setAllDiff(true);
+        problem.addConstraint(constraint);
     };
   break;
     
 
   case 9:
   if (yyn == 9)
-    /* "Choco.y":72  */
+    /* "Choco.y":73  */
                                                        {
         yyval = new Pair((Integer) yystack.valueAt (3), (Integer) yystack.valueAt (1));
     };
@@ -383,7 +384,7 @@ public class Choco
 
   case 10:
   if (yyn == 10)
-    /* "Choco.y":78  */
+    /* "Choco.y":79  */
         {
     	yyval = Relation.INFERIOR;
     };
@@ -392,7 +393,7 @@ public class Choco
 
   case 11:
   if (yyn == 11)
-    /* "Choco.y":81  */
+    /* "Choco.y":82  */
         {
     	yyval = Relation.SUPERIOR;
     };
@@ -401,7 +402,7 @@ public class Choco
 
   case 12:
   if (yyn == 12)
-    /* "Choco.y":84  */
+    /* "Choco.y":85  */
            {
     	yyval = Relation.EQUALS;
     };
@@ -410,7 +411,7 @@ public class Choco
 
   case 13:
   if (yyn == 13)
-    /* "Choco.y":87  */
+    /* "Choco.y":88  */
                   {
         yyval = Relation.INFERIORorEQUAL;
     };
@@ -419,7 +420,7 @@ public class Choco
 
   case 14:
   if (yyn == 14)
-    /* "Choco.y":90  */
+    /* "Choco.y":91  */
                   {
         yyval = Relation.SUPERIORorEQUAL;
     };
@@ -428,7 +429,7 @@ public class Choco
 
   case 15:
   if (yyn == 15)
-    /* "Choco.y":93  */
+    /* "Choco.y":94  */
                {
         yyval = Relation.DIFFERENT;
     };
@@ -437,7 +438,7 @@ public class Choco
 
   case 18:
   if (yyn == 18)
-    /* "Choco.y":107  */
+    /* "Choco.y":108  */
                                           {
         set.add((Integer) yystack.valueAt (2));
     };
@@ -446,7 +447,7 @@ public class Choco
 
   case 19:
   if (yyn == 19)
-    /* "Choco.y":113  */
+    /* "Choco.y":114  */
                      {
     	set.add((Integer) yystack.valueAt (0));
     };
@@ -455,7 +456,7 @@ public class Choco
 
   case 20:
   if (yyn == 20)
-    /* "Choco.y":116  */
+    /* "Choco.y":117  */
                                    {
         set.add((Integer) yystack.valueAt (1));
     };
@@ -464,7 +465,7 @@ public class Choco
 
   case 21:
   if (yyn == 21)
-    /* "Choco.y":122  */
+    /* "Choco.y":123  */
            {
     	yyval = new Term((Integer) yystack.valueAt (0));
     };
@@ -473,7 +474,7 @@ public class Choco
 
   case 22:
   if (yyn == 22)
-    /* "Choco.y":125  */
+    /* "Choco.y":126  */
        {
 		yyval = problem.addVariable(Yylex.id);
     };
@@ -482,7 +483,7 @@ public class Choco
 
   case 23:
   if (yyn == 23)
-    /* "Choco.y":128  */
+    /* "Choco.y":129  */
                         {
     	yyval = new Term((Term) yystack.valueAt (2), (Operator) yystack.valueAt (1), (Term) yystack.valueAt (0));
     };
@@ -491,7 +492,7 @@ public class Choco
 
   case 24:
   if (yyn == 24)
-    /* "Choco.y":134  */
+    /* "Choco.y":135  */
          {
     	yyval = Operator.ADD;
     };
@@ -500,7 +501,7 @@ public class Choco
 
   case 25:
   if (yyn == 25)
-    /* "Choco.y":137  */
+    /* "Choco.y":138  */
           {
 		yyval = Operator.SUBTRACT;
     };
@@ -509,7 +510,7 @@ public class Choco
 
   case 26:
   if (yyn == 26)
-    /* "Choco.y":140  */
+    /* "Choco.y":141  */
         {
     	yyval = Operator.MULTIPLY;
     };
@@ -518,7 +519,7 @@ public class Choco
 
   case 27:
   if (yyn == 27)
-    /* "Choco.y":143  */
+    /* "Choco.y":144  */
         {
 		yyval = Operator.DIVIDE;
     };
@@ -526,7 +527,7 @@ public class Choco
     
 
 
-/* "Choco.java":530  */
+/* "Choco.java":531  */
 
         default: break;
       }
@@ -898,7 +899,7 @@ public class Choco
     return yyvalue == yytable_ninf_;
   }
 
-  private static final byte yypact_ninf_ = -20;
+  private static final byte yypact_ninf_ = -12;
   private static final byte yytable_ninf_ = -1;
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -908,11 +909,11 @@ public class Choco
   {
     return new byte[]
     {
-       5,   -20,   -19,   -20,     8,   -20,   -20,    -3,     0,   -20,
-       5,    14,    15,   -20,   -20,   -20,   -20,   -20,    16,    -1,
-     -20,   -20,    -1,     6,     7,    19,    25,   -20,   -20,   -20,
-     -20,    20,    26,    21,    22,   -20,   -20,   -20,    23,    24,
-      27,    30,    22,   -20,   -20,   -20
+       5,   -11,     1,   -12,     8,   -12,   -12,    -3,   -12,     0,
+     -12,     5,    14,    16,   -12,   -12,   -12,   -12,   -12,    18,
+      -1,   -12,   -12,    -1,     7,    13,    25,    27,   -12,   -12,
+     -12,   -12,    20,    26,    21,    23,   -12,   -12,   -12,    24,
+      28,    29,    30,    23,   -12,   -12,   -12
     };
   }
 
@@ -924,11 +925,11 @@ public class Choco
   {
     return new byte[]
     {
-       0,     8,    22,    21,     0,     3,     4,     0,     0,     1,
-       2,    10,    11,    12,    24,    25,    26,    27,     0,     0,
-      13,    14,     0,     0,     0,     0,     0,    16,    17,    15,
-      22,     0,    23,     0,     0,     5,     6,     7,     0,     0,
-       0,     0,    19,    18,     9,    20
+       0,     0,    22,    21,     0,     3,     4,     0,     8,     0,
+       1,     2,    10,    11,    12,    24,    25,    26,    27,     0,
+       0,    13,    14,     0,     0,     0,     0,     0,    16,    17,
+      15,    22,     0,    23,     0,     0,     5,     6,     7,     0,
+       0,     0,     0,    19,    18,     9,    20
     };
   }
 
@@ -938,8 +939,8 @@ public class Choco
   {
     return new byte[]
     {
-     -20,    40,   -20,   -20,   -20,   -20,   -20,   -20,   -20,     3,
-      -8,   -20
+     -12,    41,   -12,   -12,   -12,   -12,   -12,   -12,   -12,     4,
+      -9,   -12
     };
   }
 
@@ -949,8 +950,8 @@ public class Choco
   {
     return new byte[]
     {
-      -1,    10,     5,     6,    25,    19,    20,    21,    26,    40,
-       7,    22
+      -1,    11,     5,     6,    26,    20,    21,    22,    27,    41,
+       7,    23
     };
   }
 
@@ -962,11 +963,11 @@ public class Choco
   {
     return new byte[]
     {
-      11,     8,    12,    13,    14,    15,    16,    17,     9,     1,
-      30,    31,     1,    23,    32,    24,     2,     3,    18,     2,
-      27,    28,    29,     3,    33,    34,     3,    14,    15,    16,
-      17,    35,    37,    14,    15,    16,    17,    36,    38,    39,
-       4,    41,    42,    43,    44,    45
+      12,     8,    13,    14,    15,    16,    17,    18,    10,     1,
+      31,    32,     1,    24,    33,    25,     2,     3,    19,     2,
+      28,     9,    29,     3,    30,    34,     3,    15,    16,    17,
+      18,    35,    38,    15,    16,    17,    18,    36,    39,    37,
+      40,     4,    42,     0,    45,    44,    43,    46
     };
   }
 
@@ -975,11 +976,11 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       3,    20,     5,     6,     7,     8,     9,    10,     0,     4,
-      11,    19,     4,    13,    22,    15,    11,    18,    21,    11,
-       6,     6,     6,    18,    18,    18,    18,     7,     8,     9,
-      10,    12,    12,     7,     8,     9,    10,    12,    17,    17,
-       0,    18,    18,    16,    14,    42
+       3,    12,     5,     6,     7,     8,     9,    10,     0,     4,
+      11,    20,     4,    13,    23,    15,    11,    18,    21,    11,
+       6,    20,     6,    18,     6,    18,    18,     7,     8,     9,
+      10,    18,    12,     7,     8,     9,    10,    12,    17,    12,
+      17,     0,    18,    -1,    14,    16,    18,    43
     };
   }
 
@@ -990,11 +991,11 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     4,    11,    18,    23,    24,    25,    32,    20,     0,
-      23,     3,     5,     6,     7,     8,     9,    10,    21,    27,
-      28,    29,    33,    13,    15,    26,    30,     6,     6,     6,
-      11,    32,    32,    18,    18,    12,    12,    12,    17,    17,
-      31,    18,    18,    16,    14,    31
+       0,     4,    11,    18,    23,    24,    25,    32,    12,    20,
+       0,    23,     3,     5,     6,     7,     8,     9,    10,    21,
+      27,    28,    29,    33,    13,    15,    26,    30,     6,     6,
+       6,    11,    32,    32,    18,    18,    12,    12,    12,    17,
+      17,    31,    18,    18,    16,    14,    31
     };
   }
 
@@ -1016,7 +1017,7 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     2,     2,     1,     1,     4,     4,     4,     1,     5,
+       0,     2,     2,     1,     1,     4,     4,     4,     2,     5,
        1,     1,     1,     1,     1,     2,     2,     2,     4,     2,
        3,     1,     1,     3,     1,     1,     1,     1
     };
@@ -1094,10 +1095,10 @@ private static final byte yycheck_[] = yycheck_init();
 
   private static final byte yy_error_token_ = 1;
 
-  private static final int yylast_ = 45;
+  private static final int yylast_ = 47;
   private static final int yynnts_ = 12;
   private static final int yyempty_ = -2;
-  private static final int yyfinal_ = 9;
+  private static final int yyfinal_ = 10;
   private static final int yyntokens_ = 22;
 
 /* User implementation code.  */
@@ -1118,11 +1119,11 @@ private static final byte yycheck_[] = yycheck_init();
 
 	public static List<Integer> set = new ArrayList<>();
 
-/* "Choco.java":1122  */
+/* "Choco.java":1123  */
 
 }
 
-/* "Choco.y":148  */
+/* "Choco.y":149  */
 
 
 class ChocoLexer implements Choco.Lexer {
