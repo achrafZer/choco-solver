@@ -14,6 +14,9 @@ import com.example.chocosolver.problem.Problem;
 @Controller
 public class MyController {
 
+
+	private String problemText;
+
 	@GetMapping("/")
 	public String index() {
 		return "home";
@@ -21,6 +24,7 @@ public class MyController {
 
 	@PostMapping("/solve")
 	public ModelAndView solveProblem(@RequestParam("problem") String problemText) throws IOException {
+		this.problemText = problemText;
 		Problem p = new Problem(problemText);
 		ModelAndView modelAndView = new ModelAndView();
 		if (p.isError()) {

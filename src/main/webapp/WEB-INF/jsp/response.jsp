@@ -11,7 +11,7 @@
 	<h1>Choco Solver - Response</h1>
 
 	<div class="problem-container">
-		<p>Voici le problème :</p>
+		<p>Voici le problï¿½me :</p>
 		<p>${problem}</p>
 	</div>
 	<div>
@@ -22,7 +22,7 @@
 			%>
 			<% if (solutions.isEmpty()) { %>
 			<div class="problem-container">
-				<p>Desole, ce problème n'a pas de solution</p>
+				<p>Desole, ce problï¿½me n'a pas de solution</p>
 			</div>
 
 			<% } else { %>
@@ -62,6 +62,7 @@
 			</table>
 			<% } %>
 		</div>
+
 	</div>
 
 	<div>

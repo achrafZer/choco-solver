@@ -28,4 +28,13 @@ public class Constraint {
      * The relation between the two terms.
      */
     private Relation relation;
+
+    private boolean allDiff;
+
+    public Constraint(Term term1, Term term2, Relation relation) {
+        this.term1 = term1;
+        this.term2 = term2;
+        this.relation = relation;
+        this.allDiff = false;
+    }
 }

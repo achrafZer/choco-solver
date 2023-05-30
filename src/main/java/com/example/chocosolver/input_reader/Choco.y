@@ -33,7 +33,7 @@
 	public static List<Integer> set = new ArrayList<>();
 }
 
-%token INF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS EXC
+%token INF ALLDIFF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS EXC
 
 %%
 prog:
@@ -61,6 +61,10 @@ constraint:
 		constraint.setTerm2((Term) $3);
 		constraint.setRelation((Relation) $2);
 		problem.addConstraint(constraint);
+    } |
+    ALLDIFF {
+        Constraint constraint = new Constraint();
+        constraint.setAllDiff(true);
     }
 ;
 

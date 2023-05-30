@@ -13,7 +13,7 @@ package com.example.chocosolver.input_reader;
 %line
 %column
 
-ID = [A-Za-z]
+ID = [A-Za-z]+
 WS = [ \t\n\r]+
 NUMBER = ([0-9])+
 UNKNOWN_TOKEN = .
@@ -23,12 +23,14 @@ UNKNOWN_TOKEN = .
 
 <YYINITIAL> {
 	{WS}    {}
+    "dans" {System.out.println("Mot-clé : " + yytext()); return ChocoLexer.DANS;}
+    "ALLDIFF" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.ALLDIFF;}
+
 	{ID}    {
 		id = yytext();
 		System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
 		return ChocoLexer.ID;
     }
-    "dans" {System.out.println("Mot-clé : " + yytext()); return ChocoLexer.DANS;}
     ";" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EOI;}
     {NUMBER} {
         yylval = Integer.valueOf(yytext());
@@ -48,7 +50,6 @@ UNKNOWN_TOKEN = .
     "*" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;}
     "/" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;}
     "!" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EXC;}
-
 
     {UNKNOWN_TOKEN} {return ChocoLexer.UNKNOWN_TOKEN;}
 

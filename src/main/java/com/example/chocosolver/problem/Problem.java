@@ -109,12 +109,10 @@ public class Problem {
     }
 
 	public List<HashMap<String, Integer>> solve() {
-
 		ChocoSolver cs = new ChocoSolver(this);
 		List<HashMap<String, Integer>> s = cs.solve();
 		System.out.println("here's the solution "+s);
 		return s;
-
 	}
 
     public void setErrorMessage(String errorMessage){
