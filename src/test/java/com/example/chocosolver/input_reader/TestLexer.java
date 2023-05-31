@@ -104,18 +104,9 @@ public class TestLexer {
     }
 
     @Test
-    public void testVariable_for_allDiff() throws  IOException {
-        String script = "A";
-        Problem problem = new Problem(script);
-//        assertNotNull(problem);
-
-    }
-
-    @Test
     public void testAllDiffConstraint() throws IOException {
         String script = "B <= 2; B dans {3, 4, 5}; A = B; ALLDIFF (A, B) ;";
         Problem problem = new Problem(script);
-        System.out.println(problem.getConstraints());
         assertEquals(problem.getConstraints().size(), 3);
         assertNull(problem.getConstraints().get(2).getRelation());
         assertNull(problem.getConstraints().get(2).getTerm1());
@@ -123,6 +114,20 @@ public class TestLexer {
         assertTrue(problem.getConstraints().get(2).isAllDiff());
         assertFalse(problem.getConstraints().get(1).isAllDiff());
         assertFalse(problem.getConstraints().get(0).isAllDiff());
+    }
+
+    @Test
+    public void testAllDiffConstraint1() throws IOException {
+        String script = "A dans {1, 2, 3}; b dans {1, 2, 3};c dans {1, 2, 3};ALLDIFF(A, b);";
+        Problem problem = new Problem(script);
+        System.out.println(problem.getConstraints());
+        assertEquals(problem.getConstraints().size(), 1);
+        assertNull(problem.getConstraints().get(0).getRelation());
+        assertNull(problem.getConstraints().get(0).getTerm1());
+        assertNull(problem.getConstraints().get(0).getTerm2());
+        assertTrue(problem.getConstraints().get(0).isAllDiff());
+        assertEquals(problem.getConstraints().get(0).getAllDiffVariables().size(), 2);
+        System.out.println(problem.getConstraints().get(0).getAllDiffVariables());
 
     }
 }
