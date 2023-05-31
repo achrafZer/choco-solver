@@ -2,7 +2,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     margin: 0;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -14,7 +13,7 @@ h1 {
 }
 
 form {
-    max-width: 600px;
+    width: 600px;
     margin: 0 auto;
     text-align: center;
     flex-grow: 1;
@@ -68,6 +67,13 @@ p {
     font-size: 14px;
     margin-top: 0;
 }
+pre {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 0;
+    line-height: 1;
+    
+}
 
 a {
     color: #333;
@@ -117,3 +123,36 @@ a {
         display: none;
         color: red;
     }
+    .menu {
+  background-color:#4CAF50 ;
+  padding: 5px;
+  text-align: right;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.menu li img {
+  vertical-align: middle;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+}
+
+.menu li:hover {
+  cursor: pointer;
+  background-color: #ddd;
+}
+
+.menu li:hover img {
+  filter: brightness(70%);
+}
+    

@@ -25,12 +25,13 @@ public class ChocoSolver {
 	private Model model;
 	private Solver solver;
 	private HashMap<String, IntVar> intVars;
-
+	
 	public ChocoSolver(Problem problem) {
 		this.problem = problem;
 		this.model = new Model();
 		this.solver = model.getSolver();
 		this.intVars = new HashMap<>();
+		
 	}
 
 	public IntVar getIntVar(String varName) {
@@ -124,70 +125,80 @@ public class ChocoSolver {
 	private void addConstraints() {
 
 		List<Constraint> constraints = problem.getConstraints();
+		IntVar[] list=new IntVar[intVars.size()]; 
 
 		for (Constraint constraint : constraints) {
-			ArExpression term1 = ResolveTerm(constraint.getTerm1());
-			ArExpression term2 = ResolveTerm(constraint.getTerm2());
-			Relation relation = constraint.getRelation();
+			if (constraint.isAllDiff()) {
+				int i = 0;
+				for (IntVar v : intVars.values()) {
+				    list[i] = v;
+				    i++;
+				}
+		        model.allDifferent(list).post();
+			} else {
+				ArExpression term1 = ResolveTerm(constraint.getTerm1());
+				ArExpression term2 = ResolveTerm(constraint.getTerm2());
+				Relation relation = constraint.getRelation();
 
-			switch (relation) {
-			case SUPERIOR:
-				model.arithm(term1.intVar(), ">", term2.intVar()).post();
-				break;
-			case SUPERIORorEQUAL:
-				model.arithm(term1.intVar(), ">=", term2.intVar()).post();
-				break;
-			case INFERIOR:
-				model.arithm(term1.intVar(), "<", term2.intVar()).post();
-				break;
-			case INFERIORorEQUAL:
-				model.arithm(term1.intVar(), "<=", term2.intVar()).post();
-				break;
-			case EQUALS:
-				model.arithm(term1.intVar(), "=", term2.intVar()).post();
-				break;
-			case DIFFERENT:
-				model.arithm(term1.intVar(), "!=", term2.intVar()).post();
-				break;
+				switch (relation) {
+				case SUPERIOR:
+					model.arithm(term1.intVar(), ">", term2.intVar()).post();
+					break;
+				case SUPERIORorEQUAL:
+					model.arithm(term1.intVar(), ">=", term2.intVar()).post();
+					break;
+				case INFERIOR:
+					model.arithm(term1.intVar(), "<", term2.intVar()).post();
+					break;
+				case INFERIORorEQUAL:
+					model.arithm(term1.intVar(), "<=", term2.intVar()).post();
+					break;
+				case EQUALS:
+					model.arithm(term1.intVar(), "=", term2.intVar()).post();
+					break;
+				case DIFFERENT:
+					model.arithm(term1.intVar(), "!=", term2.intVar()).post();
+					break;
+				}
 			}
 		}
 	}
 
 	public List<HashMap<String, Integer>> solve() {
-	    // Create the variables
-	    createVariables();
+		// Create the variables
+		createVariables();
 
-	    // Add the constraints
-	    addConstraints();
+		// Add the constraints
+		addConstraints();
 
-	    // Solve the problem
-	    ArrayList<Solution> solutions = new ArrayList<>();
+		// Solve the problem
+		ArrayList<Solution> solutions = new ArrayList<>();
 
-	    for (int i = 0; i < 100; i++) {
-	        try {
-	            Solution solution = model.getSolver().findSolution();
-	            if (solution != null) {
-	                solutions.add(solution);
-	            }
-	        } catch (InvalidSolutionException e) {
-	            continue;
-	        }
-	    }
+		for (int i = 0; i < 100; i++) {
+			try {
+				Solution solution = model.getSolver().findSolution();
+				if (solution != null) {
+					solutions.add(solution);
+				}
+			} catch (InvalidSolutionException e) {
+				continue;
+			}
+		}
 
-	    List<HashMap<String, Integer>> resultList = new ArrayList<>();
+		List<HashMap<String, Integer>> resultList = new ArrayList<>();
 
-	    for (Solution solution : solutions) {
-	        HashMap<String, Integer> variableMap = new HashMap<>();
+		for (Solution solution : solutions) {
+			HashMap<String, Integer> variableMap = new HashMap<>();
 
-	        for (IntVar intVar : intVars.values()) {
-	            int intVarValue = solution.getIntVal(intVar);
-	            variableMap.put(intVar.getName(), intVarValue);
-	        }
+			for (IntVar intVar : intVars.values()) {
+				int intVarValue = solution.getIntVal(intVar);
+				variableMap.put(intVar.getName(), intVarValue);
+			}
 
-	        resultList.add(variableMap);
-	    }
+			resultList.add(variableMap);
+		}
 
-	    return resultList;
+		return resultList;
 	}
 
 }

@@ -8,11 +8,21 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+	<div class="menu">
+		<ul>
+			<li><a href="javascript:history.back()"><img
+					src="/pictures/edit_icon.png" alt="Edit Icon"></a></li>
+			<li><a href="/"><img src="/pictures/restart_icon.png"
+					alt="Restart Icon"></a></li>
+			<li><img src="/pictures/save_icon.png" alt="Save Icon"></li>
+		</ul>
+	</div>
+
 	<h1>Choco Solver - Response</h1>
 
 	<div class="problem-container">
-		<p>Voici le problï¿½me :</p>
-		<p>${problem}</p>
+		<p>Voici le problème :</p>
+		<pre>${problem}</pre>
 	</div>
 	<div>
 		<p>Problem solution:</p>
@@ -20,49 +30,54 @@
 			<%
 			List<Map<String, Integer>> solutions = (List<Map<String, Integer>>) request.getAttribute("solution");
 			%>
-			<% if (solutions.isEmpty()) { %>
+			<%
+			if (solutions.isEmpty()) {
+			%>
 			<div class="problem-container">
-				<p>Desole, ce problï¿½me n'a pas de solution</p>
+				<p>Désolé, ce problème n'a pas de solution</p>
 			</div>
 
-			<% } else { %>
+			<%
+			} else {
+			%>
 			<table>
 				<thead>
 					<tr>
 						<th class="center">S/V</th>
 						<%
-							Map<String, Integer> firstSolution = solutions.get(0);
-							for (String variable : firstSolution.keySet()) {
+						Map<String, Integer> firstSolution = solutions.get(0);
+						for (String variable : firstSolution.keySet()) {
 						%>
-						<th class="center"><%= variable %></th>
+						<th class="center"><%=variable%></th>
 						<%
-							}
+						}
 						%>
 					</tr>
 				</thead>
 				<tbody>
 					<%
-						for (int i = 0; i < solutions.size(); i++) {
-							Map<String, Integer> solution = solutions.get(i);
-						%>
+					for (int i = 0; i < solutions.size(); i++) {
+						Map<String, Integer> solution = solutions.get(i);
+					%>
 					<tr>
-						<td class="center"><%= i + 1 %></td>
+						<td class="center"><%=i + 1%></td>
 						<%
-							for (Integer value : solution.values()) {
+						for (Integer value : solution.values()) {
 						%>
-						<td class="center"><%= value %></td>
+						<td class="center"><%=value%></td>
 						<%
-							}
+						}
 						%>
 					</tr>
 					<%
-						}
-						%>
+					}
+					%>
 				</tbody>
 			</table>
-			<% } %>
+			<%
+			}
+			%>
 		</div>
-
 	</div>
 
 	<div>

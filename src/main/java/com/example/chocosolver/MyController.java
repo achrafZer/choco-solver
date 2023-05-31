@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,19 +28,30 @@ public class MyController {
 		this.problemText = problemText;
 		Problem p = new Problem(problemText);
 		ModelAndView modelAndView = new ModelAndView();
+		List<HashMap<String, Integer>> solution = p.solve();
 		if (p.isError()) {
 			modelAndView.setViewName("home");
 			modelAndView.addObject("errormessage", p.getErrorMessage());
 			modelAndView.addObject("problemText", problemText);
 			modelAndView.addObject("error", p.isError());
-		} else {
-			List<HashMap<String, Integer>> solution = p.solve();
+		} 
+		else if(p.isJavaError()){
+			modelAndView.setViewName("home");
+			modelAndView.addObject("errormessage", p.getJavaErrorMessage());
+			modelAndView.addObject("problemText", problemText);
+			modelAndView.addObject("error", p.isJavaError());
+		}
+		else {		
+			
 			modelAndView.setViewName("response");
 			modelAndView.addObject("solution", solution);
-			modelAndView.addObject("problem", problemText);
+			modelAndView.addObject("problem", formatProblemWithNewLines(problemText));
  
 		}
 		return modelAndView;
 	}
-
+	private String formatProblemWithNewLines(String problemText) {
+	    return problemText.replace(";", ";\n").trim();
+	}
+	
 }
