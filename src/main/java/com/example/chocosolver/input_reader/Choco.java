@@ -368,9 +368,9 @@ public class Choco
                            {
         Constraint constraint = new Constraint();
         constraint.setTerm1((Term) yystack.valueAt (3));
-	constraint.setTerm2((Term) yystack.valueAt (1));
-	constraint.setRelation((Relation) yystack.valueAt (2));
-	problem.addConstraint(constraint);
+				constraint.setTerm2((Term) yystack.valueAt (1));
+				constraint.setRelation((Relation) yystack.valueAt (2));
+				problem.addConstraint(constraint);
     };
   break;
     
@@ -380,6 +380,7 @@ public class Choco
     /* "Choco.y":71  */
                                                       {
         Constraint constraint = new Constraint(tempList);
+        tempList = new ArrayList<>();
         problem.addConstraint(constraint);
     };
   break;
@@ -387,7 +388,7 @@ public class Choco
 
   case 10:
   if (yyn == 10)
-    /* "Choco.y":78  */
+    /* "Choco.y":79  */
                                           {
 		tempList.add((String) yystack.valueAt (2));
 	};
@@ -396,7 +397,7 @@ public class Choco
 
   case 11:
   if (yyn == 11)
-    /* "Choco.y":81  */
+    /* "Choco.y":82  */
            {
 		tempList.add((String) yystack.valueAt (0));
 	};
@@ -405,7 +406,7 @@ public class Choco
 
   case 12:
   if (yyn == 12)
-    /* "Choco.y":88  */
+    /* "Choco.y":89  */
                                                        {
         yyval = new Pair((Integer) yystack.valueAt (3), (Integer) yystack.valueAt (1));
     };
@@ -414,7 +415,7 @@ public class Choco
 
   case 13:
   if (yyn == 13)
-    /* "Choco.y":94  */
+    /* "Choco.y":95  */
         {
     	yyval = Relation.INFERIOR;
     };
@@ -423,7 +424,7 @@ public class Choco
 
   case 14:
   if (yyn == 14)
-    /* "Choco.y":97  */
+    /* "Choco.y":98  */
         {
     	yyval = Relation.SUPERIOR;
     };
@@ -432,7 +433,7 @@ public class Choco
 
   case 15:
   if (yyn == 15)
-    /* "Choco.y":100  */
+    /* "Choco.y":101  */
            {
     	yyval = Relation.EQUALS;
     };
@@ -441,7 +442,7 @@ public class Choco
 
   case 16:
   if (yyn == 16)
-    /* "Choco.y":103  */
+    /* "Choco.y":104  */
                   {
         yyval = Relation.INFERIORorEQUAL;
     };
@@ -450,7 +451,7 @@ public class Choco
 
   case 17:
   if (yyn == 17)
-    /* "Choco.y":106  */
+    /* "Choco.y":107  */
                   {
         yyval = Relation.SUPERIORorEQUAL;
     };
@@ -459,7 +460,7 @@ public class Choco
 
   case 18:
   if (yyn == 18)
-    /* "Choco.y":109  */
+    /* "Choco.y":110  */
                {
         yyval = Relation.DIFFERENT;
     };
@@ -468,7 +469,7 @@ public class Choco
 
   case 21:
   if (yyn == 21)
-    /* "Choco.y":123  */
+    /* "Choco.y":124  */
                                           {
         set.add((Integer) yystack.valueAt (2));
     };
@@ -477,7 +478,7 @@ public class Choco
 
   case 22:
   if (yyn == 22)
-    /* "Choco.y":129  */
+    /* "Choco.y":130  */
                      {
     	set.add((Integer) yystack.valueAt (0));
     };
@@ -486,7 +487,7 @@ public class Choco
 
   case 23:
   if (yyn == 23)
-    /* "Choco.y":132  */
+    /* "Choco.y":133  */
                                    {
         set.add((Integer) yystack.valueAt (1));
     };
@@ -495,7 +496,7 @@ public class Choco
 
   case 24:
   if (yyn == 24)
-    /* "Choco.y":138  */
+    /* "Choco.y":139  */
            {
     	yyval = new Term((Integer) yystack.valueAt (0));
     };
@@ -504,7 +505,7 @@ public class Choco
 
   case 25:
   if (yyn == 25)
-    /* "Choco.y":141  */
+    /* "Choco.y":142  */
        {
 		yyval = problem.addVariable(Yylex.id);
     };
@@ -513,7 +514,7 @@ public class Choco
 
   case 26:
   if (yyn == 26)
-    /* "Choco.y":144  */
+    /* "Choco.y":145  */
                         {
     	yyval = new Term((Term) yystack.valueAt (2), (Operator) yystack.valueAt (1), (Term) yystack.valueAt (0));
     };
@@ -522,7 +523,7 @@ public class Choco
 
   case 27:
   if (yyn == 27)
-    /* "Choco.y":150  */
+    /* "Choco.y":151  */
          {
     	yyval = Operator.ADD;
     };
@@ -531,7 +532,7 @@ public class Choco
 
   case 28:
   if (yyn == 28)
-    /* "Choco.y":153  */
+    /* "Choco.y":154  */
           {
 		yyval = Operator.SUBTRACT;
     };
@@ -540,7 +541,7 @@ public class Choco
 
   case 29:
   if (yyn == 29)
-    /* "Choco.y":156  */
+    /* "Choco.y":157  */
         {
     	yyval = Operator.MULTIPLY;
     };
@@ -549,7 +550,7 @@ public class Choco
 
   case 30:
   if (yyn == 30)
-    /* "Choco.y":159  */
+    /* "Choco.y":160  */
         {
 		yyval = Operator.DIVIDE;
     };
@@ -557,7 +558,7 @@ public class Choco
     
 
 
-/* "Choco.java":561  */
+/* "Choco.java":562  */
 
         default: break;
       }
@@ -1158,11 +1159,11 @@ private static final byte yycheck_[] = yycheck_init();
 	public static List<Integer> set = new ArrayList<>();
 	public static List<String> tempList = new ArrayList<>();
 
-/* "Choco.java":1162  */
+/* "Choco.java":1163  */
 
 }
 
-/* "Choco.y":164  */
+/* "Choco.y":165  */
 
 
 class ChocoLexer implements Choco.Lexer {

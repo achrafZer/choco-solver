@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.chocosolver.problem.Problem;
 
 @Controller
-public class MyController {
+public class HomeController {
 
 
 	private String problemText;

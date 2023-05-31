@@ -64,12 +64,13 @@ constraint:
     term relation term EOI {
         Constraint constraint = new Constraint();
         constraint.setTerm1((Term) $1);
-	constraint.setTerm2((Term) $3);
-	constraint.setRelation((Relation) $2);
-	problem.addConstraint(constraint);
+				constraint.setTerm2((Term) $3);
+				constraint.setRelation((Relation) $2);
+				problem.addConstraint(constraint);
     } |
     ALLDIFF OPENPAR variable_for_allDiff CLOSEPAR EOI {
         Constraint constraint = new Constraint(tempList);
+        tempList = new ArrayList<>();
         problem.addConstraint(constraint);
     }
 ;
