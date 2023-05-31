@@ -50,6 +50,10 @@ UNKNOWN_TOKEN = .
     "*" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;}
     "/" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;}
     "!" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EXC;}
+    "(" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENPAR;}
+    ")" {System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSEPAR;}
+
+
 
     {UNKNOWN_TOKEN} {return ChocoLexer.UNKNOWN_TOKEN;}
 
