@@ -42,7 +42,6 @@ public class MyController {
 			modelAndView.addObject("error", p.isJavaError());
 		}
 		else {		
-			
 			modelAndView.setViewName("response");
 			modelAndView.addObject("solution", solution);
 			modelAndView.addObject("problem", formatProblemWithNewLines(problemText));

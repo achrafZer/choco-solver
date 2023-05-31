@@ -125,16 +125,18 @@ public class ChocoSolver {
 	private void addConstraints() {
 
 		List<Constraint> constraints = problem.getConstraints();
-		IntVar[] list=new IntVar[intVars.size()]; 
+ 
 
 		for (Constraint constraint : constraints) {
-			if (constraint.isAllDiff()) {
-				int i = 0;
-				for (IntVar v : intVars.values()) {
-				    list[i] = v;
-				    i++;
-				}
-		        model.allDifferent(list).post();
+			 if (constraint.isAllDiff()) {
+		            List<String> allDiffVariables = constraint.getAllDiffVariables();
+		            IntVar[] list = new IntVar[allDiffVariables.size()];
+		            System.out.println(allDiffVariables.size());
+		            for (int i = 0; i < allDiffVariables.size(); i++) {
+		                list[i] = intVars.get(allDiffVariables.get(i));
+		                System.out.println(intVars.get(allDiffVariables.get(i)));
+		            }
+		            model.allDifferent(list).post();
 			} else {
 				ArExpression term1 = ResolveTerm(constraint.getTerm1());
 				ArExpression term2 = ResolveTerm(constraint.getTerm2());
