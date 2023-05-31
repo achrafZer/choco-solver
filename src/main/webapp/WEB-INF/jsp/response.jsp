@@ -10,11 +10,13 @@
 <body>
 	<div class="menu">
 		<ul>
-			<li><a href="javascript:history.back()"><img
-					src="/pictures/edit_icon.png" alt="Edit Icon"></a></li>
-			<li><a href="/"><img src="/pictures/restart_icon.png"
+			<li><a href="javascript:history.back()" title="Edit"> <img
+					src="/pictures/edit_icon.png" alt="Edit Icon">
+			</a></li>
+
+			<li><a href="/"  title="Restart"><img src="/pictures/restart_icon.png"
 					alt="Restart Icon"></a></li>
-			<li><img src="/pictures/save_icon.png" alt="Save Icon"></li>
+			<li><a href="/save"  title="Save"><img src="/pictures/save_icon.png" alt="Save Icon"></a></li>
 		</ul>
 	</div>
 

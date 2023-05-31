@@ -5,8 +5,18 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-	<h1>Welcome to the Choco Solver!</h1>
-	<form action="/solve" method="post">
+<div class="centre">
+
+	<div class="instructions">
+		<ul>
+			<li>La dernière variable déclarée est la seule qui est prise en compte</li>
+			<li>La limites du nombre de résultats</li>
+		</ul>
+	</div>
+
+	<div class="form-container">
+		<h1>Welcome to the Choco Solver!</h1>
+		<form action="/solve" method="post">
 		<label for="problem">Write your problem:</label>
 		<textarea id="problem" name="problem" rows="4" cols="50" ><%
 			String problemText = (String) request.getAttribute("problemText");
@@ -19,15 +29,19 @@
 		</div>
 		<button id="solveButton" type="submit" disabled>Solve</button>
 	</form>
-
-	<div>
-		<hr>
-		<p>
-			Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>
-		</p>
+		
 	</div>
+</div>
+<div class="version-container">
+       <p>Les mots clé à savoir (EOI, ...)</p>
+	<hr>
+	<p>
+		Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>
+	</p>
+</div>
 
-	<script>
+
+<script>
 	const errorMessage = "<%=request.getAttribute("errormessage")%>";
 	const hasError = "<%=request.getAttribute("error")%>" === "true";
 	const problemInput = document.getElementById('problem');
@@ -50,5 +64,6 @@
 		}
 	});
 	</script>
+
 </body>
 </html>
