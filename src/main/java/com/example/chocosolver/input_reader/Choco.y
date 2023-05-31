@@ -20,20 +20,21 @@
 	private Problem problem;
 	public static Problem parse(String script) throws IOException {
   		InputStream stream = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
-        ChocoLexer lexer = new ChocoLexer(stream);
+        	ChocoLexer lexer = new ChocoLexer(stream);
 		Choco parser = new Choco(lexer);
-        parser.problem = new Problem();
-        lexer.setProblem(parser.problem);
-        parser.parse();
-        return parser.problem;
+        	parser.problem = new Problem();
+        	lexer.setProblem(parser.problem);
+        	parser.parse();
+        	return parser.problem;
   	}
 }
 
 %code {
 	public static List<Integer> set = new ArrayList<>();
+	public static List<String> tempList = new ArrayList<>();
 }
 
-%token INF ALLDIFF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS EXC
+%token INF OPENPAR CLOSEPAR ALLDIFF SUP EQUALS PLUS MOINS MUL DIV ID EOI OPENINTERVAL CLOSEINTERVAL OPENSET CLOSESET SEPARATOR NUMBER UNKNOWN_TOKEN DANS EXC
 
 %%
 prog:
@@ -41,6 +42,11 @@ prog:
 	variable |
 	constraint
 ;
+
+id:
+	ID {
+		$$ = (String) Yylex.id;
+	}
 
 variable:
 	ID DANS interval EOI {
@@ -58,15 +64,24 @@ constraint:
     term relation term EOI {
         Constraint constraint = new Constraint();
         constraint.setTerm1((Term) $1);
-		constraint.setTerm2((Term) $3);
-		constraint.setRelation((Relation) $2);
-		problem.addConstraint(constraint);
+	constraint.setTerm2((Term) $3);
+	constraint.setRelation((Relation) $2);
+	problem.addConstraint(constraint);
     } |
-    ALLDIFF EOI {
-        Constraint constraint = new Constraint();
-        constraint.setAllDiff(true);
+    ALLDIFF OPENPAR variable_for_allDiff CLOSEPAR EOI {
+        Constraint constraint = new Constraint(tempList);
         problem.addConstraint(constraint);
     }
+;
+
+variable_for_allDiff:
+	id SEPARATOR variable_for_allDiff {
+		tempList.add((String) $1);
+	} |
+	id {
+		tempList.add((String) $1);
+	}
+
 ;
 
 interval:
