@@ -98,11 +98,11 @@ public class Term {
     @Override
     public String toString() {
         if (this.value != null) {
-            return "Term(" + value + ")";
+            return value.toString();
         } else if (this.variable != null) {
-            return "Term(" + variable + ")";
+            return  variable.getName();
         } else {
-            return "Term(Variables : " + this.terms + ", " + "Operator : " + this.operator + ")";
+            return " (" + this.getTerms().get(0) + ") " + this.operator + " (" + getTerms().get(1) + ") ";
         }
     }
     

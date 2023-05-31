@@ -38,6 +38,7 @@
 
 %%
 prog:
+
 	prog prog |
 	variable |
 	constraint
@@ -136,30 +137,30 @@ sous_ensemble:
 ;
 
 term:
-    NUMBER {
-    	$$ = new Term((Integer) $1);
+    factor PLUS factor {
+        $$ = new Term((Term) $1, Operator.ADD, (Term) $3);
     } |
-    ID {
-		$$ = problem.addVariable(Yylex.id);
+    factor MOINS factor {
+        $$ = new Term((Term) $1, Operator.SUBTRACT, (Term) $3);
     } |
-    term operateur term {
-    	$$ = new Term((Term) $1, (Operator) $2, (Term) $3);
+    factor {
+    	$$ = (Term) $1;
     }
 ;
 
-operateur:
-    PLUS {
-    	$$ = Operator.ADD;
+factor:
+		factor MUL factor {
+        $$ = new Term((Term) $1, Operator.MULTIPLY, (Term) $3);
     } |
-    MOINS {
-		$$ = Operator.SUBTRACT;
+    factor DIV factor {
+        $$ = new Term((Term) $1, Operator.DIVIDE, (Term) $3);
     } |
-    MUL {
-    	$$ = Operator.MULTIPLY;
-    } |
-    DIV {
-		$$ = Operator.DIVIDE;
-    }
+		NUMBER {
+				$$ = new Term((Integer) $1);
+		} |
+		 ID {
+				 $$ = problem.addVariable(Yylex.id);
+		 }
 ;
 
 %%

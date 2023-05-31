@@ -130,6 +130,32 @@ public class TestLexer {
         System.out.println(problem.getConstraints().get(0).getAllDiffVariables());
 
     }
+
+    @Test
+    public void testTermPrecedence() throws IOException {
+
+        String script = "a dans {1, 2}; a * 2 + 1 / 1 = 3;";
+        Problem problem = new Problem(script);
+        System.out.println(problem.getConstraints());
+        assertEquals(problem.getConstraints().size(), 1);
+        assertEquals(problem.getConstraints().get(0).getTerm2().getValue(), 3);
+
+        //Vérifions que a*2 est considéré tout seul comme un terme aditionné au terme composé de 1/1
+        assertEquals(problem.getConstraints().get(0).getTerm1().getTerms().get(0).getTerms().get(0).getVariable().getName(), "a");
+        assertEquals(problem.getConstraints().get(0).getTerm1().getTerms().get(0).getTerms().get(1).getValue(), 2);
+        assertEquals(problem.getConstraints().get(0).getTerm1().getTerms().get(0).getOperator(), Operator.MULTIPLY);
+
+        //Vérifions la même chose pour le terme 1/1
+        assertEquals(problem.getConstraints().get(0).getTerm1().getTerms().get(1).getTerms().get(0).getValue(), 1);
+        assertEquals(problem.getConstraints().get(0).getTerm1().getTerms().get(1).getTerms().get(1).getValue(), 1);
+        assertEquals(problem.getConstraints().get(0).getTerm1().getTerms().get(1).getOperator(), Operator.DIVIDE);
+
+        //Vérifions que les deux termes décrits précédemment, forment un seul terme avec + comme opérateur
+        assertEquals(problem.getConstraints().get(0).getTerm1().getOperator(), Operator.ADD);
+
+
+
+    }
 }
 
 
