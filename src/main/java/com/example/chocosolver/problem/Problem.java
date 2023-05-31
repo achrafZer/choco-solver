@@ -33,9 +33,6 @@ public class Problem {
 
     private String errorMessage;
     
-    private String JavaErrorMessage;
-    
-    private boolean JavaError;
 
     /**
      * Constructs a Problem object.
@@ -51,7 +48,7 @@ public class Problem {
         this.variables = problem.getVariables();
         this.constraints = problem.getConstraints();
         this.error = problem.isError();
-        this.JavaError = problem.isJavaError();
+        
     }
 
     /**
@@ -115,13 +112,8 @@ public class Problem {
 
     public List<HashMap<String, Integer>> solve() {
         ChocoSolver cs = new ChocoSolver(this);
-        try {
             return cs.solve();
-        } catch (Exception e) {
-            setJavaError(true);
-            setJavaErrorMessage("An error occurred: " + e.getMessage());
-            return null;
-        }
+        
     }
     public void setErrorMessage(String errorMessage){
         this.error  = true;
