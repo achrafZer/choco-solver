@@ -18,7 +18,9 @@
 		<h1>Welcome to the Choco Solver!</h1>
 		<form action="/solve" method="post">
 		<label for="problem">Write your problem:</label>
-		<textarea id="problem" name="problem" rows="4" cols="50" ><%
+		<textarea id="problem" name="problem" rows="10" cols="50"
+				  placeholder="taper votre script ici par exemple&#10;myFirstVar dans [1, 10];&#10;mySecondVar dans {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};&#10;ALLDIFF(myFirstVar, mySecondVar);&#10;myFirstVar + mySecondVar = 10;
+"><%
 			String problemText = (String) request.getAttribute("problemText");
 			if (problemText != null) {
 				out.print(problemText);
