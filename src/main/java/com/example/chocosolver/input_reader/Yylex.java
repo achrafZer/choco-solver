@@ -294,6 +294,8 @@ public class Yylex {
   /* user code: */
 	public static int yylval;  // Déclaration de yylval
 	public static String id;
+	public static int line;
+	public static int column;
 
 
   /**
@@ -707,7 +709,9 @@ public class Yylex {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return ChocoLexer.UNKNOWN_TOKEN;
+            { line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.UNKNOWN_TOKEN;
             }
           // fall through
           case 24: break;
@@ -722,106 +726,164 @@ public class Yylex {
           // fall through
           case 26: break;
           case 4:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EXC;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.EXC;
             }
           // fall through
           case 27: break;
           case 5:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENPAR;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.OPENPAR;
             }
           // fall through
           case 28: break;
           case 6:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSEPAR;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.CLOSEPAR;
             }
           // fall through
           case 29: break;
           case 7:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MUL;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.MUL;
             }
           // fall through
           case 30: break;
           case 8:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.PLUS;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+   		line = yyline;
+		column = yycolumn;
+   		return ChocoLexer.PLUS;
             }
           // fall through
           case 31: break;
           case 9:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SEPARATOR;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.SEPARATOR;
             }
           // fall through
           case 32: break;
           case 10:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.MOINS;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.MOINS;
             }
           // fall through
           case 33: break;
           case 11:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.DIV;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		line = yyline;
+		column = yycolumn;
+		return ChocoLexer.DIV;
             }
           // fall through
           case 34: break;
           case 12:
             { yylval = Integer.valueOf(yytext());
         System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+        line = yyline;
+		column = yycolumn;
         return ChocoLexer.NUMBER;
             }
           // fall through
           case 35: break;
           case 13:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EOI;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		line = yyline;
+		column = yycolumn;
+		return ChocoLexer.EOI;
             }
           // fall through
           case 36: break;
           case 14:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.INF;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.INF;
             }
           // fall through
           case 37: break;
           case 15:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.EQUALS;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.EQUALS;
             }
           // fall through
           case 38: break;
           case 16:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.SUP;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.SUP;
             }
           // fall through
           case 39: break;
           case 17:
             { id = yytext();
 		System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		line = yyline;
+		column = yycolumn;
 		return ChocoLexer.ID;
             }
           // fall through
           case 40: break;
           case 18:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENINTERVAL;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		line = yyline;
+		column = yycolumn;
+		return ChocoLexer.OPENINTERVAL;
             }
           // fall through
           case 41: break;
           case 19:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSEINTERVAL;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		line = yyline;
+		column = yycolumn;
+		return ChocoLexer.CLOSEINTERVAL;
             }
           // fall through
           case 42: break;
           case 20:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.OPENSET;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+     	line = yyline;
+		column = yycolumn;
+     	return ChocoLexer.OPENSET;
             }
           // fall through
           case 43: break;
           case 21:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.CLOSESET;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+    	line = yyline;
+		column = yycolumn;
+    	return ChocoLexer.CLOSESET;
             }
           // fall through
           case 44: break;
           case 22:
-            { System.out.println("Mot-clé : " + yytext()); return ChocoLexer.DANS;
+            { System.out.println("Mot-clé : " + yytext());
+    	line = yyline;
+		column = yycolumn;
+		return ChocoLexer.DANS;
             }
           // fall through
           case 45: break;
           case 23:
-            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]"); return ChocoLexer.ALLDIFF;
+            { System.out.println("[token at line " + yyline + ":" + yycolumn + " = \"" + yytext() + "\"]");
+		line = yyline;
+		column = yycolumn;
+		return ChocoLexer.ALLDIFF;
             }
           // fall through
           case 46: break;

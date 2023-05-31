@@ -143,6 +143,7 @@ term:
     factor MOINS factor {
         $$ = new Term((Term) $1, Operator.SUBTRACT, (Term) $3);
     } |
+
     factor {
     	$$ = (Term) $1;
     }
@@ -184,7 +185,7 @@ class ChocoLexer implements Choco.Lexer {
     public void yyerror (String s){
         System.err.println(s);
         problem.setError(true);
-        problem.setErrorMessage(s);
+        problem.setErrorMessage(s + "\nLine " + Yylex.line + ", Column " + Yylex.column );
     }
 
     @Override

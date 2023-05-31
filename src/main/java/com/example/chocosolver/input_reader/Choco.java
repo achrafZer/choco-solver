@@ -514,7 +514,7 @@ public class Choco
 
   case 26:
   if (yyn == 26)
-    /* "Choco.y":146  */
+    /* "Choco.y":147  */
            {
     	yyval = (Term) yystack.valueAt (0);
     };
@@ -523,7 +523,7 @@ public class Choco
 
   case 27:
   if (yyn == 27)
-    /* "Choco.y":152  */
+    /* "Choco.y":153  */
                                   {
         yyval = new Term((Term) yystack.valueAt (2), Operator.MULTIPLY, (Term) yystack.valueAt (0));
     };
@@ -532,7 +532,7 @@ public class Choco
 
   case 28:
   if (yyn == 28)
-    /* "Choco.y":155  */
+    /* "Choco.y":156  */
                       {
         yyval = new Term((Term) yystack.valueAt (2), Operator.DIVIDE, (Term) yystack.valueAt (0));
     };
@@ -541,7 +541,7 @@ public class Choco
 
   case 29:
   if (yyn == 29)
-    /* "Choco.y":158  */
+    /* "Choco.y":159  */
                        {
 				yyval = new Term((Integer) yystack.valueAt (0));
 		};
@@ -550,7 +550,7 @@ public class Choco
 
   case 30:
   if (yyn == 30)
-    /* "Choco.y":161  */
+    /* "Choco.y":162  */
                     {
 				 yyval = problem.addVariable(Yylex.id);
 		 };
@@ -1161,7 +1161,7 @@ private static final byte yycheck_[] = yycheck_init();
 
 }
 
-/* "Choco.y":166  */
+/* "Choco.y":167  */
 
 
 class ChocoLexer implements Choco.Lexer {
@@ -1183,7 +1183,7 @@ class ChocoLexer implements Choco.Lexer {
     public void yyerror (String s){
         System.err.println(s);
         problem.setError(true);
-        problem.setErrorMessage(s);
+        problem.setErrorMessage(s + "\nLine " + Yylex.line + ", Column " + Yylex.column );
     }
 
     @Override

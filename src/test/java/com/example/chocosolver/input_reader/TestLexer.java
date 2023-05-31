@@ -91,7 +91,7 @@ public class TestLexer {
         var p = Choco.parse(script);
         Problem problem = new Problem(script);
         assertTrue(p.isError());
-        assertEquals(p.getErrorMessage(), "syntax error, unexpected end of input, expecting EOI");
+        assertEquals(p.getErrorMessage(), "syntax error, unexpected end of input, expecting EOI\nLine 0, Column 15");
         assertNull(p.getVariables());
         assertNull(p.getConstraints());
     }
@@ -152,8 +152,28 @@ public class TestLexer {
 
         //Vérifions que les deux termes décrits précédemment, forment un seul terme avec + comme opérateur
         assertEquals(problem.getConstraints().get(0).getTerm1().getOperator(), Operator.ADD);
+    }
 
+    @Test
+    public void testNQueensProblem() throws IOException {
+        String script = "a dans {1, 2, 3, 4};\n" +
+                "b dans {1, 2, 3, 4};\n" +
+                "c dans {1, 2, 3, 4};\n" +
+                "d dans {1, 2, 3, 4};\n" +
+                "a * 4 + b < 4; \n" +
+                "a * 4 + b >= 0;\n" +
+                "c * 4 + d >= 0;\n" +
+                "c * 4 + d < 4;\n" +
+                "ALLDIFF(a, b, c, d);";
 
+        Problem problem = new Problem(script);
+    }
+
+    @Test
+    public void testTerParentheses() throws IOException {
+//        String script = "a dans {1, 2}; a * (2 + 1) / 1 = 3;";
+//        Problem problem = new Problem(script);
+//        System.out.println(problem.getConstraints());
 
     }
 }

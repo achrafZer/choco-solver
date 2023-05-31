@@ -1,0 +1,28 @@
+AC dans {1, 2, 3, 4};
+AL dans {1, 2, 3, 4};
+
+BC dans {1, 2, 3, 4};
+BL dans {1, 2, 3, 4};
+
+CC dans {1, 2, 3, 4};
+CL dans {1, 2, 3, 4};
+
+DC dans {1, 2, 3, 4};
+DL dans {1, 2, 3, 4};
+
+ALLDIFF(AC, BC, CC, DC);
+ALLDIFF(AL, BL, CL, DL);
+
+AC+AL != BC+BL;
+AC+AL != CC+CL;
+AC+AL != DC+DL;
+BC+BL != CC+CL;
+BC+BL != DC+DL
+CC+CL != DC+DL;
+
+AC-AL != BC-BL;
+AC-AL != CC-CL;
+AC-AL != DC-DL;
+BC-BL != CC-CL;
+BC-BL != DC-DL;
+CC-CL != DC-DL;
