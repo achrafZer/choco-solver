@@ -113,7 +113,7 @@ public class HomeController {
 	
 	public void saveResult(List<HashMap<String, Integer>> solution, String problem, String fileName)
 			throws IOException {
-		String csvFilePath = "solutions/" + fileName + ".csv";
+		String csvFilePath = "C:/Users/Admin/Downloads/" + fileName + ".csv";
 		try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(csvFilePath), CSVFormat.DEFAULT)) {
 			csvPrinter.print("# Problem : ");
 			csvPrinter.print(problem);
