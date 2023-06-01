@@ -3,10 +3,12 @@ import com.example.chocosolver.ChocoSolver;
 import com.example.chocosolver.input_reader.Choco;
 import lombok.Data;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 import org.chocosolver.solver.Solution;
 
@@ -33,6 +35,7 @@ public class Problem {
 
     private String errorMessage;
     
+    private boolean isSaved;
 
     /**
      * Constructs a Problem object.
@@ -48,6 +51,7 @@ public class Problem {
         this.variables = problem.getVariables();
         this.constraints = problem.getConstraints();
         this.error = problem.isError();
+        this.isSaved=false;
         
     }
 
@@ -115,6 +119,9 @@ public class Problem {
             return cs.solve();
         
     }
+    
+   
+    
     public void setErrorMessage(String errorMessage){
         this.error  = true;
         this.constraints = null;

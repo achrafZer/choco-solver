@@ -6,6 +6,24 @@
 <meta charset="UTF-8">
 <title>Spring boot application</title>
 <link rel="stylesheet" href="/css/style.css">
+<style>
+.popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	border: 1px solid black;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+	z-index: 9999;
+}
+
+.popup.show {
+	display: block;
+}
+</style>
 </head>
 <body>
 	<div class="menu">
@@ -14,9 +32,10 @@
 					src="/pictures/edit_icon.png" alt="Edit Icon">
 			</a></li>
 
-			<li><a href="/"  title="Restart"><img src="/pictures/restart_icon.png"
-					alt="Restart Icon"></a></li>
-			<li><a href="/save"  title="Save"><img src="/pictures/save_icon.png" alt="Save Icon"></a></li>
+			<li><a href="/" title="Restart"><img
+					src="/pictures/restart_icon.png" alt="Restart Icon"></a></li>
+			<li><a href="/save" title="Save"><img
+					src="/pictures/save_icon.png" alt="Save Icon"></a></li>
 		</ul>
 	</div>
 
@@ -88,5 +107,24 @@
 			Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>
 		</p>
 	</div>
+	<div id="popup" class="popup">
+    <p id="message">${saveMessage}</p>
+    <button onclick="closePopup()">OK</button>
+</div>
+
+<script>
+    const isSaved = <%= request.getAttribute("isSaved") %>;
+    function closePopup() {
+        document.getElementById('popup').classList.remove('show');
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+        if (isSaved === true) {
+            document.getElementById('popup').classList.add('show');
+        }
+    });
+</script>
+
+	
 </body>
 </html>

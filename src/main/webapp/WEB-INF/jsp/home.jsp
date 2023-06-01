@@ -46,9 +46,7 @@
 <script>
 	const errorMessage = "<%=request.getAttribute("errormessage")%>";
 	const hasError = "<%=request.getAttribute("error")%>";
-	var problemInput = document.getElementById('problem');
-	const solveButton = document.getElementById('solveButton');
-
+	
 	// Display the error message if there is an error
 	if(hasError===true)
 		{
