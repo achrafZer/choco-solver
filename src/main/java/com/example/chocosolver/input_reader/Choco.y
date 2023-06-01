@@ -137,10 +137,10 @@ sous_ensemble:
 ;
 
 term:
-    factor PLUS factor {
+    factor PLUS term {
         $$ = new Term((Term) $1, Operator.ADD, (Term) $3);
     } |
-    factor MOINS factor {
+    factor MOINS term {
         $$ = new Term((Term) $1, Operator.SUBTRACT, (Term) $3);
     } |
 

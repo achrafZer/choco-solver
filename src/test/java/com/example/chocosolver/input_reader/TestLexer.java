@@ -155,6 +155,53 @@ public class TestLexer {
     }
 
     @Test
+    public void testTermPrecedence2() throws IOException {
+
+        String script = "a dans {1, 2}; a * 2 + 1 / 1 + b * 3 = 3;";
+        Problem problem = new Problem(script);
+        assertEquals(problem.getConstraints().size(), 1);
+
+        Constraint constraint = problem.getConstraints().get(0); //a * 2 + 1 / 1 + b * 3 = 3
+        Term term1 = constraint.getTerm1(); //a * 2 + 1 / 1 + b * 3
+        Term term2 = constraint.getTerm2(); //3
+        Relation relation = constraint.getRelation(); // EQUALS
+
+        assertNotNull(term1.getTerms());
+        Term term1_1 = term1.getTerms().get(0); //a * 2
+        Term term1_2 = term1.getTerms().get(1); //1 / 1 + b * 3
+        Operator operator1 = term1.getOperator(); // ADD
+
+        assertEquals(operator1, Operator.ADD);
+
+        assertNotNull(term1_1.getTerms());
+        Term term1_1_1 = term1_1.getTerms().get(0); //a
+        Term term1_1_2 = term1_1.getTerms().get(1); //2
+        Operator operator1_1 = term1_1.getOperator(); //MULTIPLY
+
+        assertEquals(term1_1_1.getVariable().getName(), "a");
+        assertEquals(term1_1_2.getValue(), 2);
+        assertEquals(operator1_1, Operator.MULTIPLY);
+
+        assertNotNull(term1_2.getTerms());
+        Term term1_2_1 = term1_2.getTerms().get(0); //1 / 1
+        Term term1_2_2 = term1_2.getTerms().get(1); //b * 3
+        Operator operator1_2 = term1_2.getOperator(); //ADD
+        assertEquals(operator1_2, Operator.ADD);
+
+        assertNotNull(term1_2_1.getTerms());
+        Term term1_2_1_1 = term1_2_1.getTerms().get(0); //1
+        Term term1_2_1_2 = term1_2_1.getTerms().get(1); //1
+        Operator operator1_2_1 = term1_2_1.getOperator(); // /
+
+        assertEquals(term1_2_1_1.getValue(), 1);
+        assertEquals(term1_2_1_2.getValue(), 1);
+        assertEquals(operator1_2_1, Operator.DIVIDE);
+
+        assertEquals(term2.getValue(), 3);
+        System.out.println(constraint);
+    }
+
+    @Test
     public void testNQueensProblem() throws IOException {
         String script = "a dans {1, 2, 3, 4};\n" +
                 "b dans {1, 2, 3, 4};\n" +
@@ -171,9 +218,9 @@ public class TestLexer {
 
     @Test
     public void testTerParentheses() throws IOException {
-//        String script = "a dans {1, 2}; a * (2 + 1) / 1 = 3;";
-//        Problem problem = new Problem(script);
-//        System.out.println(problem.getConstraints());
+        String script = "1<";
+        Problem problem = new Problem(script);
+        System.out.println(problem.getErrorMessage());
 
     }
 }
