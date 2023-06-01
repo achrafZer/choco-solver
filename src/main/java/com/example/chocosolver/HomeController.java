@@ -30,8 +30,8 @@ public class HomeController {
         this.problemText = problemText;
         Problem p = new Problem(problemText);
         ModelAndView modelAndView = new ModelAndView();
-
         if (p.isError()) {
+        	System.out.println("elie:"+p.getErrorMessage());
             modelAndView.setViewName("home");
             modelAndView.addObject("errormessage", p.getErrorMessage());
             modelAndView.addObject("problemText", problemText);
@@ -44,6 +44,13 @@ public class HomeController {
         }
         return modelAndView;
     }
+    
+    @GetMapping("/solve") 
+    public ModelAndView handleSolveWithoutProblem() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("home");
+        return modelAndView;
+    }
 
     private String formatProblemWithNewLines(String problemText) {
         return problemText.replace(";", ";\n").trim();
@@ -51,7 +58,7 @@ public class HomeController {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleException(Exception ex) {
-    	System.out.println(ex.getMessage());
+    	System.out.println("elie:"+ex.getMessage());
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("error");
         modelAndView.addObject("errormessage", "An unexpected error occurred: " + ex.getMessage());

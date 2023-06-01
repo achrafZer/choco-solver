@@ -93,25 +93,14 @@ button {
     margin-top: 5%;
     color: #fff;
     border: none;
-    cursor: pointer;
+   
     font-size: 16px;
     border-radius: 4px;
     background-color: #4CAF50;
 }
 
 
-button:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-}
 
-button:hover:enabled {
-    background-color: #45a049;
-}
-
-button:enabled {
-    background-color: #4CAF50;
-}
 
 
 hr {
@@ -179,9 +168,11 @@ a {
 }
 
 .error-message {
-    display: none;
+	
     color: red;
 }
+
+
 
 .menu {
     background-color: #4CAF50;

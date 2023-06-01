@@ -27,9 +27,9 @@
 			}
 		%></textarea>
 		<div class="error-message">
-			<p id="errorText"></p>
+			<p id="errorText"><%=request.getAttribute("errormessage")%></p>
 		</div>
-		<button id="solveButton" type="submit" disabled>Solve</button>
+		<button id="solveButton" type="submit" >Solve</button>
 	</form>
 		
 	</div>
@@ -45,26 +45,19 @@
 
 <script>
 	const errorMessage = "<%=request.getAttribute("errormessage")%>";
-	const hasError = "<%=request.getAttribute("error")%>" === "true";
-	const problemInput = document.getElementById('problem');
+	const hasError = "<%=request.getAttribute("error")%>";
+	var problemInput = document.getElementById('problem');
 	const solveButton = document.getElementById('solveButton');
 
 	// Display the error message if there is an error
-	if (hasError && errorMessage.trim() !== '') {
+	if(hasError===true)
+		{
 		document.querySelector('.error-message').style.display = 'block';
-		document.querySelector('#errorText').textContent = errorMessage;
-	} else {
+		}
+	else {
 		document.querySelector('.error-message').style.display = 'none';
 	}
-
-	// Enable/disable the solve button based on the input value
-	problemInput.addEventListener('input', function() {
-		if (problemInput.value.trim() !== '') {
-			solveButton.disabled = false;
-		} else {
-			solveButton.disabled = true;
-		}
-	});
+	
 	</script>
 
 </body>
