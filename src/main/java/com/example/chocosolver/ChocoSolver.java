@@ -8,6 +8,8 @@ import com.example.chocosolver.problem.Relation;
 import com.example.chocosolver.problem.Term;
 import com.example.chocosolver.problem.Variable;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,18 +21,22 @@ import org.chocosolver.solver.exception.InvalidSolutionException;
 import org.chocosolver.solver.expression.discrete.arithmetic.ArExpression;
 import org.chocosolver.solver.variables.IntVar;
 
+
+@Data
 public class ChocoSolver {
 
 	private Problem problem;
 	private Model model;
 	private Solver solver;
 	private HashMap<String, IntVar> intVars;
+	private Boolean isHigherThan100;
 	
 	public ChocoSolver(Problem problem) {
 		this.problem = problem;
 		this.model = new Model();
 		this.solver = model.getSolver();
 		this.intVars = new HashMap<>();
+		this.isHigherThan100=false;
 		
 	}
 
@@ -176,17 +182,31 @@ public class ChocoSolver {
 		// Solve the problem
 		ArrayList<Solution> solutions = new ArrayList<>();
 
-		for (int i = 0; i < 100; i++) {
+		
+		
+		for (int i = 0; i < 101; i++) {
 			try {
 				Solution solution = model.getSolver().findSolution();
+				if(i==100)
+				{
+					if(solution!=null)
+					{
+						this.isHigherThan100=true;	
+						System.out.println(this.isHigherThan100.toString());
+					}
+						
+				}
 				if (solution != null) {
 					solutions.add(solution);
 				}
+				
 			} catch (InvalidSolutionException e) {
 				continue;
 			}
 		}
 
+		
+		
 		List<HashMap<String, Integer>> resultList = new ArrayList<>();
 
 		for (Solution solution : solutions) {
