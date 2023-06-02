@@ -1,0 +1,13 @@
+SEND=S*1000 +E*100+N*10+D;
+MORE=M*1000+O*100+R*10+E;
+MONEY = M*10000+O*1000+N*100+E*10+Y;
+SEND+MORE=MONEY;
+S dans [1,9];
+E dans [0,9];
+N dans [0,9];
+D dans [0,9];
+M dans [1,9];
+O dans [0,9];
+R dans [0,9];
+Y dans [0,9];
+ALLDIFF (S,E,N,D,M,O,R,Y);
