@@ -29,6 +29,9 @@ import jakarta.servlet.http.HttpSession;
 public class HomeController {
 
 	private String problemText;
+	
+	private Boolean FirstTime=true;
+	
 
 	@GetMapping("/")
 	public ModelAndView index() {
@@ -37,6 +40,13 @@ public class HomeController {
 		return modelAndView;
 	}
 
+	@GetMapping("/restart")
+	public ModelAndView restart() {
+		ModelAndView modelAndView = new ModelAndView("home");
+		return modelAndView;
+	}
+
+	
 	@PostMapping("/solve")
 	public ModelAndView solveProblem(@RequestParam("problem") String problemText, HttpServletRequest request)
 			throws IOException {

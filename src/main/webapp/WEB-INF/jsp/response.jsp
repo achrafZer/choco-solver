@@ -31,8 +31,7 @@
 			<li><a href="javascript:history.back()" title="Edit"> <img
 					src="/pictures/edit_icon.png" alt="Edit Icon">
 			</a></li>
-
-			<li><a href="/" title="Restart"><img
+			<li><a href="/restart" title="Restart"><img
 					src="/pictures/restart_icon.png" alt="Restart Icon"></a></li>
 			<li><a href="/save" title="Save"><img
 					src="/pictures/save_icon.png" alt="Save Icon"></a></li>
