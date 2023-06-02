@@ -280,6 +280,42 @@ public class TestLexer {
         System.out.println(problem.getErrorMessage());
 
     }
+
+    @Test
+    public void testNegativeNumbersIntervals() throws IOException {
+        String script1 = "a dans [-1, 10];";
+        Problem problem1 = new Problem(script1);
+        assertEquals(problem1.getVariables().get("a").getValueInterval().getFirst(), -1);
+        assertEquals(problem1.getVariables().get("a").getValueInterval().getSecond(), 10);
+
+        String script2 = "a dans [1, -10];";
+        Problem problem2 = new Problem(script2);
+        assertEquals(problem2.getVariables().get("a").getValueInterval().getFirst(), 1);
+        assertEquals(problem2.getVariables().get("a").getValueInterval().getSecond(), -10);
+
+        String script3 = "a dans [-1, -10];";
+        Problem problem3 = new Problem(script3);
+        assertEquals(problem3.getVariables().get("a").getValueInterval().getFirst(), -1);
+        assertEquals(problem3.getVariables().get("a").getValueInterval().getSecond(), -10);
+    }
+
+    @Test
+    public void testNegativeNumbersSets() throws IOException {
+        String script = "a dans {-1, -2, 3, 4, -10};";
+        Problem problem = new Problem(script);
+        assertTrue(problem.getVariables().get("a").getValueSet().contains(-1));
+        assertTrue(problem.getVariables().get("a").getValueSet().contains(-2));
+        assertTrue(problem.getVariables().get("a").getValueSet().contains(3));
+        assertTrue(problem.getVariables().get("a").getValueSet().contains(4));
+        assertTrue(problem.getVariables().get("a").getValueSet().contains(-10));
+    }
+
+    @Test
+    public void testNegativeNumbersTerm() throws IOException {
+        String script = "a dans {-1, -2, 3, 4, -10}; a - (-2) = 0;";
+        Problem problem = new Problem(script);
+        assertEquals(problem.solve().get(0).get("a"), -2);
+    }
 }
 
 
