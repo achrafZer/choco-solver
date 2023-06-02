@@ -49,6 +49,12 @@ id:
 		$$ = (String) Yylex.id;
 	}
 
+number:
+	NUMBER |
+	MOINS NUMBER {
+		$$ = (Integer) $2 * -1 ;
+	}
+
 variable:
 	ID DANS interval EOI {
 		Variable variable = new Variable(Yylex.id, (Pair) $3);
@@ -87,7 +93,7 @@ variable_for_allDiff:
 ;
 
 interval:
-    OPENINTERVAL NUMBER SEPARATOR NUMBER CLOSEINTERVAL {
+    OPENINTERVAL number SEPARATOR number CLOSEINTERVAL {
         $$ = new Pair((Integer) $2, (Integer) $4);
     }
 ;
@@ -122,16 +128,16 @@ sup_or_equals:
 ;
 
 set:
-    OPENSET NUMBER sous_ensemble CLOSESET {
+    OPENSET number sous_ensemble CLOSESET {
         set.add((Integer) $2);
     }
 ;
 
 sous_ensemble:
-    SEPARATOR NUMBER {
+    SEPARATOR number {
     	set.add((Integer) $2);
     } |
-    SEPARATOR NUMBER sous_ensemble {
+    SEPARATOR number sous_ensemble {
         set.add((Integer) $2);
     }
 ;
@@ -160,7 +166,7 @@ factor:
     	OPENPAR term CLOSEPAR {
     		$$ = (Term) $2;
     	} |
-	NUMBER {
+	number {
 		$$ = new Term((Integer) $1);
 	} |
  	ID {
