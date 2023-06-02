@@ -46,7 +46,6 @@ public class HomeController {
 		HttpSession session = request.getSession();
 
 		if (p.isError()) {
-			System.out.println("elie:" + p.getErrorMessage());
 			modelAndView.setViewName("home");
 			modelAndView.addObject("errormessage", p.getErrorMessage());
 			modelAndView.addObject("problemText", problemText);
@@ -56,10 +55,12 @@ public class HomeController {
 			modelAndView.setViewName("response");
 			modelAndView.addObject("p", p);
 			modelAndView.addObject("solution", solution);
+			modelAndView.addObject("isHigherThan100",p.isHigherThan100());
 			modelAndView.addObject("problem", formatProblemWithNewLines(problemText));
 			session.setAttribute("problem", formatProblemWithNewLines(problemText));
 			session.setAttribute("solution", solution);
 			session.setAttribute("p", p);
+			System.out.println("elie:" + p.isHigherThan100());
 		}
 		return modelAndView;
 	}
@@ -95,7 +96,7 @@ public class HomeController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd-HHmmss");
         String formattedDateTime = currentDateTime.format(formatter);
 		try {
-			saveResult(solution, p, formattedDateTime.toString());
+			problem.saveResult(solution, p, formattedDateTime.toString());
 			modelAndView.setViewName("response");
 			modelAndView.addObject("solution", solution);
 			modelAndView.addObject("problem", p);
@@ -104,39 +105,11 @@ public class HomeController {
 			modelAndView.addObject("saveMessage",saveMessage);
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	   return modelAndView;
 	}
 	
-	public void saveResult(List<HashMap<String, Integer>> solution, String problem, String fileName)
-			throws IOException {
-		String csvFilePath = "C:/Users/Admin/Downloads/" + fileName + ".csv";
-		try (CSVPrinter csvPrinter = new CSVPrinter(new FileWriter(csvFilePath), CSVFormat.DEFAULT)) {
-			csvPrinter.print("# Problem : ");
-			csvPrinter.print(problem);
-			csvPrinter.println();
-			csvPrinter.print("#S");
-			for (String key : solution.get(0).keySet()) {
-				csvPrinter.print(key);
-			}
-			csvPrinter.println();
-			int s = 1;
-			for (HashMap<String, Integer> rowData : solution) {
-				csvPrinter.print(s++);
-				for (String key : rowData.keySet()) {
-					csvPrinter.print(rowData.get(key));
-				}
-				csvPrinter.println();
-			}
-
-			csvPrinter.flush();
-			System.out.println("Solution data saved to CSV file: " + csvFilePath);
-		} catch (IOException e) {
-			System.err.println("Error saving solution data to CSV file: " + e.getMessage());
-		}
-	}
-
+	
 }

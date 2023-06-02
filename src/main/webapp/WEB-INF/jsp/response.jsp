@@ -108,23 +108,28 @@
 		</p>
 	</div>
 	<div id="popup" class="popup">
-    <p id="message">${saveMessage}</p>
-    <button onclick="closePopup()">OK</button>
-</div>
+		<p id="message">${saveMessage}</p>
+		<button onclick="closePopup()">OK</button>
+	</div>
 
-<script>
+	<script>
     const isSaved = <%= request.getAttribute("isSaved") %>;
+    const isHigherThan100 = <%=request.getAttribute("isHigherThan100")%>;
     function closePopup() {
         document.getElementById('popup').classList.remove('show');
     }
-
     window.addEventListener('DOMContentLoaded', function () {
         if (isSaved === true) {
             document.getElementById('popup').classList.add('show');
         }
+	    if(isHigherThan100===true)
+	    {
+	    	document.getElementById('popup').classList.add('show');
+	    	document.getElementById('message').textContent="le nombre de solutions dépasse 100 mais nous n'afficherons que les 100 premières solutions";
+	    }
     });
 </script>
 
-	
+
 </body>
 </html>
