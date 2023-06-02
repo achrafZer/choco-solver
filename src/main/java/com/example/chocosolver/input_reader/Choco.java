@@ -505,7 +505,7 @@ public class Choco
 
   case 25:
   if (yyn == 25)
-    /* "Choco.y":143  */
+    /* "Choco.y":144  */
                       {
         yyval = new Term((Term) yystack.valueAt (2), Operator.SUBTRACT, (Term) yystack.valueAt (0));
     };
@@ -514,7 +514,7 @@ public class Choco
 
   case 26:
   if (yyn == 26)
-    /* "Choco.y":147  */
+    /* "Choco.y":148  */
            {
     	yyval = (Term) yystack.valueAt (0);
     };
@@ -523,42 +523,51 @@ public class Choco
 
   case 27:
   if (yyn == 27)
-    /* "Choco.y":153  */
-                                  {
-        yyval = new Term((Term) yystack.valueAt (2), Operator.MULTIPLY, (Term) yystack.valueAt (0));
-    };
+    /* "Choco.y":154  */
+                          {
+        	yyval = new Term((Term) yystack.valueAt (2), Operator.MULTIPLY, (Term) yystack.valueAt (0));
+    	};
   break;
     
 
   case 28:
   if (yyn == 28)
-    /* "Choco.y":156  */
-                      {
-        yyval = new Term((Term) yystack.valueAt (2), Operator.DIVIDE, (Term) yystack.valueAt (0));
-    };
+    /* "Choco.y":157  */
+                          {
+        	yyval = new Term((Term) yystack.valueAt (2), Operator.DIVIDE, (Term) yystack.valueAt (0));
+    	};
   break;
     
 
   case 29:
   if (yyn == 29)
-    /* "Choco.y":159  */
-                       {
-				yyval = new Term((Integer) yystack.valueAt (0));
-		};
+    /* "Choco.y":160  */
+                              {
+    		yyval = (Term) yystack.valueAt (1);
+    	};
   break;
     
 
   case 30:
   if (yyn == 30)
-    /* "Choco.y":162  */
-                    {
-				 yyval = problem.addVariable(Yylex.id);
-		 };
+    /* "Choco.y":163  */
+               {
+		yyval = new Term((Integer) yystack.valueAt (0));
+	};
+  break;
+    
+
+  case 31:
+  if (yyn == 31)
+    /* "Choco.y":166  */
+           {
+		 yyval = problem.addVariable(Yylex.id);
+	};
   break;
     
 
 
-/* "Choco.java":562  */
+/* "Choco.java":571  */
 
         default: break;
       }
@@ -930,7 +939,7 @@ public class Choco
     return yyvalue == yytable_ninf_;
   }
 
-  private static final byte yypact_ninf_ = -11;
+  private static final byte yypact_ninf_ = -18;
   private static final byte yytable_ninf_ = -1;
 
   /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -940,12 +949,12 @@ public class Choco
   {
     return new byte[]
     {
-      -3,     3,    -4,   -11,     0,   -11,   -11,     1,    16,     9,
-       4,   -11,    -3,     8,    15,   -11,    23,    -8,   -11,   -11,
-      -8,    -8,    -8,    -8,   -11,    13,    28,    14,    17,    21,
-      22,   -11,   -11,   -11,   -11,    24,   -11,   -11,   -10,   -10,
-       9,    25,    26,    27,   -11,   -11,   -11,   -11,   -11,    20,
-      29,    30,    31,    27,   -11,   -11,   -11
+      11,     0,     8,    -6,   -18,     1,   -18,   -18,     3,    18,
+     -18,    13,    12,    17,   -18,    11,    25,    27,   -18,    28,
+       0,   -18,   -18,     0,     0,     0,     0,   -18,   -18,    19,
+      32,    20,    21,    29,    30,   -18,   -18,   -18,    31,   -18,
+     -18,    -9,    -9,    12,    33,    23,    34,   -18,   -18,   -18,
+     -18,   -18,    26,    35,    36,    40,    34,   -18,   -18,   -18
     };
   }
 
@@ -957,12 +966,12 @@ public class Choco
   {
     return new byte[]
     {
-       0,     0,    30,    29,     0,     3,     4,     0,    26,     0,
-       0,     1,     2,    13,    14,    15,     0,     0,    16,    17,
-       0,     0,     0,     0,     5,    11,     0,     0,     0,     0,
-       0,    19,    20,    18,    30,     0,    24,    25,    27,    28,
-       0,     0,     0,     0,     6,     7,     8,    10,     9,     0,
-       0,     0,     0,    22,    21,    12,    23
+       0,     0,     0,    31,    30,     0,     3,     4,     0,    26,
+      31,     0,     0,     0,     1,     2,    13,    14,    15,     0,
+       0,    16,    17,     0,     0,     0,     0,    29,     5,    11,
+       0,     0,     0,     0,     0,    19,    20,    18,     0,    24,
+      25,    27,    28,     0,     0,     0,     0,     6,     7,     8,
+      10,     9,     0,     0,     0,     0,    22,    21,    12,    23
     };
   }
 
@@ -972,8 +981,8 @@ public class Choco
   {
     return new byte[]
     {
-     -11,    41,   -11,   -11,   -11,     2,   -11,   -11,   -11,   -11,
-     -11,    -9,    -6,     7
+     -18,    39,   -18,   -18,   -18,     5,   -18,   -18,   -18,   -18,
+     -18,    -7,    -1,   -17
     };
   }
 
@@ -983,8 +992,8 @@ public class Choco
   {
     return new byte[]
     {
-      -1,    12,    25,     5,     6,    26,    29,    17,    18,    19,
-      30,    51,     7,     8
+      -1,    15,    29,     6,     7,    30,    33,    20,    21,    22,
+      34,    54,     8,     9
     };
   }
 
@@ -996,11 +1005,12 @@ public class Choco
   {
     return new byte[]
     {
-      11,    22,    23,     1,    13,    34,     1,     9,    14,    15,
-       2,    35,     3,     2,    36,    37,    31,     3,    10,    27,
-       3,    28,    24,    32,    16,    20,    21,    22,    23,    38,
-      39,    33,    40,    41,    42,    44,    45,    43,    46,    48,
-      52,     4,    47,     0,    56,    49,    50,    55,    54,    53
+      11,    14,    25,    26,     1,     1,    16,     2,    41,    42,
+      17,    18,    12,    10,     3,     1,    13,     2,    27,    38,
+       4,     4,    39,    40,     3,    28,    19,    23,    24,    25,
+      26,     4,    31,    35,    32,    36,    37,    44,    43,     5,
+      45,    46,    52,    47,    48,    49,    55,    51,    50,    59,
+       0,     0,     0,    53,    57,    56,    58
     };
   }
 
@@ -1009,11 +1019,12 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,    11,    12,     6,     3,    13,     6,     4,     7,     8,
-      13,    17,    20,    13,    20,    21,     8,    20,    22,    15,
-      20,    17,    13,     8,    23,     9,    10,    11,    12,    22,
-      23,     8,    19,     5,    20,    14,    14,    20,    14,    14,
-      20,     0,    40,    -1,    53,    19,    19,    16,    18,    20
+       1,     0,    11,    12,     4,     4,     3,     6,    25,    26,
+       7,     8,     4,    13,    13,     4,    22,     6,     5,    20,
+      20,    20,    23,    24,    13,    13,    23,     9,    10,    11,
+      12,    20,    15,     8,    17,     8,     8,     5,    19,     0,
+      20,    20,    19,    14,    14,    14,    20,    14,    43,    56,
+      -1,    -1,    -1,    19,    18,    20,    16
     };
   }
 
@@ -1024,12 +1035,12 @@ private static final byte yycheck_[] = yycheck_init();
   {
     return new byte[]
     {
-       0,     6,    13,    20,    25,    27,    28,    36,    37,     4,
-      22,     0,    25,     3,     7,     8,    23,    31,    32,    33,
-       9,    10,    11,    12,    13,    26,    29,    15,    17,    30,
-      34,     8,     8,     8,    13,    36,    36,    36,    37,    37,
-      19,     5,    20,    20,    14,    14,    14,    29,    14,    19,
-      19,    35,    20,    20,    18,    16,    35
+       0,     4,     6,    13,    20,    25,    27,    28,    36,    37,
+      13,    36,     4,    22,     0,    25,     3,     7,     8,    23,
+      31,    32,    33,     9,    10,    11,    12,     5,    13,    26,
+      29,    15,    17,    30,    34,     8,     8,     8,    36,    36,
+      36,    37,    37,    19,     5,    20,    20,    14,    14,    14,
+      29,    14,    19,    19,    35,    20,    20,    18,    16,    35
     };
   }
 
@@ -1042,7 +1053,7 @@ private static final byte yycheck_[] = yycheck_init();
        0,    24,    25,    25,    25,    26,    27,    27,    28,    28,
       29,    29,    30,    31,    31,    31,    31,    31,    31,    32,
       33,    34,    35,    35,    36,    36,    36,    37,    37,    37,
-      37
+      37,    37
     };
   }
 
@@ -1054,8 +1065,8 @@ private static final byte yycheck_[] = yycheck_init();
     {
        0,     2,     2,     1,     1,     1,     4,     4,     4,     5,
        3,     1,     5,     1,     1,     1,     1,     1,     2,     2,
-       2,     4,     2,     3,     3,     3,     1,     3,     3,     1,
-       1
+       2,     4,     2,     3,     3,     3,     1,     3,     3,     3,
+       1,     1
     };
   }
 
@@ -1132,10 +1143,10 @@ private static final byte yycheck_[] = yycheck_init();
 
   private static final byte yy_error_token_ = 1;
 
-  private static final int yylast_ = 49;
+  private static final int yylast_ = 56;
   private static final int yynnts_ = 14;
   private static final int yyempty_ = -2;
-  private static final int yyfinal_ = 11;
+  private static final int yyfinal_ = 14;
   private static final int yyntokens_ = 24;
 
 /* User implementation code.  */
@@ -1157,11 +1168,11 @@ private static final byte yycheck_[] = yycheck_init();
 	public static List<Integer> set = new ArrayList<>();
 	public static List<String> tempList = new ArrayList<>();
 
-/* "Choco.java":1161  */
+/* "Choco.java":1172  */
 
 }
 
-/* "Choco.y":167  */
+/* "Choco.y":171  */
 
 
 class ChocoLexer implements Choco.Lexer {

@@ -140,6 +140,7 @@ term:
     factor PLUS term {
         $$ = new Term((Term) $1, Operator.ADD, (Term) $3);
     } |
+
     factor MOINS term {
         $$ = new Term((Term) $1, Operator.SUBTRACT, (Term) $3);
     } |
@@ -150,18 +151,21 @@ term:
 ;
 
 factor:
-		factor MUL factor {
-        $$ = new Term((Term) $1, Operator.MULTIPLY, (Term) $3);
-    } |
-    factor DIV factor {
-        $$ = new Term((Term) $1, Operator.DIVIDE, (Term) $3);
-    } |
-		NUMBER {
-				$$ = new Term((Integer) $1);
-		} |
-		 ID {
-				 $$ = problem.addVariable(Yylex.id);
-		 }
+	factor MUL factor {
+        	$$ = new Term((Term) $1, Operator.MULTIPLY, (Term) $3);
+    	} |
+    	factor DIV factor {
+        	$$ = new Term((Term) $1, Operator.DIVIDE, (Term) $3);
+    	} |
+    	OPENPAR term CLOSEPAR {
+    		$$ = (Term) $2;
+    	} |
+	NUMBER {
+		$$ = new Term((Integer) $1);
+	} |
+ 	ID {
+		 $$ = problem.addVariable(Yylex.id);
+	}
 ;
 
 %%
