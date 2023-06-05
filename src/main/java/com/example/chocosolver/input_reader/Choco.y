@@ -20,12 +20,12 @@
 	private Problem problem;
 	public static Problem parse(String script) throws IOException {
   		InputStream stream = new ByteArrayInputStream(script.getBytes(StandardCharsets.UTF_8));
-        	ChocoLexer lexer = new ChocoLexer(stream);
+		ChocoLexer lexer = new ChocoLexer(stream);
 		Choco parser = new Choco(lexer);
-        	parser.problem = new Problem();
-        	lexer.setProblem(parser.problem);
-        	parser.parse();
-        	return parser.problem;
+		parser.problem = new Problem();
+		lexer.setProblem(parser.problem);
+		parser.parse();
+		return parser.problem;
   	}
 }
 

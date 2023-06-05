@@ -10,7 +10,7 @@
 	<div class="instructions">
 		<ul>
 			<li>La dernière variable déclarée est la seule qui est prise en compte</li>
-			<li>La limites du nombre de résultats</li>
+			<li>Seules les 100 premières solutions sont affichées</li>
 		</ul>
 	</div>
 
@@ -35,7 +35,7 @@
 	</div>
 </div>
 <div class="version-container">
-       <p>Les mots clé à savoir (EOI, ...)</p>
+       <p>EOI : ";" - INF : "<" - SUP : ">" - EQUALS : "=" - EXC : "!" - ID : un nom de variable - OPENPAR : "(" - CLOSEPAR : ")" - SEPARATOR : "," - ALLDIFF : le mot clé "ALLDIFF")</p>
 	<hr>
 	<p>
 		Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>

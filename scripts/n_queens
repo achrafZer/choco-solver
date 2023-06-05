@@ -17,7 +17,7 @@ AC+AL != BC+BL;
 AC+AL != CC+CL;
 AC+AL != DC+DL;
 BC+BL != CC+CL;
-BC+BL != DC+DL
+BC+BL != DC+DL;
 CC+CL != DC+DL;
 
 AC-AL != BC-BL;

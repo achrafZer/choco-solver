@@ -1,7 +1,6 @@
 package com.example.chocosolver;
 
 import com.example.chocosolver.problem.Constraint;
-import com.example.chocosolver.problem.Operator;
 import com.example.chocosolver.problem.Pair;
 import com.example.chocosolver.problem.Problem;
 import com.example.chocosolver.problem.Relation;
@@ -66,7 +65,7 @@ public class ChocoSolver {
 		}
 	}
 
-	private ArExpression ResolveTerm(Term term) {
+	private ArExpression resolveTerm(Term term) {
 		if (term.getVariable() != null) {
 			Variable variable = term.getVariable();
 			var v = intVars.get(variable.getName());
@@ -76,8 +75,8 @@ public class ChocoSolver {
 			int constantTerm1 = term.getValue();
 			return model.intVar(constantTerm1);
 		} else if (term.getTerms().size() == 2) {
-			var t1 = ResolveTerm(term.getTerms().get(0));
-			var t2 = ResolveTerm(term.getTerms().get(1));
+			var t1 = resolveTerm(term.getTerms().get(0));
+			var t2 = resolveTerm(term.getTerms().get(1));
 			switch (term.getOperator()) {
 			case ADD:
 				return t1.add(t2);
@@ -97,7 +96,7 @@ public class ChocoSolver {
 		} else {
 			ArExpression result = null;
 			for (int i = 0; i < term.getTerms().size(); i++) {
-				ArExpression currentTerm = ResolveTerm(term.getTerms().get(i));
+				ArExpression currentTerm = resolveTerm(term.getTerms().get(i));
 				if (result == null) {
 					result = currentTerm;
 				} else {
@@ -144,8 +143,8 @@ public class ChocoSolver {
 		            }
 		            model.allDifferent(list).post();
 			} else {
-				ArExpression term1 = ResolveTerm(constraint.getTerm1());
-				ArExpression term2 = ResolveTerm(constraint.getTerm2());
+				ArExpression term1 = resolveTerm(constraint.getTerm1());
+				ArExpression term2 = resolveTerm(constraint.getTerm2());
 				Relation relation = constraint.getRelation();
 
 				switch (relation) {
