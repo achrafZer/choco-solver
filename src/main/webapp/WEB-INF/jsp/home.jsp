@@ -21,6 +21,8 @@
 	<div class="instructions">
 		<ul>
 			<li>The last occurrence of a declared variable is the only one that is considered.</li>
+		</ul>
+		<ul>
 			<li>Only the first 100 solutions are displayed.</li>
 		</ul>
 	</div>
@@ -30,7 +32,7 @@
 		<form action="/solve" method="post">
 		<label for="problem">Write your problem:</label>
 		<textarea id="problem" name="problem" rows="10" cols="50"
-				  placeholder="taper votre script ici par exemple&#10;myFirstVar dans [1, 10];&#10;mySecondVar dans {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};&#10;ALLDIFF(myFirstVar, mySecondVar);&#10;myFirstVar + mySecondVar = 10;
+				  placeholder="enter you script here. For example : &#10;myFirstVar dans [1, 10];&#10;mySecondVar dans {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};&#10;ALLDIFF(myFirstVar, mySecondVar);&#10;myFirstVar + mySecondVar = 10;
 "><%
 			String problemText = (String) request.getAttribute("problemText");
 			if (problemText != null) {
