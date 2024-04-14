@@ -53,3 +53,9 @@ The application does not support values outside the range of -9999999 to 9999999
 ## Contact Information
 For any inquiries, bug reports, or feature requests, please contact the developer at zerhouniachraf@hotmail.com.
 
+## Application Screenshot
+
+Below is a screenshot of the main page of the application. This gives you a quick look at the user interface.
+
+![Main Page Screenshot](./screenshots/choco_server.png)
+
