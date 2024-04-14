@@ -41,7 +41,7 @@
 	<h1>Choco Solver - Response</h1>
 
 	<div class="problem-container">
-		<p>Voici le problème :</p>
+		<p>Problem :</p>
 		<pre>${problem}</pre>
 	</div>
 	<div>
@@ -54,7 +54,7 @@
 			if (solutions.isEmpty()) {
 			%>
 			<div class="problem-container">
-				<p>Désolé, ce problème n'a pas de solution</p>
+				<p>Dï¿½solï¿½, ce problï¿½me n'a pas de solution</p>
 			</div>
 
 			<%
@@ -103,7 +103,7 @@
 	<div>
 		<hr>
 		<p>
-			Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>
+			Version 1.0.0 | Contact us at <a href="mailto:example@example.com">zerhouniachraf@hotmail.com</a>
 		</p>
 	</div>
 	<div id="popup" class="popup">
@@ -124,7 +124,7 @@
 	    if(isHigherThan100===true)
 	    {
 	    	document.getElementById('popup').classList.add('show');
-	    	document.getElementById('message').textContent="le nombre de solutions dépasse 100 mais nous n'afficherons que les 100 premières solutions";
+	    	document.getElementById('message').textContent="le nombre de solutions dï¿½passe 100 mais nous n'afficherons que les 100 premiï¿½res solutions";
 	    }
     });
 </script>
