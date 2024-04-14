@@ -5,15 +5,26 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div class="centre">
+	<div class="menu">
+		<ul>
+			<li><a href="javascript:history.back()" title="Edit"> <img
+					src="/pictures/edit_icon.png" alt="Edit Icon">
+			</a></li>
+			<li><a href="/restart" title="Restart"><img
+					src="/pictures/restart_icon.png" alt="Restart Icon"></a></li>
+			<li><a href="/save" title="Save"><img
+					src="/pictures/save_icon.png" alt="Save Icon"></a></li>
+		</ul>
+	</div>
+<div class="center">
 
 	<div class="instructions">
 		<ul>
-			<li>La dernière variable déclarée est la seule qui est prise en compte</li>
-			<li>Seules les 100 premières solutions sont affichées</li>
+			<li>The last occurrence of a declared variable is the only one that is considered.</li>
+			<li>Only the first 100 solutions are displayed.</li>
 		</ul>
 	</div>
-
+	
 	<div class="form-container">
 		<h1>Welcome to the Choco Solver!</h1>
 		<form action="/solve" method="post">
@@ -35,7 +46,7 @@
 	</div>
 </div>
 <div class="version-container">
-       <p>EOI : ";" - INF : "<" - SUP : ">" - EQUALS : "=" - EXC : "!" - ID : un nom de variable - OPENPAR : "(" - CLOSEPAR : ")" - SEPARATOR : "," - ALLDIFF : le mot clé "ALLDIFF")</p>
+       <p>EOI : ";" - INF : "<" - SUP : ">" - EQUALS : "=" - EXC : "!" - ID : un nom de variable - OPENPAR : "(" - CLOSEPAR : ")" - SEPARATOR : "," - ALLDIFF : le mot clï¿½ "ALLDIFF")</p>
 	<hr>
 	<p>
 		Version 1.0.0 | Contact us at <a href="mailto:example@example.com">example@example.com</a>
