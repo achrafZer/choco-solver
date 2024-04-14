@@ -103,7 +103,7 @@
 	<div>
 		<hr>
 		<p>
-			Version 1.0.0 | Contact us at <a href="mailto:example@example.com">zerhouniachraf@hotmail.com</a>
+			Version 1.0.0 | Contact us at <a href="mailto:zerhouniachraf@hotmail.com">zerhouniachraf@hotmail.com</a>
 		</p>
 	</div>
 	<div id="popup" class="popup">
